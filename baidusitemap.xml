@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/15/manengAiYidan/</loc>
+    <lastmod>2017-03-15T13:47:38.085Z</lastmod>
+    <data>
+        <display>
+        <title>manengAiYidan</title>
+        <pubTime>2017-03-15T13:47:04.000Z</pubTime>
+        
+        <tag>一丹</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/15/maneng2/</loc>
+    <lastmod>2017-03-15T13:46:49.916Z</lastmod>
+    <data>
+        <display>
+        <title>maneng2</title>
+        <pubTime>2017-03-15T13:46:18.000Z</pubTime>
+        
+        <tag>能能</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/15/maneng/</loc>
+    <lastmod>2017-03-15T13:46:08.274Z</lastmod>
+    <data>
+        <display>
+        <title>你好</title>
+        <pubTime>2017-03-15T13:44:41.000Z</pubTime>
+        
+        <tag>能能</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/03/15/hello-world/</loc>
+    <lastmod>2017-03-15T01:46:33.813Z</lastmod>
+    <data>
+        <display>
+        <title>Hello World</title>
+        <pubTime>2017-03-15T01:46:33.793Z</pubTime>
+        
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>
