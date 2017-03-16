@@ -6,21 +6,24 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>maneng2 | Marnner</title>
+  <title>undertow嵌入式web服务器初体验 | Marnner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#第二篇博客 
-你好 一丹">
+  <meta name="description" content="Github源码做的一个项目，在这里开源，删除了大部分业务代码，将逐步改为一个基于netty5的框架，目前只算得上是一个手脚架吧
+
+netty同时处理HTTP和Websocket，并将HTTP请求路由到相应Action中;使用ehcache实现Session；spring IOC做管理容器，mybatis做sql数据库ORM；spring data mongoDB做mongo的ORM；Hikari">
 <meta property="og:type" content="article">
-<meta property="og:title" content="maneng2">
-<meta property="og:url" content="http://yoursite.com/2017/03/15/maneng2/index.html">
+<meta property="og:title" content="undertow嵌入式web服务器初体验">
+<meta property="og:url" content="http://yoursite.com/2017/03/16/undertow嵌入式web服务器初体验/index.html">
 <meta property="og:site_name" content="Marnner">
-<meta property="og:description" content="#第二篇博客 
-你好 一丹">
-<meta property="og:updated_time" content="2017-03-15T14:04:15.883Z">
+<meta property="og:description" content="Github源码做的一个项目，在这里开源，删除了大部分业务代码，将逐步改为一个基于netty5的框架，目前只算得上是一个手脚架吧
+
+netty同时处理HTTP和Websocket，并将HTTP请求路由到相应Action中;使用ehcache实现Session；spring IOC做管理容器，mybatis做sql数据库ORM；spring data mongoDB做mongo的ORM；Hikari">
+<meta property="og:updated_time" content="2017-03-16T02:15:54.255Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="maneng2">
-<meta name="twitter:description" content="#第二篇博客 
-你好 一丹">
+<meta name="twitter:title" content="undertow嵌入式web服务器初体验">
+<meta name="twitter:description" content="Github源码做的一个项目，在这里开源，删除了大部分业务代码，将逐步改为一个基于netty5的框架，目前只算得上是一个手脚架吧
+
+netty同时处理HTTP和Websocket，并将HTTP请求路由到相应Action中;使用ehcache实现Session；spring IOC做管理容器，mybatis做sql数据库ORM；spring data mongoDB做mongo的ORM；Hikari">
   
     <link rel="alternative" href="/atom.xml" title="Marnner" type="application/atom+xml">
   
@@ -156,28 +159,61 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-maneng2" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-undertow嵌入式web服务器初体验" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      maneng2
+      undertow嵌入式web服务器初体验
     </h1>
   
 
         
-        <a href="/2017/03/15/maneng2/" class="archive-article-date">
-  	<time datetime="2017-03-15T13:46:18.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-15</time>
+        <a href="/2017/03/16/undertow嵌入式web服务器初体验/" class="archive-article-date">
+  	<time datetime="2017-03-16T02:15:54.205Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-16</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#第二篇博客 </p>
-<p>你好 一丹</p>
+        <p><a href="https://github.com/jcalaz/nettyServer" target="_blank" rel="external">Github源码</a><br>做的一个项目，在这里开源，删除了大部分业务代码，将逐步改为一个基于netty5的框架，目前只算得上是一个手脚架吧</p>
+<blockquote>
+<p>netty同时处理HTTP和Websocket，并将HTTP请求路由到相应Action中;使用ehcache实现Session；spring IOC做管理容器，mybatis<br>做sql数据库ORM；spring data mongoDB做mongo的ORM；HikariCP做sql数据库连接池；Gson用于json解析和生成；logback日志处理</p>
+</blockquote>
+<p>####netty处理HTTP和websocket</p>
+<ul>
+<li>smart.core.netty.HttpHandler：是一个自定义的ChannelHandler用于处理HTTP<br>和Websocket请求</li>
+<li><p>Handler分别处理HTTP和Websocket</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">messageReceived</span><span class="params">(ChannelHandlerContext ctx, Object msg)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> FullHttpRequest) &#123;<span class="comment">//如果是HTTP请求，进行HTTP操作</span></div><div class="line">            handleHttpRequest(ctx, (FullHttpRequest) msg);</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (msg <span class="keyword">instanceof</span> WebSocketFrame) &#123;<span class="comment">//如果是Websocket请求，则进行websocket操作</span></div><div class="line">            handleWebSocketFrame(ctx, (WebSocketFrame) msg);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>由于websocket也是基于HTTP的，需要判断是websocket后，将HTTP升级为Websocket</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleHttpRequest</span><span class="params">(ChannelHandlerContext ctx, FullHttpRequest req)</span> </span>&#123;</div><div class="line">        logger.warn(<span class="string">"uri:"</span> + req.uri());</div><div class="line">        <span class="keyword">if</span> (req.uri().startsWith(<span class="string">"/ws/join"</span>)) &#123;<span class="comment">//如果urL开头为/ws/join则升级为websocket</span></div><div class="line">            mac = wsBeforeHandler(ctx, req);</div><div class="line">            <span class="keyword">if</span> (mac == <span class="keyword">null</span> || mac.length() &lt; <span class="number">1</span>) &#123;</div><div class="line">                RespTools.paraErrorBack(ctx,req,<span class="keyword">null</span>);</div><div class="line">                <span class="keyword">return</span>;</div><div class="line">            &#125;</div><div class="line">            WebSocketServerHandshakerFactory wsFactory = <span class="keyword">new</span> WebSocketServerHandshakerFactory(</div><div class="line">                    getWebSocketLocation(req), <span class="keyword">null</span>, <span class="keyword">true</span>);</div><div class="line">            handshaker = wsFactory.newHandshaker(req);</div><div class="line">            <span class="keyword">if</span> (handshaker == <span class="keyword">null</span>) &#123;</div><div class="line">                WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                handshaker.handshake(ctx.channel(), req);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;<span class="comment">//是HTTP请求则路由到Action</span></div><div class="line">            RouteResult&lt;Action&gt; routeResult = rs.getRouter().route(req.method(), req.uri());</div><div class="line">            Action action = routeResult.target();</div><div class="line">            action.act(ctx, req);</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>websocket请求处理,这里是从websocket请求中获取客户端传来的json字符串，并将字符串转为javabean</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleWebSocketFrame</span><span class="params">(ChannelHandlerContext ctx, WebSocketFrame frame)</span> </span>&#123;</div><div class="line"></div><div class="line">        <span class="comment">// Check for closing frame</span></div><div class="line">        <span class="keyword">if</span> (frame <span class="keyword">instanceof</span> CloseWebSocketFrame) &#123;</div><div class="line">            handshaker.close(ctx.channel(), (CloseWebSocketFrame) frame.retain());</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (frame <span class="keyword">instanceof</span> PingWebSocketFrame) &#123;</div><div class="line">            ctx.write(<span class="keyword">new</span> PongWebSocketFrame(frame.content().retain()));</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (frame <span class="keyword">instanceof</span> TextWebSocketFrame) &#123;</div><div class="line">            devicePool.join(ctx.channel(), mac);</div><div class="line">            String json = ((TextWebSocketFrame) frame).text();</div><div class="line">            Logic.ReqRespType data= JsonTools.read(json,Logic.ReqRespType.class);</div><div class="line">           <span class="comment">//...</span></div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>如果是HTTP则需在RouterSetting中配置路由.<br>比如r.POST(“api/get_verify_code”, getVerifyCodeAct):<br>将url为”api/get_verify_code”的POST请求路由到LoginAct中</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RouterSetting</span> </span>&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Router&lt;Action&gt; router;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> GetVerifyCodeAct getVerifyCodeAct;<span class="comment">//w</span></div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> LoginAct loginAct;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> RegisterAct registerAcc;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> Router&lt;Action&gt; <span class="title">getRouter</span><span class="params">()</span> </span>&#123;</div><div class="line">        routerConfig(<span class="keyword">this</span>.router);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.router;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">routerConfig</span><span class="params">(Router&lt;Action&gt; r)</span> </span>&#123;</div><div class="line">        r.POST(<span class="string">"api/get_verify_code"</span>, getVerifyCodeAct);</div><div class="line">        r.ANY(<span class="string">"api/login"</span>, loginAct);</div><div class="line">        r.GET(<span class="string">"api/register"</span>, registerAcc);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>Action处理HTTP请求并返回</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginAct</span> <span class="keyword">implements</span> <span class="title">Action</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Logger logger = LoggerFactory.getLogger(LoginAct.class);</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">act</span><span class="params">(ChannelHandlerContext ctx, FullHttpRequest req)</span> </span>&#123;</div><div class="line">        String ip = HttpTools.getIp(req);</div><div class="line">        String body = Convert.buf2Str(req.content());</div><div class="line">        Get.Login get = JsonTools.read(body, Get.Login.class);<span class="comment">//1.得到HTTP传来的json数据解析为javabean</span></div><div class="line">        Sub.Register back;<span class="comment">//构建返回给客户端的javabean的实例</span></div><div class="line">        <span class="comment">//...</span></div><div class="line">        HttpTools.sendCorrectResp(ctx, req, back);<span class="comment">//返回给客户端HTTP Response</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>添加Session(依靠ehcache)</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addSession</span><span class="params">(<span class="keyword">long</span> userId, String ip)</span> </span>&#123;</div><div class="line">        Logic.DeviceSession session = <span class="keyword">new</span> Logic.DeviceSession(ip, <span class="string">""</span>);</div><div class="line">        Cache.add(userId + <span class="string">""</span>, session, <span class="string">"6mn"</span>);<span class="comment">//设置session的缓存时间为6分钟</span></div><div class="line">        <span class="comment">//debugSession(userId);</span></div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<ul>
+<li>从HTTP请求中获取IP地址<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">String ip = HttpTools.getIp(req)；</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>####netty参数设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">port=8090</div><div class="line">netty.boss.thread.count=2</div><div class="line">netty.worker.thread.count=1</div><div class="line">netty.so.keepalive=true</div><div class="line">netty.so.backlog=100</div></pre></td></tr></table></figure></p>
+<p>####项目依赖<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//---------------------单元测试----------------------------</span></div><div class="line">   testCompile <span class="string">group:</span> <span class="string">'junit'</span>, <span class="string">name:</span> <span class="string">'junit'</span>, <span class="string">version:</span> <span class="string">'4.11'</span></div><div class="line">   <span class="comment">//--------------------数据库驱动----------------------------</span></div><div class="line">   compile <span class="string">'org.mongodb:mongodb-driver:3.2.2'</span></div><div class="line">   compile <span class="string">'mysql:mysql-connector-java:5.1.38'</span></div><div class="line">   <span class="comment">//-------------------数据库连接池---------------------------</span></div><div class="line">   compile <span class="string">'com.zaxxer:HikariCP:2.4.5'</span></div><div class="line">   <span class="comment">//----------------------ORM------------------------------</span></div><div class="line">   compile <span class="string">group:</span> <span class="string">'org.mybatis'</span>, <span class="string">name:</span> <span class="string">'mybatis'</span>, <span class="string">version:</span>mybatisVersion</div><div class="line">   compile <span class="string">group:</span> <span class="string">'org.mybatis'</span>, <span class="string">name:</span> <span class="string">'mybatis-spring'</span>, <span class="string">version:</span>mybatisSpringVersion</div><div class="line">   <span class="comment">//-----------------------缓存----------------------------</span></div><div class="line">   compile <span class="string">group:</span> <span class="string">'net.sf.ehcache'</span>, <span class="string">name:</span> <span class="string">'ehcache'</span>, <span class="string">version:</span>ehcacheVersion</div><div class="line">   <span class="comment">//----------------------工具包----------------------------</span></div><div class="line">   compile <span class="string">'commons-httpclient:commons-httpclient:3.1-rc1'</span></div><div class="line">   compile <span class="string">'org.javassist:javassist:3.20.0-GA'</span></div><div class="line">   <span class="comment">//---------------------日志处理----------------------------</span></div><div class="line">   compile <span class="string">'org.slf4j:slf4j-api:1.7.21'</span></div><div class="line">   compile <span class="string">'ch.qos.logback:logback-core:1.1.7'</span></div><div class="line">   compile <span class="string">'ch.qos.logback:logback-classic:1.1.7'</span></div><div class="line">   <span class="comment">//---------------------json处理---------------------------</span></div><div class="line">   compile <span class="string">'com.google.code.gson:gson:2.6.2'</span></div><div class="line">   <span class="comment">//---------------------netty-----------------------------</span></div><div class="line">   compile <span class="string">group:</span> <span class="string">'io.netty'</span>, <span class="string">name:</span> <span class="string">'netty-all'</span>, <span class="string">version:</span>nettyVersion</div><div class="line">   <span class="comment">//---------------------spring----------------------------</span></div><div class="line">   compile <span class="string">group:</span> <span class="string">'org.springframework'</span>, <span class="string">name:</span> <span class="string">'spring-test'</span>, <span class="string">version:</span>springVersion</div><div class="line">   compile <span class="string">group:</span> <span class="string">'org.springframework'</span>, <span class="string">name:</span> <span class="string">'spring-jdbc'</span>, <span class="string">version:</span>springVersion</div><div class="line">   compile(<span class="string">group:</span> <span class="string">'org.springframework'</span>, <span class="string">name:</span> <span class="string">'spring-context'</span>, <span class="string">version:</span>springVersion) &#123;</div><div class="line">       exclude(<span class="string">module:</span> <span class="string">'commons-logging'</span>)</div><div class="line">   &#125;</div></pre></td></tr></table></figure></p>
 
       
 
@@ -222,7 +258,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">能能</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">undertow</a>
         		</li>
       		
 		</ul>
@@ -278,7 +314,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/15/maneng2/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/16/undertow嵌入式web服务器初体验/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,18 +328,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/15/manengAiYidan/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          manengAiYidan
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/15/maneng/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">你好</div>
+    <a href="/2017/03/16/Springboot 整合 Mybatis/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Springboot 整合 Mybatis</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -317,7 +344,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="maneng2" data-title="maneng2" data-url="http://yoursite.com/2017/03/15/maneng2/"></div>
+	<div class="ds-thread" data-thread-key="undertow嵌入式web服务器初体验" data-title="undertow嵌入式web服务器初体验" data-url="http://yoursite.com/2017/03/16/undertow嵌入式web服务器初体验/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -425,7 +452,15 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">springboot mybatis</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">能能</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
               </li>
              
               <li class="article-tag-list-item">
