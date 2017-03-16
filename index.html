@@ -154,6 +154,110 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-小书匠更新说明" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/03/16/小书匠更新说明/">更新内容</a>
+    </h1>
+  
+
+        
+        <a href="/2017/03/16/小书匠更新说明/" class="archive-article-date">
+  	<time datetime="2017-03-16T00:55:11.981Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-16</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ol>
+<li><a href="#200-新功能">2.0.0 新功能</a></li>
+<li><a href="#200-修改">2.0.0 修改</a></li>
+</ol>
+<p><strong>注</strong>：  新版本升级了底层模块，对保存在小书匠数据库里的旧数据有升级要求的用户，请先下载 <code>1.13.0</code> 版本，使用该版本提供的数据库导出功能，导出数据库，再在 <code>2.0.0</code> 版本上进行数据库导入, 完成数据升级。升级前建议先备份原有的数据文件（数据文件存储位置可到 <code>关于</code> 界面上查看）。</p>
+<h1 id="2-0-1-修改"><a href="#2-0-1-修改" class="headerlink" title="2.0.1 修改"></a>2.0.1 修改</h1><ol>
+<li>修复客户端关联打开 markdown 文件失效的问题（主要是 window 客户端）</li>
+<li>修复客户端打印后，无法正常关闭窗体的问题</li>
+</ol>
+<h1 id="2-0-0-新功能"><a href="#2-0-0-新功能" class="headerlink" title="2.0.0 新功能"></a>2.0.0 新功能</h1><ol>
+<li>升级 nwjs 到 0.20.3   (Chromium 56 + Node 7.6.0)</li>
+<li>发送邮件时，可以追加更多的附件</li>
+<li>发送邮件支持同时发送给多个用户，多个用户用逗号分开。 #298 参考格式： <code>xsj1@xiaoshujiang.com, &quot;X sj&quot; &lt;xsj2@xiaoshujiang.com&gt;, &quot;X, sjs&quot; &lt;xsj3@xiaoshujiang.com&gt;</code></li>
+<li>发送邮件添加抄送，秘密抄送功能</li>
+<li>加入 gitlab 第三方存储绑定</li>
+<li>实现相册图片放大，缩小功能(鼠标中键滚动)</li>
+<li>添加生成静态 toc 功能(<a href="https://github.com/suziwen/blogxiaoshujiang/blob/master/2017-3-1%20%E9%9D%99%E6%80%81%E7%9B%AE%E5%BD%95%E5%8A%9F%E8%83%BD%E4%BB%8B%E7%BB%8D.md#%E9%9D%99%E6%80%81%E7%9B%AE%E5%BD%95" target="_blank" rel="external">详细说明</a>)</li>
+<li>客户端编辑区右键添加粘贴为 markdown 的菜单，可以快速将剪切板里的富文本(html)转换成 markdown</li>
+<li>客户端预览区右键添加复制为 html 片段</li>
+<li>codemirror 编辑器添加代码块折叠功能</li>
+<li>客户端打印添加预览 pdf</li>
+<li>有道绑定时可以设置是否转换 svg 为图片</li>
+<li>添加数据库导入，导出功能</li>
+</ol>
+<h1 id="2-0-0-修改"><a href="#2-0-0-修改" class="headerlink" title="2.0.0 修改"></a>2.0.0 修改</h1><ol>
+<li>解决 github 新建的文章 ==保存中== 提示不准确问题</li>
+<li>图片迁移时去重</li>
+<li>解决文件树上下文菜单没有正确关闭的问题</li>
+<li>代码预览 tab-size 4</li>
+<li>浮动预览禁止鼠标中键滚动旋转</li>
+<li>客户端不再使用 phantomjs 导出 pdf</li>
+<li>优化 html 转换成 markdown 结果</li>
+<li>github 绑定时，如果仓库未初始化，没有错误提示 #309</li>
+<li>重构 pdf 导出里的 toc 样式</li>
+<li>允许 pdf 导出设置的起始页可以为负值</li>
+<li>gif 图片在导出时都变成静态图片的 bug</li>
+<li>导出带表格的pdf格式会乱 #60</li>
+<li>调整同步滚动编辑区方式， 允许保存同步预览  #318</li>
+<li>导出 pdf 时默认不再转换 svg 到图片</li>
+<li>pdf 打印的 checkbox radio 样式替换</li>
+<li>调整工具栏关闭后的样式</li>
+<li>调整预览行内代码，标签，高亮默认样式</li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">更新说明,小书匠</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/03/16/小书匠更新说明/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-manengAiYidan" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -495,6 +599,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color3">一丹</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">更新说明,小书匠</a>
               </li>
             
             <div class="clearfix"></div>
