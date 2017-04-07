@@ -4,6 +4,23 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/04/07/JPA%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C/</loc>
+    <lastmod>2017-04-07T06:53:23.766Z</lastmod>
+    <data>
+        <display>
+        <title>JPA参考手册</title>
+        <pubTime>2017-04-07T06:31:15.800Z</pubTime>
+        
+        <tag>java,JPA</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/04/07/volatile%20%E5%AD%A6%E4%B9%A0/</loc>
     <lastmod>2017-04-07T06:42:12.890Z</lastmod>
     <data>
@@ -46,23 +63,6 @@
         <pubTime>2017-04-07T06:33:42.787Z</pubTime>
         
         <tag>java,注解</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/04/07/JPA%E5%8F%82%E8%80%83%E6%89%8B%E5%86%8C/</loc>
-    <lastmod>2017-04-07T06:32:29.922Z</lastmod>
-    <data>
-        <display>
-        <title>JPA参考手册</title>
-        <pubTime>2017-04-07T06:31:15.800Z</pubTime>
-        
-        <tag>java,JPA</tag>
          
          
            
