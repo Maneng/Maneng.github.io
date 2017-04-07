@@ -10,7 +10,7 @@
     
     <title>
         
-            Springboot 整合 Mybatis | 
+            volatile 学习 | 
         
         Marnner
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="marnner">
     <meta name="description" content="Just do it">
-    <meta name="keywords" content="null,springboot mybatis">
+    <meta name="keywords" content="null,java,volatile">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Springboot 整合 Mybatis | Marnner">
+    <meta property="og:title" content="volatile 学习 | Marnner">
     <meta property="og:description" content="Just do it">
-    <meta property="og:article:tag" content="springboot mybatis"> 
+    <meta property="og:article:tag" content="java,volatile"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#为什么使用Mybatis？"><span class="post-toc-number">1.</span> <span class="post-toc-text">为什么使用Mybatis？</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#gradle中加入依赖"><span class="post-toc-number">2.</span> <span class="post-toc-text">gradle中加入依赖</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-6"><a class="post-toc-link" href="#spring-boot-mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖"><span class="post-toc-number">2.0.1.</span> <span class="post-toc-text">spring.boot:mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在application-yml中配置mybatis"><span class="post-toc-number">3.</span> <span class="post-toc-text">在application.yml中配置mybatis</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在Spring-Boot中配置好数据源DataSource"><span class="post-toc-number">4.</span> <span class="post-toc-text">在Spring Boot中配置好数据源DataSource</span></a></li></ol></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#测试一下"><span class="post-toc-number"></span> <span class="post-toc-text">测试一下</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#在me-jcala-blog-mapping下新建一个TestMapper接口"><span class="post-toc-number">1.</span> <span class="post-toc-text">在me.jcala.blog.mapping下新建一个TestMapper接口</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#再随便写一个测试的类"><span class="post-toc-number">2.</span> <span class="post-toc-text">再随便写一个测试的类</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#volatile"><span class="post-toc-number">1.</span> <span class="post-toc-text">volatile</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#正确使用-volatile-变量的条件"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">正确使用 volatile 变量的条件</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                Springboot 整合 Mybatis
+                volatile 学习
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>marnner</strong>
-        <span>3月 16, 2017</span>
+        <span>4月 07, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -313,7 +313,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/springboot-mybatis/">springboot mybatis</a>
+        <a class="post_tag-link" href="/tags/java-volatile/">java,volatile</a>
     </ul>
     
 
@@ -327,7 +327,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/03/16/Springboot 整合 Mybatis/" class="leancloud-views_num" data-flag-title="Springboot 整合 Mybatis">
+                <span id="/2017/04/07/volatile 学习/" class="leancloud-views_num" data-flag-title="volatile 学习">
      &nbsp;浏览量
 </span>
 
@@ -339,7 +339,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Springboot 整合 Mybatis&url=http://yoursite.com//2017/03/16/Springboot 整合 Mybatis/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=volatile 学习&url=http://yoursite.com//2017/04/07/volatile 学习/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -348,7 +348,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Springboot 整合 Mybatis&url=http://yoursite.com//2017/03/16/Springboot 整合 Mybatis/index.html&via=marnner" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=volatile 学习&url=http://yoursite.com//2017/04/07/volatile 学习/index.html&via=marnner" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -357,7 +357,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/03/16/Springboot 整合 Mybatis/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/04/07/volatile 学习/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -366,7 +366,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/03/16/Springboot 整合 Mybatis/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/04/07/volatile 学习/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,27 +390,86 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h4 id="为什么使用Mybatis？"><a href="#为什么使用Mybatis？" class="headerlink" title="为什么使用Mybatis？"></a>为什么使用Mybatis？</h4><blockquote>
-<p>Mybatis是目前很火的SSM框架中的ORM组件，相比Hibernate更加灵活小巧，学习成本也更低，我觉得可维护性也更好些。</p>
-</blockquote>
-<p>但是spring boot官方更只提供了自家的spring data jpa及hibernate的整合方案，而没有给出Mybatis的整合组件。于是上Github，发现了Mybatis提供了它的spring-boot-starter。</p>
-<p>##整合方法</p>
+        <h2 id="volatile"><a href="#volatile" class="headerlink" title="volatile"></a>volatile</h2><ul>
+<li><p>###作用: </p>
 <ol>
-<li><h4 id="gradle中加入依赖"><a href="#gradle中加入依赖" class="headerlink" title="gradle中加入依赖"></a>gradle中加入依赖</h4><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">compile(<span class="string">"org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1"</span>)</div></pre></td></tr></table></figure>
+<li><strong>保证变量对所有线程的可见性，即一个线程修改了某个值，新值对其他线程来说是立即可见的。(强制从公共堆栈中取得变量的值，而不是从线程私有数据栈中取得变量的值。)</strong></li>
+</ol>
+<p>Java内存模型规定，对于多个线程共享的变量，存储在主内存当中，每个线程都有自己独立的工作内存（比如CPU的寄存器），线程只能访问自己的工作内存，不可以访问其它线程的工作内存。<br>工作内存中保存了主内存共享变量的副本，线程要操作这些共享变量，只能通过操作工作内存中的副本来实现，操作完毕之后再同步回到主内存当中。<br>volatile保在每次访问变量时都会进行一次刷新，因此每次访问都是主内存中最新的版本。</p>
+<ol>
+<li><strong>禁止指令重排序</strong></li>
+</ol>
+<p>指令重排序是JVM为了优化指令，提高程序运行效率，在不影响单线程程序执行结果的前提下，尽可能地提高并行度。<br>但是指令重排序在多线程时会出现一些问题。如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">在线程A中:</div><div class="line">context = loadContext();</div><div class="line">inited = true;</div><div class="line"></div><div class="line">在线程B中:</div><div class="line">while(!inited )&#123; //根据线程A中对inited变量的修改决定是否使用context变量</div><div class="line">   sleep(100);</div><div class="line">&#125;</div><div class="line">doSomethingwithconfig(context);</div><div class="line"></div><div class="line">假设线程A中发生了指令重排序:</div><div class="line">inited = true;</div><div class="line">context = loadContext();</div><div class="line">那么B中很可能就会拿到一个尚未初始化或尚未初始化完成的context,从而引发程序错误。</div></pre></td></tr></table></figure>
+<p>而volatile使用内存屏障可以禁用指令重排序，避免这种问题。</p>
+</li>
+<li><p>###与synchronized对比:</p>
+<ol>
+<li>volatile可以保证数据的可见性，但不可以保证原子性</li>
+<li>synchronized可以保证原子性，也可以间接保证可见性</li>
+<li>synchronized有volatile同步的功能</li>
+<li>volatile性能一般高于synchronized</li>
+</ol>
+</li>
+<li><h3 id="正确使用-volatile-变量的条件"><a href="#正确使用-volatile-变量的条件" class="headerlink" title="正确使用 volatile 变量的条件"></a>正确使用 volatile 变量的条件</h3><ol>
+<li>对变量的写操作不依赖于当前值。(不能是自增自减等操作)</li>
+<li>该变量没有包含在具有其他变量的不变式中。<br>包含在具有其他变量的不变式中的情况(包含了一个不变式 —— 下界总是小于或等于上界)：<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NumberRange</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">int</span> lower, upper;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getLower</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> lower; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getUpper</span><span class="params">()</span> </span>&#123; <span class="keyword">return</span> upper; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setLower</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; </div><div class="line">        <span class="keyword">if</span> (value &gt; upper) </div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">""</span>);</div><div class="line">        lower = value;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUpper</span><span class="params">(<span class="keyword">int</span> value)</span> </span>&#123; </div><div class="line">        <span class="keyword">if</span> (value &lt; lower) </div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">""</span>);</div><div class="line">        upper = value;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
-<h6 id="spring-boot-mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖"><a href="#spring-boot-mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖" class="headerlink" title="spring.boot:mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖"></a>spring.boot:mybatis-spring-boot-starter中已经包含了对mybatis和mybatis-spring的依赖</h6><ol>
-<li><h4 id="在application-yml中配置mybatis"><a href="#在application-yml中配置mybatis" class="headerlink" title="在application.yml中配置mybatis"></a>在application.yml中配置mybatis</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mybatis:</div><div class="line">    #指定mapper和domain(实体)所在的包</div><div class="line">    type-aliases-package: me.jcala.blog.domain,me.jcala.blog.mapping</div><div class="line">    #指定使用的类型转换器</div><div class="line">    type-handlers-package: org.apache.ibatis.type.LocalDateTypeHandler</div></pre></td></tr></table></figure>
+<p>如果凑巧两个线程在同一时间使用不一致的值执行 setLower 和 setUpper 的话，则会使范围处于不一致的状态.<br>例如，如果初始状态是(0, 5)，同一时间内，线程 A 调用 setLower(4) 并且线程 B 调用 setUpper(3)，<br>显然这两个操作交叉存入的值是不符合条件的，那么两个线程都会通过用于保护不变式的检查，<br>使得最后的范围值是 (4, 3) —— 一个无效值。</p>
+</li>
+<li><p>###volatile可以解决的问题示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RunThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isRunning=<span class="keyword">true</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isRunning</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">return</span> isRunning;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setRunning</span><span class="params">(<span class="keyword">boolean</span> isRunning)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.isRunning=isRunning;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(<span class="string">"进入run了"</span>);</div><div class="line">        <span class="keyword">while</span> (isRunning==<span class="keyword">true</span>)&#123;</div><div class="line">        &#125;</div><div class="line">        System.out.println(<span class="string">"线程被停止了"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">            RunThread thread=<span class="keyword">new</span> RunThread();</div><div class="line">            thread.start();</div><div class="line">            Thread.sleep(<span class="number">1000</span>);</div><div class="line">            thread.setRunning(<span class="keyword">false</span>);</div><div class="line">            System.out.println(<span class="string">"已经赋值为false"</span>);</div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>运行时加入JVM参数, -server。查看结果发现System.out.println(“线程被停止了”);从未执行。</p>
+<p>因为JVM被设置为-server模式时为了线程的运行效率，线程一直在私有堆栈中取得isRunning的值为true，而更新的却是公共堆栈中的isRunning。</p>
+<p>解决方法：volatile private boolean isRunning=true;</p>
+<ul>
+<li><p>###线程工作内存和主工作内存之间通过8中原子操作实现</p>
+<ol>
+<li><p>lock（锁定）：作用于主内存的变量，它把一个变量标识为一条线程独占的状态。</p>
+</li>
+<li><p>unlock（解锁）：作用于主内存的变量，它把一个处于锁定状态的变量释放出来，释放后的变量才可以被其它线程锁定。</p>
+</li>
+<li><p>read（读取）：作用于主内存的变量，它把一个变量的值从主内存传输到线程的工作内存中，以便随后的load动作使用。</p>
+</li>
+<li><p>load（载入）：作用于工作内存的变量，它把read操作从主内存中得到的变量值放入工作内存的变量副本中。</p>
+</li>
+<li><p>use（使用）：作用于工作内存的变量，它把工作内存中一个变量的值传递给执行引擎，每当虚拟机遇到一个需要使用到变量的值的字节码指令时将会执行这个操作。</p>
+</li>
+<li><p>assign（赋值）：作用于工作内存的变量，它把一个从执行引擎接收到的值赋给工作内存的变量，每当虚拟机遇到一个给变量赋值的字节码指令时执行这个操作。</p>
+</li>
+<li><p>store（存储）：作用于工作内存的变量，它把工作内存中一个变量的值传送给主内存中，以便随后的write操作使用。</p>
+</li>
+<li><p>write（写入）：作用于主内存的变量，它把store操作从工作内存中得到的变量的值放入主内存的变量中。</p>
 </li>
 </ol>
-<p>除此之外mybatis还提供了一下配置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mybatis:</div><div class="line">	config-location:	#mybatis的xml注册文件位置</div><div class="line">	mapper-locations:   #Mapper xml config files (optional)</div><div class="line">	executor-type:	  #执行类型为: SIMPLE, REUSE还是BATCH</div><div class="line">	configuration:      #mybatis的其他配置</div></pre></td></tr></table></figure></p>
-<ol>
-<li><h4 id="在Spring-Boot中配置好数据源DataSource"><a href="#在Spring-Boot中配置好数据源DataSource" class="headerlink" title="在Spring Boot中配置好数据源DataSource"></a>在Spring Boot中配置好数据源DataSource</h4>可以使用任意数据源，mybatis会自动使用spring boot中所配置的数据库连接池</li>
-</ol>
-<p>以上就完成了spring boot对mybatis的整合，超级简单啊</p>
-<h2 id="测试一下"><a href="#测试一下" class="headerlink" title="测试一下"></a>测试一下</h2><p>因为在type-aliases-package: me.jcala.blog.domain,me.jcala.blog.mapping中指定的mapping扫描包为me.jcala.blog.mapping，所以要把写的mapper放到me.jcala.blog.mapping包下。</p>
-<h4 id="在me-jcala-blog-mapping下新建一个TestMapper接口"><a href="#在me-jcala-blog-mapping下新建一个TestMapper接口" class="headerlink" title="在me.jcala.blog.mapping下新建一个TestMapper接口"></a>在me.jcala.blog.mapping下新建一个TestMapper接口</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Repository</span></div><div class="line"><span class="meta">@Mapper</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">TestMapper</span> </span>&#123;</div><div class="line">    <span class="meta">@Insert</span>(<span class="string">"insert into users set username='zzp',password='zzp105'"</span>)</div><div class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="再随便写一个测试的类"><a href="#再随便写一个测试的类" class="headerlink" title="再随便写一个测试的类"></a>再随便写一个测试的类</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">public class TestForMapper&#123;</div><div class="line">@Autowired</div><div class="line">TestMapper testMapper;</div><div class="line">@Test</div><div class="line">public void testInsert()&#123;</div><div class="line">      testMapper.insert();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p><img src="http://github-neng.oss-cn-hangzhou.aliyuncs.com/github/java_pic/volatile_01.png" alt="enter description here"></p>
+<pre><code>***对于volatile修饰的变量，只能保证从主内存到工作内存的值是最新的，但像use和assign这些操作并不是原子性的，因此volatile无法保证原子性***
+</code></pre><ul>
+<li><p>###使用原子类进行i++操作</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicInteger; </div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AddCountThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> AtomicInteger count=<span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">1000</span>;i++)&#123;</div><div class="line">            System.out.println(count.incrementAndGet());</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        AddCountThread thread=<span class="keyword">new</span> AddCountThread();</div><div class="line">        <span class="keyword">new</span> Thread(thread).start();</div><div class="line">        <span class="keyword">new</span> Thread(thread).start();</div><div class="line">        <span class="keyword">new</span> Thread(thread).start();</div><div class="line">        <span class="keyword">new</span> Thread(thread).start();</div><div class="line">        <span class="keyword">new</span> Thread(thread).start();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>###原子类也不完全安全</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.concurrent.atomic.AtomicLong;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyService</span></span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> AtomicLong aiRef=<span class="keyword">new</span> AtomicLong();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addNum</span><span class="params">()</span></span>&#123;</div><div class="line">        System.out.println(Thread.currentThread().getName()+<span class="string">"加了100后的值是:"</span>+aiRef.addAndGet(<span class="number">100</span>));</div><div class="line">        aiRef.addAndGet(<span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>&#123;</div><div class="line">    <span class="keyword">private</span> MyService myService;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyThread</span><span class="params">(MyService myService)</span></span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.myService=myService;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>&#123;</div><div class="line">        myService.addNum();</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span></span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String args[])</span></span>&#123;</div><div class="line">        <span class="keyword">try</span>&#123;</div><div class="line">        MyService service=<span class="keyword">new</span> MyService();</div><div class="line">        MyThread[] myThreads=<span class="keyword">new</span> MyThread[<span class="number">5</span>];</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;myThreads.length;i++)&#123;</div><div class="line">            myThreads[i]=<span class="keyword">new</span> MyThread(service);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;myThreads.length;i++)&#123;</div><div class="line">            myThreads[i].start();</div><div class="line">        &#125;</div><div class="line">        Thread.sleep(<span class="number">1000</span>);</div><div class="line">        System.out.println(service.aiRef.get());    </div><div class="line">        &#125;<span class="keyword">catch</span> (InterruptedException e)&#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>运行发现打印出错，这是因为addAndGet()方法虽然是原子性的，但方法与方法之间的调用不是原子性的。</p>
+<ul>
+<li></li>
+</ul>
+<p>#####参考:</p>
+<ul>
+<li>JAVA多线程编程核心技术</li>
+<li>深入理解Java虚拟机</li>
+<li><a href="http://www.codeceo.com/article/jvm-memory-model-visual.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.codeceo.com/article/jvm-memory-model-visual.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.importnew.com/23535.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.importnew.com/23535.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.jianshu.com/p/03a8f06ede46?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.jianshu.com/p/03a8f06ede46?utm_source=tuicool&amp;utm_medium=referral</a></li>
+</ul>
+
     
 
     
@@ -433,7 +492,7 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/16/undertow嵌入式web服务器初体验/" id="post_nav-newer" class="prev-content">
+        <a href="/2017/04/07/java注解总结/" id="post_nav-newer" class="prev-content">
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
                 <i class="material-icons">arrow_back</i>
             </button>
@@ -447,7 +506,7 @@
 
     <!-- Next Nav -->
     
-        <a href="/2017/03/16/微服务/" id="post_nav-older" class="next-content">
+        <a href="/2017/04/07/JPA参考手册/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">

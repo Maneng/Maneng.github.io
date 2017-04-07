@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            JPA参考手册 | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,java,JPA">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="JPA参考手册 | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="java,JPA"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-JPA普通注解"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. JPA普通注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-JPA生命周期注解"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. JPA生命周期注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-关联"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 关联</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-JPA映射策略"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. JPA映射策略</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-spring-data注解"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. spring data注解</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#参考"><span class="post-toc-number">6.</span> <span class="post-toc-text">参考</span></a></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                JPA参考手册
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>4月 07, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/java-JPA/">java,JPA</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/04/07/JPA参考手册/" class="leancloud-views_num" data-flag-title="JPA参考手册">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JPA参考手册&url=http://yoursite.com//2017/04/07/JPA参考手册/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JPA参考手册&url=http://yoursite.com//2017/04/07/JPA参考手册/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/04/07/JPA参考手册/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/04/07/JPA参考手册/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="1-JPA普通注解"><a href="#1-JPA普通注解" class="headerlink" title="1. JPA普通注解"></a>1. JPA普通注解</h3><ul>
+<li><strong>@Entity</strong>: 声明为一个实体。<strong>(修饰实体类)</strong></li>
+<li><p><strong>@Table</strong>: 指定实体所映射的表。<strong>(修饰实体类)</strong></p>
+<p>| 属性 | 是否必要 | 说明 |<br>| :————– | :———— | :———— |<br>| name    | 否 | 设置实体映射的表名。不指定则与实体类的类名相同 |<br>| catalog | 否 | 设置实体映射的表放入指定的catalog中。不指定则放入默认的catalog中 |<br>| schema  | 否 | 设置实体映射的表放入指定的schema中。 不指定则放入默认的schema中 |<br>| uniqueConstraints| 否 | 为实体映射的表设置唯一的约束。该属性可以是一个@UniqueConstraint Annotation数组 |</p>
+</li>
+<li><p><strong>@Indexed</strong>：定义索引</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>, indexes = &#123;</div><div class="line">		<span class="meta">@Index</span>(name=<span class="string">"idx_person"</span>, columnList=<span class="string">"name"</span>)</div><div class="line">		&#125;)</div><div class="line"><span class="meta">@NamedQuery</span>(</div><div class="line">	    name=<span class="string">"simpleByTest"</span>,</div><div class="line">	    query=<span class="string">"SELECT x FROM SimpleModel x WHERE x.test LIKE :test"</span></div><div class="line">	)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line"></div><div class="line">	<span class="meta">@Id</span></div><div class="line">	<span class="meta">@GeneratedValue</span></div><div class="line">	<span class="keyword">private</span> Long id;</div><div class="line">    <span class="keyword">private</span> String name;</div><div class="line">    <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@secondaryTable</strong>: 把实体的部分属性映射到第二个数据表。可通过@secondaryTable指定多个额外的数据表。<strong>(修饰实体类)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | name       | 否 | 指定新数据表的表名 |<br> | catalog | 否 | 设置实体映射的表放入指定的catalog中。不指定则放入默认的catalog中 |<br> | schema  | 否 | 设置实体映射的表放入指定的schema中。 不指定则放入默认的schema中 |<br> | uniqueConstraints| 否 | 为实体映射的表设置唯一的约束。 |<br> | pkJoinColumns| 否 | 指定新数据表的一个或多个外键列，只有通过该外键列才可让新数据表中的记录参照到主表记录。该属性值是一个@PrimaryKeyJoinColumn数组 |</p>
+<p> <strong>@PrimaryKeyJoinColumn</strong>: 用于定义在从表中定义的外键列的映射信息。<br> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | name                | 否 | 指定从表中的外键列的列名 |<br> | columnDefinition    | 否 | 指定JPA使用该属性值指定的SQL片段来创建外键列 |<br> | referencedColumnName| 否 | 指定从表中外键参照的数据列的列名 |</p>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">@Entity</div><div class="line">@Table(name=&quot;person_table&quot;)</div><div class="line">@SecondaryTable(name=&quot;person_detail&quot;,pkJoinColumns=@PrimaryKeyJoinColumn(name=&quot;person_id&quot;))</div><div class="line">public class Person&#123;</div><div class="line">@Id</div><div class="line">private int id;</div><div class="line">@Column(name=&quot;person_name&quot;,length=50)</div><div class="line">private String name;</div><div class="line">@Column(table=&quot;person_detail&quot;,name=&quot;email&quot;)</div><div class="line">private String email;</div><div class="line">@Column(table=&quot;person_detail&quot;,name=&quot;phone&quot;)</div><div class="line">private String phone;</div><div class="line">&#125;</div><div class="line">指定将实体状态放入第二个person_detail数据表中，并指定email,phone两个属性放入person_detail数据表中</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Column</strong>: 指定属性映射的列信息，如列名，长度等。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | name       | 否 | 指定该列的列名。默认为属性名 |<br> | length     | 否 | 指定该列所能保存的数据的最大长度。默认为255 |<br> | nullable   | 否 | 指定该列是否允许为null。默认为true |<br> | unique     | 否 | 指定该列是否具有唯一约束。默认为false |<br> | updatable  | 否 | 指定该列是否包含在JPA生成的update语句的列列表中。默认为true |<br> | insertable | 否 | 指定该列是否包含在JPA生成的insert语句的列列表中。默认为true |</p>
+</li>
+<li><p><strong>@Id</strong>和<strong>@GeneratedValue</strong>：映射实体类的主键。<strong>(修饰属性)</strong><br>@Id定义主键，可以是基本类型，基本类型的包装类，String，Date等类型。<br>@GeneratedValue：设置自动生成属性值，属性如下：</p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | strategy | 否 | 使用怎样的主键生成策略。GenerationType.AUTO：JPA自动选择最适合底层数据库的主键生成策略; GenerationType.IDENTITY: 对于mysql，sqlserver这样的数据库选择自增长的主键生成策略；GenerationType.SEQUENCE: 对于oracle这样的数据库，选择使用基于sequence的主键生成策略，应与@SequenceGenderator一起使用；GenerationType.TABLE：使用一个辅助表来生成主键，应与@TableGenderator一起使用|<br> | generator| 否 | 当使用GenerationType.SEQUENCE,GenerationType.TABLE主键生成策略时，该属性指定sequence,辅助表的名称 |</p>
+</li>
+<li><p><strong>@Transient</strong>: 修饰不想持久保存的属性。<strong>(修饰属性)</strong></p>
+</li>
+<li><p><strong>@Enumerated</strong>： 修饰枚举类型。<strong>(修饰属性)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">当@Enumerated的value属性为EnumType.STRING时，底层数据库保存的是枚举值的名称；</div><div class="line">当@Enumerated的value属性为EnumType.ORDINAL时，保存枚举值的序号。</div><div class="line">如@Enumerated(EnumType.ORDINAL).</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Lob</strong>:修饰大数据类型，对应JDBC的java.sql.Clob类型或者java.sql.Blob类型。<strong>(修饰属性)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">当修饰的属性为byte[],Byte[],java.io.Serializable类型时，将映射为数据库底层的Blob列；</div><div class="line">当修饰的属性为char[],Character[]或java.lang.String类型时，映射为底层的Clob列。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Basic</strong>：用于延迟加载操作。<strong>(修饰属性)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">比如JPA加载Person实体时并不需要立即加载它的pic属性，而只加载一个&quot;虚拟的&quot;代理，真正需要pic属性再从数据库加载。</div><div class="line">@Basic可以指定的属性：</div><div class="line">fetch:指定是否需要延迟加载该属性。FetchType.EAGER不使用延迟加载，Fetch.LAZY使用延迟加载。</div><div class="line">optional：指定映射的数据列是否允许使用null值。</div><div class="line">例如：</div><div class="line">@Lob</div><div class="line">@Basic(fetch=FetchType.LAZY)</div><div class="line">private byte[] pic;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Temporal</strong>: 修饰日期类型。<strong>(修饰属性)</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Temporal可以指定一个value属性，</div><div class="line">该属性支持Temporal.DATE,Temporal.TIME,Temporal.TIMESTAMP，</div><div class="line">分别对应于数据库date,time,timestamp类型的数据列。</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Embedded</strong>和<strong>@Embeddable</strong>: 映射复合类型。@Embeadded修饰这个复合类型属性，@Embeaddable修饰这个复合类。<br>@AttributeOverride用来指定复合类型的成员属性的映射配置，它支持的属性：</p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | name       | 是 | 指定对复合类型中哪个属性进行配置 |<br> | column     | 是 | 指定该属性所映射的数据列的列名   |</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">@Entity</div><div class="line">@Table(name=&quot;person_table&quot;)</div><div class="line">public class Person&#123;</div><div class="line">@Id</div><div class="line">private int id;</div><div class="line">@Column(name=&quot;person_name&quot;,length=50)</div><div class="line">private String name;</div><div class="line">@Embedded</div><div class="line">@AttributeOverrides(&#123;</div><div class="line"> @AttributeOverride(name=&quot;name&quot;,column=@Column(name=&quot;cat_name&quot;,length=35)),</div><div class="line"> @AttributeOverride(name=&quot;color&quot;,column=@Column(&quot;cat_color&quot;))</div><div class="line">&#125;)</div><div class="line">private Cat cat;</div><div class="line">&#125;</div><div class="line">@Embeddable</div><div class="line">public class Cat&#123;</div><div class="line">  private String name;</div><div class="line">  private String color;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@IdClass</strong>和<strong>@EmbeddedId</strong>: 定义复合类型的主键。<strong>(修饰属性)</strong><br>定义复合类型的主键有两种方式：<br>(1). 使用@IdClass和多个@Id;<br>(2). 使用一个@EmbeddedId即可。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line">方式一：使用@IdClass和多个@Id</div><div class="line">   @Entity</div><div class="line">   @Table(name=&quot;person_table&quot;)</div><div class="line">   @IdClass(Cat.class)</div><div class="line">   public class Person&#123;</div><div class="line">   //两个@Id定义联合主键</div><div class="line">   @Id</div><div class="line">   private int id;</div><div class="line">   @Id</div><div class="line">   private String name;</div><div class="line">   private Cat cat;</div><div class="line">   &#125;</div><div class="line">方式二：用一个@EmbeddedId</div><div class="line"> @Entity</div><div class="line">   @Table(name=&quot;person_table&quot;)</div><div class="line">   public class Person&#123;</div><div class="line">   @Id</div><div class="line">   private int id;</div><div class="line">   @Column(name=&quot;person_name&quot;,length=50)</div><div class="line">   private String name;</div><div class="line">   @EmbeddedId</div><div class="line">   @Embedded</div><div class="line">   @AttributeOverrides(&#123;</div><div class="line">    @AttributeOverride(name=&quot;name&quot;,column=@Column(name=&quot;cat_name&quot;,length=35)),</div><div class="line">    @AttributeOverride(name=&quot;color&quot;,column=@Column(&quot;cat_color&quot;))</div><div class="line">   &#125;)</div><div class="line">   private Cat cat;</div><div class="line">   &#125;</div><div class="line">   @Embeddable</div><div class="line">   public class Cat&#123;</div><div class="line">     private String name;</div><div class="line">     private String color;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@OrderBy</strong>: 对关联实体进行排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Example 1:</span></div><div class="line"> <span class="meta">@Entity</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Course</span> </span>&#123;</div><div class="line">    <span class="meta">@ManyToMany</span></div><div class="line">    <span class="meta">@OrderBy</span>(<span class="string">"lastname ASC"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Student&gt; <span class="title">getStudents</span><span class="params">()</span> </span>&#123;&#125;;</div><div class="line"> &#125;</div><div class="line"> <span class="comment">//Example 2:</span></div><div class="line"> <span class="meta">@Entity</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Student</span> </span>&#123;</div><div class="line">    <span class="meta">@ManyToMany</span>(mappedBy=<span class="string">"students"</span>)</div><div class="line">    <span class="meta">@OrderBy</span> <span class="comment">// ordering by primary key is assumed</span></div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Course&gt; <span class="title">getCourses</span><span class="params">()</span> </span>&#123;&#125;;</div><div class="line"> &#125;</div><div class="line"> <span class="comment">//Example 3:</span></div><div class="line"> <span class="meta">@Entity</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@ElementCollection</span></div><div class="line">    <span class="meta">@OrderBy</span>(<span class="string">"zipcode.zip, zipcode.plusFour"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> Set&lt;Address&gt; <span class="title">getResidences</span><span class="params">()</span> </span>&#123;&#125;;</div><div class="line"> &#125;</div><div class="line"> <span class="meta">@Embeddable</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> String street;</div><div class="line">    <span class="keyword">protected</span> String city;</div><div class="line">    <span class="keyword">protected</span> String state;</div><div class="line">    <span class="meta">@Embedded</span> <span class="keyword">protected</span> Zipcode zipcode;</div><div class="line"> &#125;</div><div class="line"> <span class="meta">@Embeddable</span></div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Zipcode</span> </span>&#123;</div><div class="line">    <span class="keyword">protected</span> String zip;</div><div class="line">    <span class="keyword">protected</span> String plusFour;</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@JoinColumn</strong>: 定义外键。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | columnDefinition | 否 | 指定JPA使用该属性值指定的SQL片段来创建外键列 |<br> | name             | 否 | 指定该外键列的列名 |<br> | insertable       | 否 | 指定该列是否包含在JPA生成的insert语句的列列表中。默认为true |<br> | updatable        | 否 | 指定该列是否包含在JPA生成的update语句的列列表中。默认为true |<br> | nullable         | 否 | 指定该列是否允许为null。默认为true |<br> | table            | 否 | 指定该列所在的数据表的表名 |<br> | unique           | 否 | 指定是否为该列增加唯一约束 |<br> | referenceColumnName | 否| 指定该列所参照的主键列的列名 |</p>
+</li>
+<li><p><strong>@ManyToOne</strong>: 映射多对一关系。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | cascade     | 否 | 指定JPA对关联实体采用怎样的级联策略，该级联策略支持四个属性值。CascadeType.ALL：指定JPA将所有的持久化操作都级联到关联实体；CascadeType.MERGE: 指定JPA将merge操作都级联到关联实体；CascadeType.PERSIST：指定JPA将persist操作级联到关联实体；CascadeType.REFRESH: 指定JPA将refresh操作级联到关联实体；CascadeType.REMOVE: 指定JPA将remove操作关联到关联实体|<br> | fetch       | 否 | 指定抓取关联实体时抓取策略，该属性支持两个值。FetchType.EAGER: 抓取实体时，立即抓取关联实体，默认值；FetchType.LAZY：抓取实体时延迟抓取关联实体，等到真到用到时再去抓取。 |<br> | optional    | 否 | 该属性指定关联关系是否可选。 |<br> | targetEntity| 否 | 该属性指定关联实体的类名。 在默认情况下，JPA通过反射判断 |</p>
+</li>
+<li><p><strong>@OneToOne</strong>: 映射一对一关系。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | cascade     | 否 | 指定JPA对关联实体采用怎样的级联策略，该级联策略支持四个属性值。CascadeType.ALL：指定JPA将所有的持久化操作都级联到关联实体；CascadeType.MERGE: 指定JPA将merge操作都级联到关联实体；CascadeType.PERSIST：指定JPA将persist操作级联到关联实体；CascadeType.REFRESH: 指定JPA将refresh操作级联到关联实体；CascadeType.REMOVE: 指定JPA将remove操作关联到关联实体|<br> | fetch       | 否 | 指定抓取关联实体时抓取策略，该属性支持两个值。FetchType.EAGER: 抓取实体时，立即抓取关联实体，默认值；FetchType.LAZY：抓取实体时延迟抓取关联实体，等到真到用到时再去抓取。 |<br> | optional    | 否 | 该属性指定关联关系是否可选。 |<br> | targetEntity| 否 | 该属性指定关联实体的类名。 在默认情况下，JPA通过反射判断 |<br> | mappedBy    | 否 | 该属性合法的属性值为关联实体的属性名，该属性指定关联实体中哪一个属性可引用到关联实体时采取抓取。 |</p>
+</li>
+<li><p><strong>@OneToMany</strong>：映射一对多关系。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | cascade     | 否 | 指定JPA对关联实体采用怎样的级联策略，该级联策略支持四个属性值。CascadeType.ALL：指定JPA将所有的持久化操作都级联到关联实体；CascadeType.MERGE: 指定JPA将merge操作都级联到关联实体；CascadeType.PERSIST：指定JPA将persist操作级联到关联实体；CascadeType.REFRESH: 指定JPA将refresh操作级联到关联实体；CascadeType.REMOVE: 指定JPA将remove操作关联到关联实体|<br> | fetch       | 否 | 指定抓取关联实体时抓取策略，该属性支持两个值。FetchType.EAGER: 抓取实体时，立即抓取关联实体，默认值；FetchType.LAZY：抓取实体时延迟抓取关联实体，等到真到用到时再去抓取。 |<br> | targetEntity| 否 | 该属性指定关联实体的类名。 在默认情况下，JPA通过反射判断 |<br> | mappedBy    | 否 | 该属性合法的属性值为关联实体的属性名，该属性指定关联实体中哪一个属性可引用到关联实体时采取抓取。 |</p>
+</li>
+<li><p><strong>@ManyToMany</strong>：映射多对多关系。<strong>(修饰属性)</strong></p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | cascade     | 否 | 指定JPA对关联实体采用怎样的级联策略，该级联策略支持四个属性值。CascadeType.ALL：指定JPA将所有的持久化操作都级联到关联实体；CascadeType.MERGE: 指定JPA将merge操作都级联到关联实体；CascadeType.PERSIST：指定JPA将persist操作级联到关联实体；CascadeType.REFRESH: 指定JPA将refresh操作级联到关联实体；CascadeType.REMOVE: 指定JPA将remove操作关联到关联实体|<br> | fetch       | 否 | 指定抓取关联实体时抓取策略，该属性支持两个值。FetchType.EAGER: 抓取实体时，立即抓取关联实体，默认值；FetchType.LAZY：抓取实体时延迟抓取关联实体，等到真到用到时再去抓取。 |<br> | targetEntity| 否 | 该属性指定关联实体的类名。 在默认情况下，JPA通过反射判断 |<br> | mappedBy    | 否 | 该属性合法的属性值为关联实体的属性名，该属性指定关联实体中哪一个属性可引用到关联实体时采取抓取。 |</p>
+</li>
+<li><p><strong>@JoinTable</strong>：专门用于多对多关联关系指定连接表的配置信息。</p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | name    | 否 | 指定该连接表的表名 |<br> | catalog | 否 | 设置将该连接表放入指定的catalog内。如果没有指定该属性，连接表放入默认的catalog中。|<br> | schema  | 否 | 设置将该连接表放入指定的schema内。 如果没有指定该属性，连接表放入默认的schema中。 |<br> | joinColumns | 否 | 该属性值可接受多个@JoinColumn，用于配置连接表中外键列的列信息，这些列参照当前实体对应表的主键列 |<br> | inverseJoinColumns | 否 |该属性值可接受多个@JoinColumn，用于配置连接表中外键列的列信息，这些列参照当前实体的关联实体对应表的主键列 |<br> | uniqueConstraints  | 否 | 该属性为连接表增加唯一约束。 |</p>
+</li>
+<li><p><strong>@MapKey</strong>: 使用Map集合记录关联实体。</p>
+</li>
+<li><p><strong>MappedSuperClass</strong>: 映射为非实体父类，该实体父类不会生成对应的数据表</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@MappedSuperclass</span></div><div class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">       <span class="meta">@Id</span> <span class="keyword">protected</span> Integer empId;</div><div class="line">       <span class="meta">@Version</span> <span class="keyword">protected</span> Integer version;</div><div class="line">       <span class="meta">@ManyToOne</span> <span class="meta">@JoinColumn</span>(name=<span class="string">"ADDR"</span>)</div><div class="line">       <span class="keyword">protected</span> Address address;</div><div class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">getEmpId</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setEmpId</span><span class="params">(Integer id)</span> </span>&#123;  &#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> Address <span class="title">getAddress</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setAddress</span><span class="params">(Address addr)</span> </span>&#123; &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="comment">// Default table is FTEMPLOYEE table</span></div><div class="line">   <span class="meta">@Entity</span></div><div class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FTEmployee</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">       <span class="comment">// Inherited empId field mapped to FTEMPLOYEE.EMPID</span></div><div class="line">       <span class="comment">// Inherited version field mapped to FTEMPLOYEE.VERSION</span></div><div class="line">       <span class="comment">// Inherited address field mapped to FTEMPLOYEE.ADDR fk</span></div><div class="line">       <span class="comment">// Defaults to FTEMPLOYEE.SALARY</span></div><div class="line">       <span class="keyword">protected</span> Integer salary;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="title">FTEmployee</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> Integer <span class="title">getSalary</span><span class="params">()</span> </span>&#123; &#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setSalary</span><span class="params">(Integer salary)</span> </span>&#123; &#125;</div><div class="line">   &#125;</div><div class="line">   <span class="meta">@Entity</span> <span class="meta">@Table</span>(name=<span class="string">"PT_EMP"</span>)</div><div class="line">   <span class="meta">@AssociationOverride</span>(</div><div class="line">       name=<span class="string">"address"</span>,</div><div class="line">       joincolumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"ADDR_ID"</span>))</div><div class="line">   <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PartTimeEmployee</span> <span class="keyword">extends</span> <span class="title">Employee</span> </span>&#123;</div><div class="line">       <span class="comment">// Inherited empId field mapped to PT_EMP.EMPID</span></div><div class="line">       <span class="comment">// Inherited version field mapped to PT_EMP.VERSION</span></div><div class="line">       <span class="comment">// address field mapping overridden to PT_EMP.ADDR_ID fk</span></div><div class="line">       <span class="meta">@Column</span>(name=<span class="string">"WAGE"</span>)</div><div class="line">       <span class="keyword">protected</span> Float hourlyWage;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="title">PartTimeEmployee</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> Float <span class="title">getHourlyWage</span><span class="params">()</span> </span>&#123;&#125;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setHourlyWage</span><span class="params">(Float wage)</span> </span>&#123;&#125;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@Inheritance</strong>：指定映射策略<br> InheritanceType.SINGLE_TABLE： 整个类层次对应一张表策略,这是继承映射的默认策略。<br> InheritanceType.JOINED：连接子类策略。父亲的放在一张表，儿子只是保存和父亲不一样的，增加的属性。<br> InheritanceType.TABLE_PER_CLASS： 每个具体的类一个表的策略。</p>
+</li>
+<li><p><strong>@DiscriminatorColumn</strong>:在整个类层次对应一张表策略的映射策略中配置辨别列。</p>
+<p> | 属性 | 是否必要 | 说明 |<br> | :————– | :———— | :———— |<br> | columnDefinition    | 否 | 指定JPA使用该属性值指定的SQL片段来创建外键列 |<br> | name                | 否 | 指定辨别列的名称，默认值为”DTYPE” |<br> | discriminatorType   | 否 | 指定该辨别者列的数据类型。 DiscriminatorType.CHAR: 辨别者列的类型是字符类型，即该列只接受单个字符；DiscriminatorType.INTEGER：辨别者列的类型是整数类型，即该列只接受整数值；DiscriminatorType.STRING：辨别者列的类型是字符串类型，即该列只接受字符串值，为默认值|<br> | length              | 否 | 该属性指定辨别者的字符长度 |</p>
+</li>
+</ul>
+<h3 id="2-JPA生命周期注解"><a href="#2-JPA生命周期注解" class="headerlink" title="2. JPA生命周期注解"></a>2. JPA生命周期注解</h3><ul>
+<li><strong>@PerPersist</strong>：保存实体之前回调它修饰的方法。</li>
+<li><strong>@PostPersist</strong>：保存实体之后回调它修饰的方法。</li>
+<li><strong>@PreRemove</strong>：删除实体之前回调它修饰的方法。</li>
+<li><strong>@PostRemove</strong>：删除实体之后回调它修饰的方法。</li>
+<li><strong>@PreUpdate</strong>：更新实体之前回调它修饰的方法。</li>
+<li><strong>@PostUpdate</strong>：更新实体之后回调它修饰的方法。</li>
+<li><strong>@PostLoad</strong>：记载实体之后回调它修饰的方法。</li>
+<li><p><strong>@EntityListeners</strong>: 自定义专门的监听器</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@EntityListeners</span>(PersonListener.class)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> <span class="keyword">implements</span> <span class="title">Serializable</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>@ExcludeDefaultListeners和@ExcludeSuperclassListeners</strong>：排除监听器。</p>
+</li>
+</ul>
+<h3 id="3-关联"><a href="#3-关联" class="headerlink" title="3. 关联"></a>3. 关联</h3><ul>
+<li><strong>单向N-1关联</strong>：使用<strong>@ManyToOne</strong>注解。<br>比如一个人对应多个手机号,仅通过手机号获取用户，无需获取用户的手机号的场景。<br><strong>当使用@JoinColumn通过外键实现，否则通过第三方表实现。</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Person"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Phone"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="meta">@Column</span>(name = <span class="string">"`number`"</span>)</div><div class="line">    <span class="keyword">private</span> String number;</div><div class="line">    <span class="meta">@ManyToOne</span>(optional=<span class="keyword">false</span>,cascade=CascadeType.ALL,fetch=FetchType.LAZY,targetEntity=Person.class)</div><div class="line">    <span class="meta">@JoinColumn</span>(name = <span class="string">"person_id"</span>,</div><div class="line">            foreignKey = <span class="meta">@ForeignKey</span>(name = <span class="string">"PERSON_ID_FK"</span>)</div><div class="line">    )</div><div class="line">    <span class="keyword">private</span> Person person;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Phone</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Phone</span><span class="params">(String number)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.number = number;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> number;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Person <span class="title">getPerson</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> person;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setPerson</span><span class="params">(Person person)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.person = person;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对应的sql语句：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Person (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Phone (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    <span class="built_in">number</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) ,</div><div class="line">    person_id <span class="built_in">BIGINT</span> ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line"> )</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Phone</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> PERSON_ID_FK</div><div class="line">FOREIGN <span class="keyword">KEY</span> (person_id) <span class="keyword">REFERENCES</span> Person</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong>单向1-1关联</strong>: 使用<strong>@OneToOne</strong>注解。<br>比如一个人对应一个身份证Id,只需获取一个人的身份证号，而无需通过身份证号获取用户的情况。<br><strong>当使用@JoinColumn通过外键实现，否则通过第三方表实现。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> personid;</div><div class="line"><span class="keyword">private</span> String name;</div><div class="line"><span class="meta">@OneToOne</span>(optional=<span class="keyword">false</span>,cascade=CascadeType.ALL,fetch=FetchType.LAZY,targetEntity=IdCard.class)</div><div class="line"><span class="meta">@JoinColumn</span>(name=<span class="string">"id_card_id"</span>,nullable=<span class="keyword">false</span>,updatable=<span class="keyword">false</span>)<span class="comment">//映射外键列</span></div><div class="line"><span class="keyword">private</span> IdCard idCard;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"id_card_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">IdCard</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> idCardId;</div><div class="line"><span class="keyword">private</span> String cardNumber;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>单向1-N关联</strong>：使用<strong>@OneToMany</strong>注解。<br>-<strong>对于1-N关联，应尽量设计为双向关联，而不是单向</strong><br>比如一个人有多个手机号，仅需要获取一个人的手机号，而无需通过手机号获取用户的场景。<br><strong>当使用@JoinColumn通过外键实现，否则通过第三方表实现。</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Person"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="meta">@OneToMany</span>(cascade = CascadeType.ALL, orphanRemoval = <span class="keyword">true</span>)</div><div class="line">    <span class="keyword">private</span> List&lt;Phone&gt; phones = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Phone&gt; <span class="title">getPhones</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> phones;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Phone"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Phone</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="meta">@Column</span>(name = <span class="string">"`number`"</span>)</div><div class="line">    <span class="keyword">private</span> String number;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Phone</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Phone</span><span class="params">(String number)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.number = number;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> number;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对应的sql：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Person (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Person_Phone (</div><div class="line">    Person_id <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    phones_id <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Phone (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    <span class="built_in">number</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line">)</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Person_Phone</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> UK_9uhc5itwc9h5gcng944pcaslf</div><div class="line"><span class="keyword">UNIQUE</span> (phones_id);</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Person_Phone</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FKr38us2n8g5p9rj0b494sd3391</div><div class="line">FOREIGN <span class="keyword">KEY</span> (phones_id) <span class="keyword">REFERENCES</span> Phone;</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Person_Phone</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FK2ex4e4p7w1cj310kg2woisjl2</div><div class="line">FOREIGN <span class="keyword">KEY</span> (Person_id) <span class="keyword">REFERENCES</span> Person</div></pre></td></tr></table></figure></p>
+<ul>
+<li><strong>单向N-N关联</strong>：使用<strong>@ManyToMany</strong>注解。<br>比如一个人有多个住址，一个住址又对应多个用户，仅需通过用户获取住址列表的场景。<br><strong>对于多对多关系，数据库底层只能通过关联表实现。</strong><br>方式一：使用默认<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Person"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="meta">@ManyToMany</span>(cascade = &#123;CascadeType.PERSIST, CascadeType.MERGE&#125;)</div><div class="line">    <span class="keyword">private</span> List&lt;Address&gt; addresses = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Address&gt; <span class="title">getAddresses</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> addresses;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Address"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="keyword">private</span> String street;</div><div class="line">    <span class="meta">@Column</span>(name = <span class="string">"`number`"</span>)</div><div class="line">    <span class="keyword">private</span> String number;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Address</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Address</span><span class="params">(String street, String number)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.street = street;</div><div class="line">        <span class="keyword">this</span>.number = number;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> Long <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> id;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getStreet</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> street;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getNumber</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> number;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>对应的sql：<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Address (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    <span class="built_in">number</span> <span class="built_in">VARCHAR</span>(<span class="number">255</span>) ,</div><div class="line">    street <span class="built_in">VARCHAR</span>(<span class="number">255</span>) ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Person (</div><div class="line">    <span class="keyword">id</span> <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    PRIMARY <span class="keyword">KEY</span> ( <span class="keyword">id</span> )</div><div class="line">)</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Person_Address (</div><div class="line">    Person_id <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span> ,</div><div class="line">    addresses_id <span class="built_in">BIGINT</span> <span class="keyword">NOT</span> <span class="literal">NULL</span></div><div class="line">)</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Person_Address</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FKm7j0bnabh2yr0pe99il1d066u</div><div class="line">FOREIGN <span class="keyword">KEY</span> (addresses_id) <span class="keyword">REFERENCES</span> Address;</div><div class="line"><span class="keyword">ALTER</span> <span class="keyword">TABLE</span> Person_Address</div><div class="line"><span class="keyword">ADD</span> <span class="keyword">CONSTRAINT</span> FKba7rc9qe2vh44u93u0p2auwti</div><div class="line">FOREIGN <span class="keyword">KEY</span> (Person_id) <span class="keyword">REFERENCES</span> Person</div></pre></td></tr></table></figure></p>
+<p>方式二：<strong>通过@JoinTable配置关联表</strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span>(name = <span class="string">"Person"</span>)</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</div><div class="line">    <span class="meta">@Id</span></div><div class="line">    <span class="meta">@GeneratedValue</span></div><div class="line">    <span class="keyword">private</span> Long id;</div><div class="line">    <span class="meta">@ManyToMany</span>(cascade = &#123;CascadeType.PERSIST, CascadeType.MERGE&#125;,targetEntity=Address.class)</div><div class="line">    <span class="meta">@JoinTable</span>(</div><div class="line">    name=<span class="string">"person_address"</span>,</div><div class="line">    joinColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"person_id"</span>),</div><div class="line">    inverseJoinTableColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"address_id"</span>)</div><div class="line">    )</div><div class="line">    <span class="keyword">private</span> List&lt;Address&gt; addresses = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Address&gt; <span class="title">getAddresses</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> addresses;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong>双向1-1关联</strong>: 使用<strong>两边@OneToOne</strong>注解和<strong>mappedBy</strong>属性<br>双向需要两边实体类都增加@OneToOne，可在一边的实体类增加mappedBy属性。<br>当使用mappedBy属性后表示当前实体不再控制关联联系，因此不可使用@JoinColumn。<br>比如一个人一个精确住址，既可以通过用户获取住址，又可以通过住址获取该住户的场景。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> personId;</div><div class="line"><span class="keyword">private</span> String name;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"><span class="meta">@OneToOne</span>(mappedBy=<span class="string">"person"</span>,cascade=CascadeType.ALL)</div><div class="line"><span class="keyword">private</span> Address address;</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"address_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span></span>&#123;</div><div class="line"> <span class="meta">@Id</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> addressId;</div><div class="line"> <span class="keyword">private</span> String detail;</div><div class="line"> <span class="meta">@OneToOne</span>(optional=<span class="keyword">false</span>,cascade=CascadeType.ALL)</div><div class="line"> <span class="meta">@JoinColumn</span>(name=<span class="string">"person_id"</span>,nullable=<span class="keyword">false</span>,updatable=<span class="keyword">false</span>)</div><div class="line"> <span class="keyword">private</span> Person person;</div><div class="line"> <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>双向1-N关联</strong>：使用<strong>@OneToMany</strong>和<strong>@ManyToOne</strong>注解和<strong>mappedBy</strong>属性<br><strong>对于1-N关联，应尽量设计为双向关联，而不是单向，并且尽量使用N的一端来控制关联。</strong><br>1的一端使用@OneToMany注解和mappedBy属性，N的一端使用@ManyToOne和@JoinColumn。<br>比如一个人有多个住址，既可以通过用户获取住址，又可以通过住址获取用户的场景。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> personId;</div><div class="line"><span class="keyword">private</span> String name;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"><span class="meta">@OneToMany</span>(mappedBy=<span class="string">"person"</span>,cascade=CascadeType.ALL)</div><div class="line"><span class="keyword">private</span> Set&lt;Address&gt; addresses=<span class="keyword">new</span> HashSet&lt;Address&gt;();</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"address_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span></span>&#123;</div><div class="line"> <span class="meta">@Id</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> addressId;</div><div class="line"> <span class="keyword">private</span> String detail;</div><div class="line"> <span class="meta">@ManyToOne</span>(optional=<span class="keyword">false</span>,cascade=CascadeType.ALL)</div><div class="line"> <span class="meta">@JoinColumn</span>(name=<span class="string">"person_id"</span>,nullable=<span class="keyword">true</span>)</div><div class="line"> <span class="keyword">private</span> Person person;</div><div class="line"> <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>双向N-N关联</strong>: 使用<strong>两边@ManyToMany</strong>注解，<strong>一边mapperBy</strong>属性和。<br>对于N-N关联，底层数据库必须通过关联表来关联实体之间的关系。<br>对于双向N-N关联，两边实体对等，一边通过mappedBy不再控制关系，另一边通过@JoinTable控制关系即可。<br>比如多个人住在同一个地址，但一个人也可有多个住址，既可以通过用户找到住址列表，又可以通过住址找到用户列表的场景。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> personId;</div><div class="line"><span class="keyword">private</span> String name;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"><span class="meta">@ManyToMany</span>(mappedBy=<span class="string">"persons"</span>,cascade=CascadeType.ALL)</div><div class="line"><span class="keyword">private</span> Set&lt;Address&gt; addresses=<span class="keyword">new</span> HashSet&lt;Address&gt;();</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"address_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Address</span></span>&#123;</div><div class="line"> <span class="meta">@Id</span></div><div class="line"> <span class="keyword">private</span> <span class="keyword">int</span> addressId;</div><div class="line"> <span class="keyword">private</span> String detail;</div><div class="line"> <span class="meta">@ManyToMany</span>(optional=<span class="keyword">false</span>,cascade=CascadeType.ALL)</div><div class="line"> <span class="meta">@JoinColumn</span>(name=<span class="string">"person_id"</span>,nullable=<span class="keyword">true</span>)</div><div class="line"> <span class="meta">@JoinTable</span>(</div><div class="line">    name=<span class="string">"person_address"</span>,</div><div class="line">    joinColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"address_id"</span>),</div><div class="line">    inverseJoinTableColumns=<span class="meta">@JoinColumn</span>(name=<span class="string">"person_id"</span>)</div><div class="line"> )</div><div class="line"> <span class="keyword">private</span> Set&lt;Person&gt; persons=<span class="keyword">new</span> HashSet&lt;Person&gt;();</div><div class="line"> <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用Map集合记录关联实体：使用<strong>@MapKey</strong>注解：<br>比如一个人有多个住址，既可以通过用户获取住址，又可以通过住址获取用户的场景。<br>使用@MapKey时必须指定一个name属性，name属性的属性值为当前实体的关联实体中标识属性的属性名。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_table"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;</div><div class="line"><span class="meta">@Id</span></div><div class="line"><span class="meta">@GeneratedValue</span>(strategy=GenerationType.IDENTITY)</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> personId;</div><div class="line"><span class="keyword">private</span> String name;</div><div class="line"><span class="keyword">private</span> <span class="keyword">int</span> age;</div><div class="line"><span class="meta">@OneToMany</span>(mappedBy=<span class="string">"person"</span>,cascade=CascadeType.ALL)</div><div class="line"><span class="meta">@MapKey</span>(name=<span class="string">"pk"</span>)</div><div class="line"><span class="keyword">private</span> Map&lt;AddressPk,Address&gt; addresses=<span class="keyword">new</span> HashMap&lt;AddressPk,Address&gt;();</div><div class="line"><span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="4-JPA映射策略"><a href="#4-JPA映射策略" class="headerlink" title="4. JPA映射策略"></a>4. JPA映射策略</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">JPA提供了3种映射策略：</div><div class="line">(1)、 整个类层次对应一张表策略,这是继承映射的默认策略。</div><div class="line">即如果实体类B继承实体类A，实体类C也继承自实体A，那么只会映射成一个表，</div><div class="line">这个表中包括了实体类A、B、C中所有的字段，JPA使用一个叫做“discriminator列”来区分某一行数据是应该映射成哪个实体。</div><div class="line">注解为：@Inheritance(strategy = InheritanceType.SINGLE_TABLE)</div><div class="line">(2)、 连接子类策略。父亲的放在一张表，儿子只是保存和父亲不一样的，增加的属性。</div><div class="line">这种情况下子类的字段被映射到各自的表中，这些字段包括父类中的字段，并执行一个join操作来实例化子类。</div><div class="line">注解为：@Inheritance(strategy = InheritanceType.JOINED)</div><div class="line">(3)、 每个具体的类一个表的策略。</div><div class="line">注解为：@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)</div><div class="line">可使用@Inheritance指定映射策略</div><div class="line">InheritanceType.SINGLE_TABLE：第一种</div><div class="line">InheritanceType.JOINED：第二种</div><div class="line">InheritanceType.TABLE_PER_CLASS：第三种</div></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>整个类层次对应一张表策略</strong>。<br>这种策略下，整个类层次所有的实体都存放在一张数据表中，系统通过在该表增加额外的一个辨别列，用来区分每行记录到底是哪一个类的实例。<br>使用@DiscriminatorColumn来配置辨别列。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Inheritance</span>(strategy=InheritanceType.SINGLE_TABLE)</div><div class="line"><span class="comment">// 定义辨别者列的列名为person_type，列类型为字符串</span></div><div class="line"><span class="meta">@DiscriminatorColumn</span>(name=<span class="string">"person_type"</span> ,</div><div class="line">    discriminatorType=DiscriminatorType.STRING)</div><div class="line"><span class="comment">// 指定Person实体对应的记录在辨别者列的值为"普通人"</span></div><div class="line"><span class="meta">@DiscriminatorValue</span>(<span class="string">"普通人"</span>)</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;</div><div class="line"><span class="comment">// 顾客类继承了Person类</span></div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="comment">// 指定Customer实体对应的记录在辨别者列的值为"顾客"</span></div><div class="line"><span class="meta">@DiscriminatorValue</span>(<span class="string">"顾客"</span>)</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"customer_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;&#125;</div><div class="line"><span class="comment">// 员工类继承了Person类</span></div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="comment">// 指定Employee实体对应的记录在辨别者列的值为"员工"</span></div><div class="line"><span class="meta">@DiscriminatorValue</span>(<span class="string">"员工"</span>)</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"employee_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>连接子类的映射策略</strong><br>这种策略中父类实体保存在父类表中，而子类实体由父亲表和子类表共同存储，父类和子类共有部分存储在父类表，子类单独存在属性存储在子类表中。<br>无需使用辨别者，只需要在继承树的根实体类上使用@Inheritance,指定strategy=InheritanceType.JOINED即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Inheritance</span>(strategy=InheritanceType.JOINED)</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"customer_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Customer</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;&#125;</div><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"employee_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Employee</span> <span class="keyword">extends</span> <span class="title">Person</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><strong>每个具体的类一个表的策略</strong><br>子类实例仅保存在子类表中，在父类表中没有任何记录。<br>单从数据库来看，几乎难以看出继承关系，只是多个实体之间主键存在某种连续性，因此不能让数据库自动生成主键，因此<strong>不能使用GenerationType.IDENTITY和GenerationType.AUTO这两种主键生成策略</strong>。<br>无需使用辨别者，只需要在继承树的根实体类上使用@Inheritance,指定strategy=InheritanceType.TABLE_PER_CLASS即可</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Entity</span></div><div class="line"><span class="meta">@Inheritance</span>(strategy=InheritanceType.TABLE_PER_CLASS)</div><div class="line"><span class="meta">@Table</span>(name=<span class="string">"person_inf"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="5-spring-data注解"><a href="#5-spring-data注解" class="headerlink" title="5. spring data注解"></a>5. spring data注解</h3><ul>
+<li><strong>@CreatedBy</strong>：Declares a field as the one representing the principal that created the entity containing the field.</li>
+<li><strong>@CreatedDate</strong>：Declares a field as the one representing the date the entity containing the field was created.</li>
+<li><strong>@Id</strong>：Demarcates an identifier.</li>
+<li><strong>@LastModifiedBy</strong>：Declares a field as the one representing the principal that recently modified the entity containing the field.</li>
+<li><strong>@LastModifiedDate</strong>：Declares a field as the one representing the date the entity containing the field was recently modified.</li>
+<li><strong>@ReadOnlyProperty</strong>：Marks a field to be read-only for the mapping framework and therefore will not be persisted.</li>
+<li><strong>@Reference</strong>：Meta-annotation to be used to annotate annotations that mark references to other objects.</li>
+<li><strong>@Transient</strong>：Marks a field to be transient for the mapping framework. Thus the property will not be persisted and not further inspected by the mapping framework.</li>
+<li><strong>@TypeAlias</strong>：Annotation to allow String based type aliases to be used when writing type information for PersistentEntitys.</li>
+<li><strong>@version</strong>: 定义一个属性为版本字段用于实现乐观锁</li>
+</ul>
+<h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><ul>
+<li>《经典JAVAEE企业应用实战》</li>
+<li>JPA API</li>
+<li>spring data commons源码</li>
+<li><a href="http://blog.csdn.net/u012881904/article/details/51059156" target="_blank" rel="external">http://blog.csdn.net/u012881904/article/details/51059156</a></li>
+</ul>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/04/07/volatile 学习/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/03/22/GitLearn in 15 minutes/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">15</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
