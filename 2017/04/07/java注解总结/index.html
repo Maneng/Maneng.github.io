@@ -403,22 +403,22 @@
 <table>
 <thead>
 <tr>
-<th style="text-align:left">注解标识</th>
-<th style="text-align:left">作用</th>
+<th>注解标识</th>
+<th>作用</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:left">@Override</td>
-<td style="text-align:left">覆盖超类中的方法</td>
+<td>@Override</td>
+<td>覆盖超类中的方法</td>
 </tr>
 <tr>
-<td style="text-align:left">@Deprecated</td>
-<td style="text-align:left">声明过期</td>
+<td>@Deprecated</td>
+<td>声明过期</td>
 </tr>
 <tr>
-<td style="text-align:left">@SuppressWarnings</td>
-<td style="text-align:left">关闭不当的编译器警告信息</td>
+<td>@SuppressWarnings</td>
+<td>关闭不当的编译器警告信息</td>
 </tr>
 </tbody>
 </table>
@@ -491,7 +491,7 @@
 <ul>
 <li>####示例</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Target</span>(&#123;ElementType.METHOD,ElementType.TYPE&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="meta">@Inherited</span></div><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Desc &#123;</div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line">    <span class="function">String <span class="title">desc</span><span class="params">()</span> <span class="keyword">default</span> "description："</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)</div><div class="line">@Retention(RetentionPolicy.RUNTIME)</div><div class="line">@Inherited</div><div class="line">@Documented</div><div class="line">public @interface Desc &#123;</div><div class="line">    String value();</div><div class="line">    String desc() default &quot;description：&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
 <li><h4 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h4></li>
 </ul>
@@ -522,15 +522,14 @@
 </blockquote>
 <ol>
 <li><p>被注解的测试类</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Desc</span>(value = <span class="string">"test"</span>,desc = <span class="string">"Test is a type"</span>)</div><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">@Desc(value = &quot;test&quot;,desc = &quot;Test is a type&quot;)</div><div class="line"> public class Test &#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>反射获取注解信息</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>&#123;</div><div class="line">       Class&lt;?&gt; c=Class.forName(<span class="string">"me.jcala.tip.annotation.Test"</span>);</div><div class="line">       Annotation annotation=c.getAnnotation(Desc.class);</div><div class="line">       <span class="keyword">if</span> (annotation!=<span class="keyword">null</span>)&#123;</div><div class="line">          Desc desc=(Desc)annotation;</div><div class="line">          System.out.println(<span class="string">"value:"</span>+desc.value());</div><div class="line">          System.out.println(<span class="string">"description:"</span>+desc.desc());</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"> public class Main &#123;</div><div class="line">   public static void main(String[] args) throws Exception&#123;</div><div class="line">       Class&lt;?&gt; c=Class.forName(&quot;me.jcala.tip.annotation.Test&quot;);</div><div class="line">       Annotation annotation=c.getAnnotation(Desc.class);</div><div class="line">       if (annotation!=null)&#123;</div><div class="line">          Desc desc=(Desc)annotation;</div><div class="line">          System.out.println(&quot;value:&quot;+desc.value());</div><div class="line">          System.out.println(&quot;description:&quot;+desc.desc());</div><div class="line">       &#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ol>
 </li>
 </ul>
-<p>#####<a href="https://github.com/jcalaz/tip/tree/master/src/main/java/me/jcala/tip/annotation" target="_blank" rel="external">示例代码地址</a></p>
 <p>#####参考:</p>
 <ul>
 <li>慕课网</li>
