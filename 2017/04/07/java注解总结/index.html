@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义注解"><span class="post-toc-number">1.</span> <span class="post-toc-text">自定义注解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">注意事项</span></a></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#注解分类"><span class="post-toc-number">1.</span> <span class="post-toc-text">注解分类</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#标准注解"><span class="post-toc-number">2.</span> <span class="post-toc-text">标准注解</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#自定义注解"><span class="post-toc-number">3.</span> <span class="post-toc-text">自定义注解</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-5"><a class="post-toc-link" href="#元注解"><span class="post-toc-number">3.0.0.1.</span> <span class="post-toc-text">元注解</span></a></li></ol></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#示例"><span class="post-toc-number">3.0.1.</span> <span class="post-toc-text">示例</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#注意事项"><span class="post-toc-number">3.0.2.</span> <span class="post-toc-text">注意事项</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#编写注解解析器"><span class="post-toc-number">3.0.3.</span> <span class="post-toc-text">编写注解解析器</span></a></li></ol></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -390,8 +390,7 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>##注解分类</p>
-<ol>
+        <h2 id="注解分类"><a href="#注解分类" class="headerlink" title="注解分类"></a>注解分类</h2><ol>
 <li><p>源码注解： 只在源码中存在，编译成.class就不存在了。</p>
 </li>
 <li><p>编译时注解： 源码和.class中都存在，比如@Override，@Deprecated等</p>
@@ -399,8 +398,7 @@
 <li><p>运行时注解： 在运行时注解，比如spring的@Component，@AutoWired等</p>
 </li>
 </ol>
-<p>##标准注解</p>
-<table>
+<h2 id="标准注解"><a href="#标准注解" class="headerlink" title="标准注解"></a>标准注解</h2><table>
 <thead>
 <tr>
 <th>注解标识</th>
@@ -423,7 +421,7 @@
 </tbody>
 </table>
 <h2 id="自定义注解"><a href="#自定义注解" class="headerlink" title="自定义注解"></a>自定义注解</h2><ul>
-<li>#####元注解<blockquote>
+<li><h5 id="元注解"><a href="#元注解" class="headerlink" title="元注解"></a>元注解</h5><blockquote>
 <p>用于自定义注解</p>
 </blockquote>
 </li>
@@ -489,7 +487,7 @@
 </li>
 </ol>
 <ul>
-<li>####示例</li>
+<li><h4 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h4></li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">@Target(&#123;ElementType.METHOD,ElementType.TYPE&#125;)</div><div class="line">@Retention(RetentionPolicy.RUNTIME)</div><div class="line">@Inherited</div><div class="line">@Documented</div><div class="line">public @interface Desc &#123;</div><div class="line">    String value();</div><div class="line">    String desc() default &quot;description：&quot;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <ul>
@@ -516,8 +514,7 @@
 </li>
 </ol>
 <ul>
-<li><p>####编写注解解析器</p>
-<blockquote>
+<li><h4 id="编写注解解析器"><a href="#编写注解解析器" class="headerlink" title="编写注解解析器"></a>编写注解解析器</h4><blockquote>
 <p>要想注添加逻辑，需要反射或者字节码操作获取注解信息</p>
 </blockquote>
 <ol>
@@ -529,12 +526,6 @@
 </li>
 </ol>
 </li>
-</ul>
-<p>#####参考:</p>
-<ul>
-<li>慕课网</li>
-<li>java编程思想</li>
-<li><a href="http://www.open-open.com/lib/view/open1453426805042.html" target="_blank" rel="external">http://www.open-open.com/lib/view/open1453426805042.html</a></li>
 </ul>
 
     
