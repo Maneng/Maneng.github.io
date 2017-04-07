@@ -485,12 +485,47 @@
 <li><h4 id="java-lang-ClassLoader"><a href="#java-lang-ClassLoader" class="headerlink" title="java.lang.ClassLoader"></a>java.lang.ClassLoader</h4><p>java.lang.ClassLoader类的基本职责就是根据一个指定的类的名称，找到或者生成其对应的字节代码，然后从这些字节代码中定义出一个Java类,还负责加载 Java 应用所需的资源，如图像文件和配置文件等.<br><strong>ClassLoader 中与加载类相关的方法:</strong></p>
 </li>
 </ul>
-<p>| 方法 | 说明 |<br>| ————– | ———— |<br>| getParent()    |返回该类加载器的父类加载器。|<br>| loadClass(String name) | 加载名称为 name 的类，返回的结果是 java.lang.Class 类的实例。|<br>| findClass(String name) | 查找名称为 name 的类，返回的结果是 java.lang.Class 类的实例。|<br>| findLoadedClass(String name) | 查找名称为 name 的已经被加载过的类，返回的结果是 java.lang.Class 类的实例。|<br>| defineClass(String name, byte[] b, int off, int len) | 把字节数组 b 中的内容转换成 Java 类，返回的结果是 java.lang.Class 类的实例。这个方法被声明为 final 的。|<br>| resolveClass(Class&lt;?&gt; c) | 链接指定的 Java 类。|</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getParent()</td>
+<td>返回该类加载器的父类加载器。</td>
+</tr>
+<tr>
+<td>loadClass(String name)</td>
+<td>加载名称为 name 的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>findClass(String name)</td>
+<td>查找名称为 name 的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>findLoadedClass(String name)</td>
+<td>查找名称为 name 的已经被加载过的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>defineClass(String name, byte[] b, int off, int len)</td>
+<td>把字节数组 b 中的内容转换成 Java 类，返回的结果是 java.lang.Class 类的实例。这个方法被声明为 final 的。</td>
+</tr>
+<tr>
+<td>resolveClass(Class&lt;?&gt; c)</td>
+<td>链接指定的 Java 类。</td>
+</tr>
+</tbody>
+</table>
 <ul>
 <li><h4 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h4>定义类加载器可以选择 继承ClassLoader类，重写里面的方法来实现。loadClass()方法重写的话可能会破坏双亲委托模型，不推荐重写；defineClass：主要用于将原始字节转换为Class对象，不需要重写；findClass：根据名称来查找类，一般就重写这个方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  public class Main &#123;</div><div class="line">    static class MyClassLoader extends ClassLoader &#123;</div><div class="line">        private String classPath;</div><div class="line">        public MyClassLoader(String classPath) &#123;</div><div class="line">            this.classPath = classPath;</div><div class="line">        &#125;</div><div class="line">        private byte[] loadByte(String name) throws Exception &#123;</div><div class="line">            name = name.replaceAll(&quot;\\.&quot;, &quot;/&quot;);</div><div class="line">            FileInputStream fis = new FileInputStream(classPath + &quot;/&quot; + name</div><div class="line">                    + &quot;.class&quot;);</div><div class="line">            int len = fis.available();</div><div class="line">            byte[] data = new byte[len];</div><div class="line">            fis.read(data);</div><div class="line">            fis.close();</div><div class="line">            return data;</div><div class="line">        &#125;</div><div class="line">        protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</div><div class="line">            try &#123;</div><div class="line">                byte[] data = loadByte(name);</div><div class="line">                return defineClass(name, data, 0, data.length);</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">                throw new ClassNotFoundException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    public static void main(String args[]) throws Exception &#123;</div><div class="line">        MyClassLoader classLoader = new MyClassLoader(&quot;D:/test&quot;);</div><div class="line">        Class clazz = classLoader.loadClass(&quot;com.huachao.cl.Test&quot;);</div><div class="line">        Object obj = clazz.newInstance();</div><div class="line">        Method helloMethod = clazz.getDeclaredMethod(&quot;hello&quot;, null);</div><div class="line">        helloMethod.invoke(obj, null);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-</li>
+<ul>
 <li><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
 <li>《实战java虚拟机》</li>
 <li><a href="http://www.jianshu.com/p/11cc2de9dbc2" target="_blank" rel="external">http://www.jianshu.com/p/11cc2de9dbc2</a></li>
