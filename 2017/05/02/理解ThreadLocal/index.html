@@ -10,7 +10,7 @@
     
     <title>
         
-            深入理解Java虚拟机（目录） | 
+            理解ThreadLocal | 
         
         Marnner
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="marnner">
     <meta name="description" content="Just do it">
-    <meta name="keywords" content="null,JVM">
+    <meta name="keywords" content="null,java">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="深入理解Java虚拟机（目录） | Marnner">
+    <meta property="og:title" content="理解ThreadLocal | Marnner">
     <meta property="og:description" content="Just do it">
-    <meta property="og:article:tag" content="JVM"> 
+    <meta property="og:article:tag" content="java"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#本书一共分为5个章节，13个小结"><span class="post-toc-number">1.</span> <span class="post-toc-text">本书一共分为5个章节，13个小结</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一部分-走进Java"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">第一部分 走进Java</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第一章"><span class="post-toc-number">1.1.1.</span> <span class="post-toc-text">第一章</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二部分-自动内存管理机制"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">第二部分 自动内存管理机制</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第二章"><span class="post-toc-number">1.2.1.</span> <span class="post-toc-text">第二章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第三章"><span class="post-toc-number">1.2.2.</span> <span class="post-toc-text">第三章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第四章"><span class="post-toc-number">1.2.3.</span> <span class="post-toc-text">第四章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第五章"><span class="post-toc-number">1.2.4.</span> <span class="post-toc-text">第五章</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三部分-虚拟机执行子系统"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">第三部分 虚拟机执行子系统</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第六章"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">第六章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第七章"><span class="post-toc-number">1.3.2.</span> <span class="post-toc-text">第七章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第八章"><span class="post-toc-number">1.3.3.</span> <span class="post-toc-text">第八章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第九章"><span class="post-toc-number">1.3.4.</span> <span class="post-toc-text">第九章</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第四部分"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">第四部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十章"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">第十章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十一章"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">第十一章</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第五部分"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">第五部分</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十二章"><span class="post-toc-number">1.5.1.</span> <span class="post-toc-text">第十二章</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#第十三章"><span class="post-toc-number">1.5.2.</span> <span class="post-toc-text">第十三章</span></a></li></ol></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#理解ThreadLocal"><span class="post-toc-number">1.</span> <span class="post-toc-text">理解ThreadLocal</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ThreadLocal的使用"><span class="post-toc-number">2.</span> <span class="post-toc-text">ThreadLocal的使用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#实现原理"><span class="post-toc-number">3.</span> <span class="post-toc-text">实现原理</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ThreadLocal内存泄漏"><span class="post-toc-number">4.</span> <span class="post-toc-text">ThreadLocal内存泄漏</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#参考"><span class="post-toc-number"></span> <span class="post-toc-text">参考</span></a>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                深入理解Java虚拟机（目录）
+                理解ThreadLocal
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>marnner</strong>
-        <span>3月 17, 2017</span>
+        <span>5月 02, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -313,7 +313,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/JVM/">JVM</a>
+        <a class="post_tag-link" href="/tags/java/">java</a>
     </ul>
     
 
@@ -327,7 +327,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/03/17/深入理解Java虚拟机（目录）/" class="leancloud-views_num" data-flag-title="深入理解Java虚拟机（目录）">
+                <span id="/2017/05/02/理解ThreadLocal/" class="leancloud-views_num" data-flag-title="理解ThreadLocal">
      &nbsp;浏览量
 </span>
 
@@ -339,7 +339,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=深入理解Java虚拟机（目录）&url=http://yoursite.com//2017/03/17/深入理解Java虚拟机（目录）/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=理解ThreadLocal&url=http://yoursite.com//2017/05/02/理解ThreadLocal/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -348,7 +348,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=深入理解Java虚拟机（目录）&url=http://yoursite.com//2017/03/17/深入理解Java虚拟机（目录）/index.html&via=marnner" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=理解ThreadLocal&url=http://yoursite.com//2017/05/02/理解ThreadLocal/index.html&via=marnner" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -357,7 +357,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/03/17/深入理解Java虚拟机（目录）/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/05/02/理解ThreadLocal/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -366,7 +366,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/03/17/深入理解Java虚拟机（目录）/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/05/02/理解ThreadLocal/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,25 +390,56 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h1 id="本书一共分为5个章节，13个小结"><a href="#本书一共分为5个章节，13个小结" class="headerlink" title="本书一共分为5个章节，13个小结"></a>本书一共分为5个章节，13个小结</h1><h2 id="第一部分-走进Java"><a href="#第一部分-走进Java" class="headerlink" title="第一部分 走进Java"></a>第一部分 走进Java</h2><p>本书的第一部分为后文的讲解建立了良好的基础，尽管了解Java技术的来龙去脉，以及编译自己的OpenJDK对于读书理解Java虚拟机并不是必需的，但是这些准备可以过程可以为走进Java技术和虚拟机提供良好的引导，第一分部只有第一章：</p>
-<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><pre><code>介绍了Java技术体系的过去，现在和未来的一些发展趋势，并且介绍了如何独立的编译一个OpenJDK 7。
-</code></pre><h2 id="第二部分-自动内存管理机制"><a href="#第二部分-自动内存管理机制" class="headerlink" title="第二部分 自动内存管理机制"></a>第二部分 自动内存管理机制</h2><p>因为程序员把内存控制的权利交给了Java虚拟机，所以可以在编码的时候享受自动内存管理的诸多优势，不过也正是这个原因，一旦出现内存泄漏和溢出得问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会成为一项艰难的工作。第二部分有2~5章。</p>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><pre><code>讲解了虚拟机内存是如何划分的，以及那部分区域，什么样的操作和代码可以导致内存溢出异常，讲解了各个区域出现内存溢出异常常见的原因。
-</code></pre><h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><pre><code>分析了垃圾收集的算法和JDK 1.7 中提供的几款垃圾收集器的特点以及运行的原理，通过代码示例验证了Java虚拟机中自动内存分配以及回收的主要规则。
-</code></pre><h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><pre><code>加少了JDK发布的6个命令工具和两个可视化的故障处理工具的使用方法。
-</code></pre><h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><pre><code>与读者分享了几个比较比较有代表性的实际案例。还准备了所有开发人员都能亲身实战的练习，读者可以通过实践来获得故障处理和调优的经验。
-</code></pre><h2 id="第三部分-虚拟机执行子系统"><a href="#第三部分-虚拟机执行子系统" class="headerlink" title="第三部分 虚拟机执行子系统"></a>第三部分 虚拟机执行子系统</h2><p>执行子系统是虚拟机中必不可少的组成部分，了解了虚拟机如何执行程序，才能写出优秀的代码。第三部分包括6~9章：</p>
-<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><pre><code>讲解了Class文件中的各个组成部分，以及每个部分中的定义，数据结构和使用方法，以实战的方法演示了Class文件的数据是如何储存和访问的。
-</code></pre><h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><pre><code>介绍了类加载过程中的“加载”，“验证”，“准备”，“解析”和“初始化”的5个阶段和虚拟机分别执行了那些动作，还介绍了类加载器的工作原理以及其对虚拟机的意义。
-</code></pre><h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><pre><code>分析了虚拟机在执行代码的时候如何找到正确的方法，如何执行方法内的字节码，以及执行代码时设计的内存结构。
-</code></pre><h3 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h3><pre><code>通过四个类加载以及执行子系统的案例，分享了使用类加载器和处理字节码的一些值得欣赏和借鉴的思路，并且通过一些实战练习来加深对前面理论知识的理解。
-</code></pre><h2 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h2><p>Java程序从源码编译到字节码以及从字节码编译成本地机器码的两个过程，合并起来就等同于一个传统编译器所执行的编译过程，第四部分主要包括10~11章</p>
-<h3 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h3><pre><code>分析了Java语言中的泛型，主动装箱和拆箱，条件编译等多种语法糖的前因后果。并且通过实战演示了如何插入式注解处理器来实现一个检查程序命名规范的编译器插件。
-</code></pre><h3 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h3><pre><code>讲解了虚拟机的热点探测方法，HotSpot的即时编译器。编译触发条件，以及如何从虚拟机外部观察和分析JIT编译的数据和结果，此外，还讲解了几种常见的编译优化技术。
-</code></pre><h2 id="第五部分"><a href="#第五部分" class="headerlink" title="第五部分"></a>第五部分</h2><p>Java语言和虚拟机提供的原生的，完善的多线程支持，这使得它天生就适合开发多线程并发的应用程序。不过我们不能期望系统来完成所有的并打相关的处理，了解并发的内幕也是一个高级程序员不可缺少的课程，第五部分有12~13章</p>
-<h3 id="第十二章"><a href="#第十二章" class="headerlink" title="第十二章"></a>第十二章</h3><pre><code>讲解了虚拟机Java内存的结构和操作，以及原子性，可见性和有序性在Java内存模型中的体现，介绍了先行发生原则的规则和使用，还了解了线程在Java语言中是如何实现的。
-</code></pre><h3 id="第十三章"><a href="#第十三章" class="headerlink" title="第十三章"></a>第十三章</h3><pre><code>介绍了线程安全涉及的概念和分类，同步实现的方法以及虚拟机的底层运作原理，并且介绍了虚拟机实现高效并发所采取的一系列的锁优化措施。
-</code></pre>
+        <h3 id="理解ThreadLocal"><a href="#理解ThreadLocal" class="headerlink" title="理解ThreadLocal"></a>理解ThreadLocal</h3><p>java中可以使用public static设置一个全局变量，所有线程都共享这个变量。<br>但是有时，我们需要每一个线程都有一个自己的共享变量，ThreadLocal就是一个不错的解决方案。</p>
+<p>java8中对ThreadLocal的解释<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">This class provides thread-local variables. </div><div class="line">These variables differ from their normal counterparts in that each thread that accesses one </div><div class="line">(via its get or set method)has its own, independently initialized copy of the variable. </div><div class="line">ThreadLocal instances are typically private static fields in classes that wish to associate state with a</div><div class="line"> thread (e.g., a user ID or Transaction ID).</div></pre></td></tr></table></figure></p>
+<p>对其理解：</p>
+<ul>
+<li><p>每个线程单独保存这个变量，对其他线程不可见。</p>
+</li>
+<li><p>ThreadLocal可以给一个初始值，而每个线程都会获得这个初始化值的一个副本，也可以new的方式为线程创建一个变量。</p>
+</li>
+<li><p>ThreadLocal 不是用于解决共享变量的问题的，不是为了协调线程同步而存在，而是为了方便每个线程处理自己的状态而引入的一个机制。</p>
+</li>
+</ul>
+<h3 id="ThreadLocal的使用"><a href="#ThreadLocal的使用" class="headerlink" title="ThreadLocal的使用"></a>ThreadLocal的使用</h3><ul>
+<li><p>ThreadLocal几个主要操作方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public T get() &#123;...&#125;//获取线程变量对象</div><div class="line">public void remove() &#123;...&#125;//移除线程变量对象，将对线程变量对象的引用设置为null</div><div class="line">public void set(T value) &#123;...&#125;//添加线程变量对象</div><div class="line">protected T initialValue() &#123;...&#125;//设置初始化数据，覆盖该方法可以设置初始默认值</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用的小demo</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalDemo</span> </span>&#123;</div><div class="line">    </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ThreadLocal&lt;Integer&gt; local=() -&gt; <span class="number">0</span>;<span class="comment">//覆盖initialValue方法设置初始值。</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        Thread[] threads=<span class="keyword">new</span> Thread[<span class="number">3</span>];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">3</span>;i++)&#123;</div><div class="line">            threads[i]=() -&gt; &#123;</div><div class="line">                 <span class="keyword">int</span> mun=local.get();</div><div class="line">                 <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>;j&lt;<span class="number">10</span>;j++)&#123;</div><div class="line">                     mun=mun+<span class="number">1</span>;</div><div class="line">                 &#125;</div><div class="line">                 local.set(mun);</div><div class="line">                 System.out.println(Thread.currentThread().getName()+<span class="string">"==="</span>+local.get());</div><div class="line">                &#125;;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(Thread t:threads)&#123;</div><div class="line">            t.start();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行结果<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Thread-3===10</div><div class="line">Thread-2===10</div><div class="line">Thread-1===10</div></pre></td></tr></table></figure></p>
+<p>可以看出线程之间互不影响。</p>
+<h3 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h3><ol>
+<li>ThreadLocal中的静态内部类ThreadLocalMap<br>可以看到Entry 类继承了 WeakReference<threadlocal<?>&gt;，<br>即每个Entry对象都有一个ThreadLocal的弱引用（作为key）。<br>一旦线程结束，key变为一个不可达的对象，这个Entry就可以被GC了。</threadlocal<?></li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>&#123;</div><div class="line">        <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>&#123;</div><div class="line">            Object value;</div><div class="line">            Entry(ThreadLocal&lt;?&gt; k, Object v) &#123;</div><div class="line">                <span class="keyword">super</span>(k);</div><div class="line">                value = v;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ul>
+<li><p>ThreadLocal类中有一个静态内部类ThreadLocalMap，用来存放线程变量。</p>
+</li>
+<li><p>ThreadLocalMap里面有一个Entry数组，根据ThreadLocal变量本身的哈希值将线程变量的值存入散列到数组中。</p>
+</li>
+</ul>
+<ol>
+<li>ThreadLocal的set方法及延伸</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocal</span></span>&#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(T value)</span> </span>&#123;</div><div class="line">             Thread t = Thread.currentThread();<span class="comment">//获取当前线程对象</span></div><div class="line">             ThreadLocalMap map = getMap(t);<span class="comment">//获取当前线程内的ThreadLocalMap</span></div><div class="line">             <span class="keyword">if</span> (map != <span class="keyword">null</span>)</div><div class="line">                 map.set(<span class="keyword">this</span>, value);<span class="comment">//如果map已经设置，则直接赋值</span></div><div class="line">             <span class="keyword">else</span></div><div class="line">                 createMap(t, value);<span class="comment">//还没有设置，就实例化一个ThreadLocalMap</span></div><div class="line">      &#125;</div><div class="line">      <span class="function"><span class="keyword">void</span> <span class="title">createMap</span><span class="params">(Thread t, T firstValue)</span> </span>&#123;</div><div class="line">              t.threadLocals = <span class="keyword">new</span> ThreadLocalMap(<span class="keyword">this</span>, firstValue);</div><div class="line">          &#125;</div><div class="line">          </div><div class="line">     <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span></span>&#123;</div><div class="line">         <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> INITIAL_CAPACITY = <span class="number">16</span>;</div><div class="line">        ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) &#123;</div><div class="line">             table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];<span class="comment">//开辟一个大小为16的数组</span></div><div class="line">             <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</div><div class="line">             table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</div><div class="line">             size = <span class="number">1</span>;</div><div class="line">             setThreshold(INITIAL_CAPACITY);<span class="comment">// 设置扩容的阈值</span></div><div class="line">        &#125;</div><div class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">setThreshold</span><span class="params">(<span class="keyword">int</span> len)</span> </span>&#123;</div><div class="line">                    threshold = len * <span class="number">2</span> / <span class="number">3</span>;</div><div class="line">        &#125;</div><div class="line">     &#125;</div><div class="line">   <span class="comment">//...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li>ThreadLocalMap的set方法及延伸<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span></span>&#123;</div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal key, Object value)</span> </span>&#123;</div><div class="line">    Entry[] tab = table;</div><div class="line">    <span class="keyword">int</span> len = tab.length;</div><div class="line">    <span class="keyword">int</span> i = key.threadLocalHashCode &amp; (len-<span class="number">1</span>);</div><div class="line"></div><div class="line">    <span class="comment">// 使用的是开放地址法解决冲突，如果发生碰撞则向后查找</span></div><div class="line">    <span class="comment">// 如果得到的i位置已经有值，那么就向后一个单位尝试填充</span></div><div class="line">    <span class="keyword">for</span> (Entry e = tab[i];</div><div class="line">         e != <span class="keyword">null</span>;</div><div class="line">         e = tab[i = nextIndex(i, len)]) &#123;</div><div class="line">        ThreadLocal k = e.get();</div><div class="line">        <span class="comment">// 如果是相同的key就替换，说明同一个对象中的</span></div><div class="line">        <span class="comment">// 同一个threadLocal变量</span></div><div class="line">        <span class="keyword">if</span> (k == key) &#123;</div><div class="line">            e.value = value;</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 因为是弱引用，ThreadLocal已经被回收，所以key就是null，将value放在这个位置</span></div><div class="line">        <span class="keyword">if</span> (k == <span class="keyword">null</span>) &#123;</div><div class="line">            replaceStaleEntry(key, value, i);</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 直到找到一个元素为空的位置（e == null），</span></div><div class="line">    <span class="comment">// 每新占用一个数组位置（上面都是在替换原来元素或者替换</span></div><div class="line">    <span class="comment">// 已经被移除的元素，size已经加过的）就要判断是否需要进行扩容</span></div><div class="line">    tab[i] = <span class="keyword">new</span> Entry(key, value);</div><div class="line">    <span class="keyword">int</span> sz = ++size;</div><div class="line">    <span class="comment">// 如果没有清除数组中的元素并且元素个数已经大于等于阈值threshold则进行扩容</span></div><div class="line">    <span class="keyword">if</span> (!cleanSomeSlots(i, sz) &amp;&amp; sz &gt;= threshold)</div><div class="line">        rehash();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 扫描数组清除陈旧的数据，但并不是全部扫描，而是log2(n)对数扫描</span></div><div class="line"><span class="comment">// 在全部扫描和不扫描之间取一个折中</span></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">cleanSomeSlots</span><span class="params">(<span class="keyword">int</span> i, <span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">boolean</span> removed = <span class="keyword">false</span>;</div><div class="line">    Entry[] tab = table;</div><div class="line">    <span class="keyword">int</span> len = tab.length;</div><div class="line"></div><div class="line">    <span class="keyword">do</span> &#123;</div><div class="line">        i = nextIndex(i, len);</div><div class="line">        Entry e = tab[i];</div><div class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span> &amp;&amp; e.get() == <span class="keyword">null</span>) &#123;</div><div class="line">            n = len;</div><div class="line">            removed = <span class="keyword">true</span>;</div><div class="line">            i = expungeStaleEntry(i);</div><div class="line">        &#125;</div><div class="line">    <span class="comment">// 无符号右移一位，相当于每次除2取整</span></div><div class="line">    &#125; <span class="keyword">while</span> ( (n &gt;&gt;&gt;= <span class="number">1</span>) != <span class="number">0</span>);</div><div class="line">    <span class="keyword">return</span> removed;</div><div class="line">&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="ThreadLocal内存泄漏"><a href="#ThreadLocal内存泄漏" class="headerlink" title="ThreadLocal内存泄漏"></a>ThreadLocal内存泄漏</h3><p>虽然ThreadLocal的Entry继承自WeakReference，为弱引用，但是依然可能发生内存泄漏。<br>可以参考：<a href="http://www.linkedkeeper.com/detail/blog.action?bid=58" target="_blank" rel="external">http://www.linkedkeeper.com/detail/blog.action?bid=58</a></p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li><a href="http://www.cnblogs.com/chengxiao/p/6152824.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/chengxiao/p/6152824.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://blog.csdn.net/baidu_23086307/article/details/56674454?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://blog.csdn.net/baidu_23086307/article/details/56674454?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://qlm.pw/2016/09/22/%E5%85%B3%E4%BA%8Ethreadlocal%E5%AF%B9%E8%B1%A1/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://qlm.pw/2016/09/22/%E5%85%B3%E4%BA%8Ethreadlocal%E5%AF%B9%E8%B1%A1/?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.cnblogs.com/whoislcj/p/5811989.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/whoislcj/p/5811989.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.cnblogs.com/sunshine-2015/p/6072184.html?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.cnblogs.com/sunshine-2015/p/6072184.html?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.sczyh30.com/posts/Java/java-concurrent-threadlocal/?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.sczyh30.com/posts/Java/java-concurrent-threadlocal/?utm_source=tuicool&amp;utm_medium=referral</a></li>
+<li><a href="http://www.linkedkeeper.com/detail/blog.action?bid=58" target="_blank" rel="external">http://www.linkedkeeper.com/detail/blog.action?bid=58</a></li>
+</ul>
+
     
 
     
@@ -431,21 +462,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/03/17/深入理解Java虚拟机（一）/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/03/16/undertow嵌入式web服务器初体验/" id="post_nav-older" class="next-content">
+        <a href="/2017/05/02/synchronized/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
