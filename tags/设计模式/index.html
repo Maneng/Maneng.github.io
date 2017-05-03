@@ -10,7 +10,7 @@
     
     <title>
         
-            JVM学习笔记（三）垃圾收集器与内存分配策略 | 
+            标签: 设计模式 | 
         
         Marnner
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="marnner">
     <meta name="description" content="Just do it">
-    <meta name="keywords" content="null,JVM">
+    <meta name="keywords" content="null">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="JVM学习笔记（三）垃圾收集器与内存分配策略 | Marnner">
+    <meta property="og:title" content="标签: 设计模式 | Marnner">
     <meta property="og:description" content="Just do it">
-    <meta property="og:article:tag" content="JVM"> 
+    
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -208,286 +208,93 @@
                         </button>
                     
 
-                    <!-- Post TOC -->
-
+                    <!-- Index Module -->
+<div class="material-index mdl-grid">
     
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
+    <div class="locate-thumbnail-symbol"></div>
 
-    <!-- Left aligned menu below button -->
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons">format_list_numbered</i>
-    </button>
+    <!-- Pin on top -->
+    
 
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#第二部分-垃圾收集器与内存分配策略"><span class="post-toc-number">1.</span> <span class="post-toc-text">第二部分 垃圾收集器与内存分配策略</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Java与C-之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。"><span class="post-toc-number">1.0.1.</span> <span class="post-toc-text">Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#对象已死吗？"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">对象已死吗？</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#引用计数算法"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">引用计数算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#程序计数器"><span class="post-toc-number">1.3.1.</span> <span class="post-toc-text">程序计数器</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#可达性分析算法"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">可达性分析算法</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#再谈引用"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">再谈引用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#回收方法区"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">回收方法区</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#垃圾收集算法"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">垃圾收集算法</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#G1收集器（Garbage-First）"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">G1收集器（Garbage-First）</span></a></li></ol></li></ol>
-
-        <!--
-        <li class="mdl-menu__item">
-            Some Action
-        </li>
-        -->
-    </ul>
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
-                
-    <!-- Paradox Post Header -->
+    <!-- Normal Post -->
+    
+        
+        
+            <!-- Paradox Thumbnail -->
+            <div class="post_entry-module mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col fade out">
+    <!-- Post Thumbnail -->
     
         
             <!-- Random Thumbnail -->
             <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script>
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
-</script>
-
         
     
-            <p class="article-headline-p">
-                JVM学习笔记（三）垃圾收集器与内存分配策略
-            </p>
-        </div>
 
-
-
-
-
-                
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>marnner</strong>
-        <span>3月 18, 2017</span>
+        <!-- Post Title -->
+        <p class="article-headline-p"><a href="/2017/05/03/面向对象设计原则/">面向对象设计原则</a></p>
     </div>
 
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/JVM/">JVM</a>
-    </ul>
-    
-
-    <!-- Share -->
-    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-    <!-- Leancloud Views -->
-        <a class="post_share-link" href="#">
-            <li class="mdl-menu__item">
-                <span id="/2017/03/18/JVM学习笔记（三）垃圾收集器与内存分配策略/" class="leancloud-views_num" data-flag-title="JVM学习笔记（三）垃圾收集器与内存分配策略">
-     &nbsp;浏览量
-</span>
-
-            </li>
-        </a>
-    
-
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=JVM学习笔记（三）垃圾收集器与内存分配策略&url=http://yoursite.com//2017/03/18/JVM学习笔记（三）垃圾收集器与内存分配策略/index.html&pic=&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=JVM学习笔记（三）垃圾收集器与内存分配策略&url=http://yoursite.com//2017/03/18/JVM学习笔记（三）垃圾收集器与内存分配策略/index.html&via=marnner" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Twitter
-            </li>
-        </a>
-    
-
-    <!-- Share Facebook -->
-    
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/03/18/JVM学习笔记（三）垃圾收集器与内存分配策略/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Facebook
-            </li>
-        </a>
-    
-
-    <!-- Share Google+ -->
-    
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/03/18/JVM学习笔记（三）垃圾收集器与内存分配策略/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 Google+
-            </li>
-        </a>
-    
-
-    <!-- Share LinkedIn -->
-    
-
-    <!-- Share QQ -->
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-</div>
-
-                
-
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
-    
-        <h1 id="第二部分-垃圾收集器与内存分配策略"><a href="#第二部分-垃圾收集器与内存分配策略" class="headerlink" title="第二部分 垃圾收集器与内存分配策略"></a>第二部分 垃圾收集器与内存分配策略</h1><h3 id="Java与C-之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。"><a href="#Java与C-之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。" class="headerlink" title="Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。"></a>Java与C++之间有一堵由内存动态分配和垃圾收集技术所围成的“高墙”，墙外面的人想进去，墙里面的人想出来。</h3><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>垃圾收集（Garbage Collection，GC）需要完成的三件事情:</p>
-<p>1 哪些内存需要回收？<br> -[] 内存区域-回收条件<br>2 什么时候回收？<br> -[] 多线程/安全点<br>3 如何回收？<br> -[] 回收算法</p>
-<p>当要排查各种内存溢出、内存泄漏问题时，当垃圾收集称为系统达到更高并发量的瓶颈时，我们就需要对这些”自动化”的技术实施必要的监控和调节。</p>
-<p>1.程序计数器、虚拟机栈、本地方法栈3个区域随线程而生，随线程而灭；每一个栈帧中分配多少内存基本上在类结构确定下来的时候就已知。因此这几个区域的内存分配和回收都具有确定性，不需过多考虑回收问题，方法结束或者线程结束时，内存自然就随之回收了。<br>2.Java堆和方法区则不一样，一个接口中的多个实现类需要的内存可能不一样，一个方法中的多个分支需要的内存也可能不一样，只有在程序处于运行期间才知道会创建哪些对象，这部分内存的分配和回收都是动态的，垃圾收集器所关注的是这部分内存！</p>
-<h2 id="对象已死吗？"><a href="#对象已死吗？" class="headerlink" title="对象已死吗？"></a>对象已死吗？</h2><p>垃圾回收器在对堆进行回收前，首要确定的事情就是这些对象之间哪些还存活着，哪些已经死去？</p>
-<h2 id="引用计数算法"><a href="#引用计数算法" class="headerlink" title="引用计数算法"></a>引用计数算法</h2><ul>
-<li>定义：引用计数算法（Reference Counting）:给对象添加一个引用计数器，每当一个地方引用它时，计数器值就+1；当引用失效时，计数器值就-1；任何时刻计数器为0的对象就是不可能被再使用的；</li>
-<li>优点：实现简单，判定效率高；微软的COM技术、Python中都使用了Reference Couting算法进行内存管理</li>
-<li>缺点：由于其很难解决对象之间相互循环引用的问题，主流Java虚拟机里面都没有选用Refrence Couting算法来管理内存；</li>
-</ul>
-<h3 id="程序计数器"><a href="#程序计数器" class="headerlink" title="程序计数器"></a>程序计数器</h3><ul>
-<li>程序计数器（Program Counter Register）是一块比较小的内存空间，它可以看作是当前线程所执行的字节码的行号指示器；</li>
-<li>PCR为线程私有内存；</li>
-<li>是唯一一个在Java虚拟机规范中没有规定任何OOM情况的区域；</li>
-</ul>
-<h2 id="可达性分析算法"><a href="#可达性分析算法" class="headerlink" title="可达性分析算法"></a>可达性分析算法</h2><ul>
-<li>定义：可达性分析（Reachability Analysis）判断对象存活的基本思路：通过一系列的称为GC Roots的对象作为起始点，从这些节点开始向下搜索，搜索所走过的路径称为引用链（Reference Chain）,当一个对象到GC Roots没有任何引用链相连（即GC Roots到这个对象不可达）时，则证明此对象是不可用的；</li>
-</ul>
-<p>![enter description here][1]</p>
-<ol>
-<li>Java语言中，可作为GC Roots对象包括：</li>
-<li>虚拟机栈（栈帧中的本地变量表）中引用的对象；</li>
-<li>方法区中类静态属性引用的对象；</li>
-<li>方法区中产量引用的对象；</li>
-<li>本地方法栈中JNI（即一般的Native方法）引用的对象</li>
-</ol>
-<h3 id="再谈引用"><a href="#再谈引用" class="headerlink" title="再谈引用"></a>再谈引用</h3><p>JDk1.2之后，Java对引用概念进行了扩充，将引用分为强引用、软引用、弱引用、虚引用4种，4种强度一次逐渐减弱。</p>
-<ol>
-<li>强引用（Strong Reference）是指在程序代码之中普遍存在的，类似Object obj=new Object()这类的引用，只要强引用存在，对象就不会发生GC；</li>
-<li>软引用（Soft Reference）是用来描述一些还有用但并非必须的对象。对于软引用关联着的对象，在系统将要发生OOM异常之前，将会把这些对象列进回收范围之中进行第二次回收，如果这次回收后还没有足够的内存，才会抛出OOM异常。</li>
-<li>弱引用（Weak Reference）是用来描述非必须对象的，强度比软引用更弱，被弱引用关联的对象只能生存到下一次GC发生之前。当垃圾回收器工作时，无论当前内存是否足够，都会回收掉只被弱引用关联的对象</li>
-<li>虚引用（Phantom Reference）也称为幽灵引用或者幻影引用，它是最弱的一种引用关系。一个对象是否有虚引用的存在，完全不会对其生存时间构成影响，也无法通过虚引用来取得一个对象实例。为一个对象设置虚引用关联的唯一目的就是能在这个对象被收集器回收时收到一个系统通知。</li>
-</ol>
-<h3 id="回收方法区"><a href="#回收方法区" class="headerlink" title="回收方法区"></a>回收方法区</h3><ul>
-<li>在方法区中进行垃圾收集的性价比一般比较低；而在Heap中，尤其是在新生代，常规应用进行一次垃圾收集一般回收70%~95%的空间，而永久代的垃圾收集效率远低于此；</li>
-<li>永久代的垃圾收集主要回收两部分内容：废弃常量和无用的类；</li>
-<li>回收废弃常量与回收Java堆中的对象类似；</li>
-<li>判定一个类是否是无用的类条件相对苛刻：<ul>
-<li>该类所有实例都已被回收，即Java堆中不存在该类的任何实例；</li>
-<li>加载该类的ClassLoader已经被回收；</li>
-<li>该类对应的java.lang.Class对象没有在任何地方被引用，无法在任何地方通过反射访问该方法。</li>
-</ul>
-</li>
-</ul>
-<p>在大量使用反射、动态代理、CGLib等ByteCode框架、动态生成JSP以及OSGi这类自定义ClassLoader的场景都需要虚拟机具备类卸载的功能，以保证永久代不会溢出。</p>
-<h3 id="垃圾收集算法"><a href="#垃圾收集算法" class="headerlink" title="垃圾收集算法"></a>垃圾收集算法</h3><p>只介绍内存回收的方法论（算法思想及发展过程），不讨论具体算法实现。</p>
-<h2 id="G1收集器（Garbage-First）"><a href="#G1收集器（Garbage-First）" class="headerlink" title="G1收集器（Garbage-First）"></a>G1收集器（Garbage-First）</h2><p>面向服务器端应用的垃圾收集器，计划未来替代CMS收集器。</p>
-<p>理解GC日志<br>垃圾收集器参数总结<br>内存分配与回收策略<br>对象优先在Eden分配<br>大对象直接进入老年代<br>长期存活的对象将进入老年代<br>动态对象年龄判定<br>空间分配担保</p>
-
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-
-
-
-
-                
+    <!-- Post Excerpt -->
+    <div class="mdl-color-text--grey-600 mdl-card__supporting-text post_entry-content">
+        
+            
+        
+        &nbsp;&nbsp;&nbsp;
+        <span>
+            <a href="/2017/05/03/面向对象设计原则/" target="_self">继续阅读</a>
+        </span>
+    </div>
+    <!-- Post_entry Info-->
+    <div id="post_entry-info">
+        <div id="post_entry-left-info" class="mdl-card__supporting-text meta mdl-color-text--grey-600 ">
+            <!-- Author Avatar -->
+            <div id="author-avatar">
+                <img src="/img/avatar.png" width="44px" height="44px" alt="marnner's avatar">
             </div>
+            <div>
+                <strong>marnner</strong>
+                <span>5月 03, 2017</span>
+            </div>
+        </div>
+        <div id="post_entry-right-info">
+            <!-- Category -->
+            <span class="post_entry-category">
+                
+            </span>
 
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
-    
-        <a href="/2017/03/20/Web开发者2017路线图/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
+            
 
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/03/18/JVM学习笔记（二）Java内存区域与内存溢出异常/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
+            <!-- Post Views -->
+            <span class="post_entry-views">
+            </span>
         </div>
     </div>
+</div>
 
+        
+        
+        
+    
+
+    
+
+    
+        <script>
+    var randomNum;
+
+    var locatePost = $('.locate-thumbnail-symbol').next();
+    for(var i = 0; i < 10; i++) {
+        randomNum = Math.floor(Math.random() * 19 + 1);
+
+        locatePost.children('.post_thumbnail-random').attr('id', 'random_thumbnail-'+randomNum);
+        locatePost.children('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')')
+
+        locatePost = locatePost.next();
+    }
+</script>
+
+    
+</div>
 
 
                     
@@ -684,14 +491,6 @@ It will not impact the appearance and can give developers a lot of support :)
 </aside>
 
                     
-
-                    
-                        <!-- Footer Top Button -->
-                        <div class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
 
                     
 
