@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            陌生单词笔记本 | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,english learn">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="陌生单词笔记本 | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="english learn"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                陌生单词笔记本
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>5月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/english-learn/">english learn</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/05/23/陌生单词笔记本/" class="leancloud-views_num" data-flag-title="陌生单词笔记本">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=陌生单词笔记本&url=http://yoursite.com//2017/05/23/陌生单词笔记本/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=陌生单词笔记本&url=http://yoursite.com//2017/05/23/陌生单词笔记本/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/05/23/陌生单词笔记本/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/05/23/陌生单词笔记本/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p> Robust  强大的<br> definitive 确定的<br> security landscape（风景，风景，山水） 安全形势<br> two-factor authentication 双因素认证<br> solid 坚实<br> alternative  可以供选择的<br> debate 争论<br> intelligently   智能的<br> properly  正确的<br> tactics  策略、<br> fluent 连贯<br> endpoint 端点<br> enforce 实施 强制 执行<br> encapsulate 封装<br> interchangeable 可交换的<br> Strategy 策略<br> vary 变化<br> DelegatingFilterProxy 委托过滤代理<br> hierarchies 阶层; 层次; 层次结构<br> outlines  概述<br> application 应用程式 应用、应用程序<br>application framework 应用程式框架、应用框架 应用程序框架architecture 架构、系统架构 体系结构<br>argument 参数（传给函式的值）。<br>array 阵列 数组<br>arrow operator arrow（箭头）运算子 箭头操作符<br>assembly 装配件<br>assembly language 组合语言 汇编语言<br>assert(ion) 断言<br>assign 指派、指定、设值、赋值 赋值<br>assignment 指派、指定 赋值、分配<br>assignment operator 指派（赋值）运算子 = 赋值操作符<br>associated 相应的、相关的 相关的、关联、相应的<br>associative container 关联式容器（对应 sequential container）关联式容器<br>atomic 不可分割的 原子的<br>attribute 属性 属性、特性<br>audio 音讯 音频<br>A.I. 人工智慧 人工智能</p>
+<p>background 背景 背景（用於图形着色）後台（用於行程）<br>backward compatible 回溯相容 向下兼容<br>bandwidth 频宽 带宽<br>base class 基础类别 基类<br>base type 基础型别 (等同於<br>base class) batch 批次（意思是整批作业） 批处理<br>benefit 利益 收益<br>best viable function 最佳可行函式 最佳可行函式<br>binary search 二分搜寻法 二分查找<br>binary tree 二元树 二叉树<br>binary function 二元函式 双叁函数<br>binary operator 二元运算子 二元操作符<br>binding 系结 绑定<br>bit 位元 位<br>bit field 位元栏 位域<br>bitmap 位元图 位图<br>bitwise 以 bit 为单元逐一<br>bitwise copy 以 bit 为单元进行复制；位元逐一复制 位拷贝<br>block 区块,区段 块、区块、语句块<br>boolean 布林值（真假值，true 或 false）布尔值<br>border 边框、框线 边框<br>brace(curly brace) 大括弧、大括号 花括弧、花括号<br>bracket(square brakcet) 中括弧、中括号 方括弧、方括号<br>breakpoint 中断点 断点<br>build 建造、构筑、建置（MS 用语）<br>build－in 内建 内置<br>bus 汇流排 总线<br>business 商务,业务 业务<br>buttons 按钮 按钮<br>byte 位元组（由 8 bits 组成） 字节</p>
+<p>cache 快取 高速缓存<br>call 呼叫、叫用 调用<br>callback 回呼 回调<br>call operator call（函式呼叫）运算子调用操作符<br>candidate function 候选函式 候选函数<br>chain 串链（例 chain of function calls） 链<br>character 字元 字符<br>check box 核取方块 (i.e. check button) 复选框<br>checked exception 可控式异常<br>check button 方钮 (i.e. check box) 复选按钮<br>child class 子类别（或称为derived class, subtype） 子类<br>class 类别 类<br>class body 类别本体 类体<br>class declaration 类别宣告、类别宣告式 类声明<br>class definition 类别定义、类别定义式 类定义<br>class derivation list 类别衍化列 类继承列表<br>class head 类别表头 类头<br>class hierarchy 类别继承体系, 类别阶层 类层次体系<br>class library 类别程式库、类别库 类库<br>class template 类别模板、类别范本 类模板<br>class template partial specializations 类别模板偏特化 类模板部分特化<br>class template specializations 类别模板特化 类模板特化<br>cleanup 清理、善後 清理、清除<br>client 客端、客户端、客户 客户<br>client－server 主从架构 客户/服务器<br>clipboard 剪贴簿 剪贴板<br>clone 复制 克隆<br>collection 群集 集合<br>combo box 复合方块、复合框 组合框<br>command line 命令列 命令行(系统文字模式下的整行执行命令)<br>communication 通讯 通讯<br>compatible 相容 兼容<br>compile time 编译期 编译期、编译时<br>compiler 编译器 编译器<br>component 组件 组件<br>composition 复合、合成、组合 组合<br>computer 电脑、计算机 计算机、电脑<br>concept 概念 概念<br>concrete 具象的 实在的<br>concurrent 并行 并发<br>configuration 组态 配置<br>connection 连接，连线（网络,资料库） 连接<br>constraint 约束（条件）<br>construct 构件 构件<br>container 容器 容器(存放资料的某种结构如 list, vector…）<br>containment 内含 包容<br>context 背景关系、周遭环境、上下脉络 环境、上下文<br>control 控制元件、控件 控件<br>console 主控台 控制台<br>const常数（constant 的缩写，C++ 关键字）<br>constant 常数（相对於 variable） 常量<br>constructor（ctor） 建构式 构造函数（与class 同名的一种 member functions）<br>copy (v) 复制、拷贝 拷贝<br>copy (n) 复件, 副本<br>cover 涵盖 覆盖<br>create 创建、建立、产生、生成 创建<br>creation 产生、生成 创建<br>cursor 游标 光标<br>custom 订制、自定 定制</p>
+<p>data 资料 数据<br>database 资料库 数据库<br>database schema 数据库结构纲目<br>data member 资料成员、成员变数 数据成员、成员变量<br>data structure 资料结构 数据结构<br>datagram 资料元 数据报文<br>dead lock 死结 死锁<br>debug 除错 调试<br>debugger 除错器 调试器<br>declaration 宣告、宣告式 声明<br>deduction 推导（例：template argument deduction） 推导、推断<br>default 预设 缺省、默认<br>defer 延缓 推迟<br>define 定义 预定义<br>definition 定义、定义区、定义式 定义<br>delegate 委派、委托、代理<br>delegation （同上）<br>demarshal 反编列 散集<br>dereference 提领（取出指标所指物体的内容） 解叁考<br>dereference operator dereference（提领）运算子 * 解叁考操作符<br>derived class 衍生类别 派生类<br>design by contract 契约式设计<br>design pattern 设计范式、设计样式 设计模式<br>destroy 摧毁、销毁<br>destructor 解构式 析构函数<br>device 装置、设备 设备<br>dialog 对话窗、对话盒 对话框<br>directive 指令（例：using directive） (编译)指示符<br>directory 目录 目录<br>disk 碟 盘<br>dispatch 分派 分派<br>distributed computing 分布式计算 (分布式电算) 分布式计算 分散式计算 (分散式电算)<br>document 文件 文档<br>dot operator dot（句点）运算子 . (圆)点操作符<br>driver 驱动程式 驱动（程序）<br>dynamic binding 动态系结 动态绑定</p>
+<p>efficiency 效率 效率<br>efficient 高效 高效<br>end user 终端用户<br>entity 物体 实体、物体<br>encapsulation 封装 封装<br>enclosing class外围类别（与巢状类别 nested class 有关）外围类<br>enum (enumeration) 列举（一种 C++ 资料型别） 枚举<br>enumerators 列举元（enum 型别中的成员） 枚举成员、枚举器<br>equal 相等 相等<br>equality 相等性 相等性<br>equality operator equality（等号）运算子 == 等号操作符<br>equivalence 等价性、等同性、对等性 等价性<br>equivalent 等价、等同、对等 等价<br>escape code 转义码 转义码<br>evaluate 评估、求值、核定 评估<br>event 事件 事件<br>event driven 事件驱动的 事件驱动的<br>exception 异常情况 异常<br>exception declaration 异常宣告（ref. C++ Primer 3/e, 11.3）异常声明<br>exception handling 异常处理、异常处理机制 异常处理、异常处理机制<br>exception specification 异常规格（ref. C++ Primer 3/e, 11.4）异常规范<br>exit 退离（指离开函式时的那一个执行点） 退出<br>explicit 明白的、明显的、显式 显式<br>export 汇出 引出、导出</p>
+<p>facility 设施、设备 设施、设备<br>feature 特性<br>field 栏位,资料栏（Java） 字段, 值域（Java）<br>file 档案 文件<br>firmware 韧体 固件<br>flag 旗标 标记<br>flash memory 快闪记忆体 闪存<br>flexibility 弹性 灵活性<br>flush 清理、扫清 刷新<br>font 字型 字体<br>form 表单（programming 用语） 窗体<br>formal parameter形式叁数 形式叁数<br>forward declaration 前置宣告 前置声明<br>forwarding 转呼叫,转发 转发<br>forwarding function 转呼叫函式,转发函式 转发函数<br>fractal 碎形 分形<br>framework 框架 框架<br>full specialization 全特化（ref. partial specialization）<br>function 函式、函数 函数<br>function call operator 同<br>call operator function object 函式物件（ref. C++ Primer 3/e, 12.3） 函数对象<br>function overloaded resolution 函式多载决议程序 函数重载解决（方案）<br>functionality 功能、机能 功能<br>function template 函式模板、函式范本 函数模板<br>functor 仿函式 仿函式、函子</p>
+<p>game 游戏 游戏<br>generate 生成<br>generic 泛型、一般化的 一般化的、通用的、泛化<br>generic algorithm 泛型演算法 通用算法<br>getter (相对於 setter) 取值函式<br>global 全域的（对应於 local） 全局的<br>global object 全域物件 全局对象<br>global scope resolution operator 全域生存空间（范围决议）运算子 :: 全局范围解析操作符<br>group 群组<br>group box 群组方块 分组框<br>guard clause 卫述句 (Refactoring, p250) 卫语句<br>GUI 图形介面 图形界面</p>
+<p>hand shaking 握手协商<br>handle 识别码、识别号、号码牌、权柄 句柄<br>handler 处理常式 处理函数<br>hard－coded 编死的 硬编码的<br>hard－copy 硬拷图 屏幕截图<br>hard disk硬碟 硬盘<br>hardware 硬体 硬件<br>hash table 杂凑表 哈希表、散列表<br>header file 表头档、标头档 头文件<br>heap 堆积 堆<br>hierarchy 阶层体系 层次结构（体系）<br>hook 挂钩 钩子<br>hyperlink 超链结 超链接</p>
+<p>icon 图示、图标 图标<br>IDE 整合开发环境 集成开发环境<br>identifier 识别字、识别符号 标识符<br>if and only if 若且唯若 当且仅当<br>Illinois 伊利诺 伊利诺斯<br>image 影像 图象<br>immediate base 直接的（紧临的）上层 base class。 直接上层基类<br>immediate derived 直接的（紧临的）下层 derived class。 直接下层派生类<br>immutability 不变性<br>immutable 不可变（的）<br>implement 实作、实现 实现<br>implementation 实作品、实作体、实作码、实件 实现<br>implicit 隐喻的、暗自的、隐式 隐式<br>import 汇入 导入<br>increment operator 累加运算子 ++ 增加操作符<br>infinite loop 无穷回圈 无限循环<br>infinite recursive 无穷递回 无限递归<br>information 资讯 信息<br>infrastructure 公共基础建设<br>inheritance 继承、继承机制 继承、继承机制<br>inline 行内 内联<br>inline expansion 行内展开 内联展开<br>initialization 初始化（动作） 初始化<br>initialization list 初值列 初始值列表<br>initialize 初始化 初始化<br>inner class 内隐类别 内嵌类<br>instance 实体 实例（根据某种表述而实际产生的「东西」）<br>instantiated 具现化、实体化（常应用於 template） 实例化<br>instantiation 具现体、具现化实体（常应用於 template） 实例<br>integer (integral) 整数（的） 整型（的）<br>integrate 整合 集成<br>interacts 交谈、互动 交互<br>interface 介面 接口<br>interpreter 直译器 解释器<br>invariants 恒常性,约束条件 约束条件<br>invoke 唤起 调用<br>iterate迭代（回圈一个轮回一个轮回地进行） 迭代<br>iterative 反覆的，迭代的<br>iterator 迭代器（一种泛型指标） 迭代器<br>iteration 迭代（回圈每次轮回称为一个 iteration） 迭代<br>item 项目、条款 项、条款、项目<br>laser 雷射 激光<br>level 阶 层 (级) 例 high level 高阶 高层<br>library 程式库、函式库 库、函数库<br>lifetime 生命期、寿命 生命期、寿命<br>link 联结、连结 连接,链接<br>linker 联结器、连结器 连接器<br>literal constant 字面常数（例 3.14 或 “hi” 这等常数值） 字面常数<br>list 串列（linked－list） 列表、表、链表<br>list box 列表方块、列表框 列表框</p>
+<p>load 载入 装载<br>loader 载入器 装载器、载入器<br>local 区域的（对应於 global） 局部的<br>local object 区域物件 局部对象<br>lock 机锁<br>loop 回圈 循环<br>lvalue 左值 左值</p>
+<p>macro 巨集 宏<br>magic number 魔术数字 魔法数<br>maintain 维护 维护<br>manipulator 操纵器（iostream 预先定义的一种东西） 操纵器<br>marshal 编列 列集叁考<br>demarshal mechanism 机制 机制<br>member 成员 成员<br>member access operator 成员取用运算子（有 dot 和 arrow 两种） 成员存取操作符<br>member function 成员函式 成员函数<br>member initialization list 成员初值列 成员初始值列表<br>memberwise 以 member 为单元┅、members 逐一┅ 以成员为单位<br>memberwise copy 以 members 为单元逐一复制<br>memory 记忆体 内存<br>menu 表单、选单 菜单<br>message 讯息 消息<br>message based 以讯息为基础的 基於消息的<br>message loop 讯息回圈 消息环<br>method 方法、行为、函式 方法<br>meta－ 超－ 元－<br>meta－programming 超编程 元编程<br>micro 微 微<br>middleware 中介层 中间件<br>modeling 模塑<br>modeling language 塑模语言，建模语言<br>modem 数据机 调制解调器<br>module 模组 模块<br>modifier 饰词 修饰符<br>most derived class 最末层衍生类别 最底层的派生类<br>mouse 滑鼠 鼠标<br>mutable可变的 可变的<br>multi－tasking 多工 多任务</p>
+<p>namespace 命名空间 名字空间、命名空间<br>native 原生的 本地的、固有的<br>nested class 巢状类别 嵌套类<br>network 网路 网络<br>network card 网路卡 网卡</p>
+<p>object 物件 对象<br>object based 以物件为基础的 基於对象的<br>object file 目的档 目标文件<br>object model 物件模型 对象模型<br>object oriented 物件导向的 面向对象的<br>online 线上 在线<br>opaque 不透明的<br>operand 运算元 操作数<br>operating system (OS) 作业系统 操作系统<br>operation 操作、操作行为 操作<br>operator 运算子 操作符、运算符<br>option 选项，可选方案 选项<br>ordinary 常规的 常规的<br>overflow 上限溢位（相对於 underflow） 溢出（underflow:下溢）<br>overhead 额外负担、额外开销 额外开销<br>overload 多载化、多载化、重载 重载<br>overloaded function 多载化函式 重载的函数<br>overloaded operator 多载化运算子 被重载的操作符<br>overloaded set 多载集合 重载集合<br>override 改写、覆写 重载、改写、重新定义（在 derived class 中重新定义虚拟函式)</p>
+<p>package 套件 包<br>pair 对组<br>palette 调色盘、组件盘、工具箱<br>pane 窗格 窗格<br>parallel 平行 并行<br>parameter 叁数（函式叁数列上的变数） 叁数、形式叁数、形叁<br>parameter list 叁数列 叁数列表<br>parent class 父类别（或称 base class） 父类<br>parentheses 小括弧、小括号 圆括弧、圆括号<br>parse 解析 解析<br>part 零件 部件<br>partial specialization 偏特化（ref. C++ Primer 3/e, 16.10）局部特化<br>pass by address 传址（函式引数的传递方式）（非正式用语）传地址<br>pass by reference 传址（函式引数的一种传递方式） 传地址, 按引用传递<br>pass by value 传值（函式引数的一种传递方式） 按值传递<br>pattern 范式、样式 模式<br>performance 效率、性能兼而有之 性能<br>persistence 永续性 持久性<br>pixel 图素、像素 像素<br>platform 平台 平台<br>pointer 指标 指针址位器（和址叁器 reference 形成对映，满好）<br>poll 轮询 轮询<br>polymorphism 多型 多态<br>pop up 冒起式、弹出式 弹出式<br>port 埠 端口<br>postfix 後置式、後序式 後置式<br>precedence 优先序（通常用於运算子的优先执行次序）<br>prefix 前置式、前序式 前置式<br>preprocessor 前处理器 预处理器<br>prime 质数 素数<br>primitive type 基本型别 (不同於 base class,基础类别)<br>print 列印 打印<br>printer 印表机 打印机<br>priority 优先权 (通常用於执行绪获得 CPU 时间的优先次序）<br>procedure 程序 过程<br>procedural 程序性的、程序式的 过程式的、过程化的<br>process 行程 进程<br>profile 评测 评测<br>profiler 效能（效率）评测器 效能（性能）评测器<br>programmer 程式员 程序员<br>programming 编程、程式设计、程式化 编程<br>progress bar 进度指示器 进度指示器<br>project 专案 项目、工程<br>property 属性<br>protocol 协定 协议<br>pseudo code 假码、虚拟码、伪码 伪码</p>
+<p>qualified 经过资格修饰（例如加上 scope 运算子） 限定<br>qualifier 资格修饰词、饰词 限定修饰词<br>quality 品质 质量<br>queue 伫列 队列</p>
+<p>radian 径度 弧度<br>radio button 圆钮 单选按钮<br>raise 引发（常用来表示发出一个 exception） 引起、引发<br>random number 随机数、乱数 随机数<br>range 范围、区间（用於 STL 时） 范围、区间<br>rank 等级、分等（ref. C++Primer 3/e 9,15章） 等级<br>raw 生鲜的、未经处理的 未经处理的<br>record 记录 记录<br>recordset 记录集 记录集<br>recursive 递回 递归<br>re－direction 重导向 重定向<br>refactoring 重构、重整 重构<br>refer 取用 叁考<br>refer to 指向、指涉、指代<br>reference 引用、叁考 址叁器,<br>see pointer register 暂存器 寄存器<br>reflection 反射 反射、映像<br>relational database 关联式资料库 关系数据库<br>represent 表述，表现 表述，表现<br>resolve 决议（为算式中的符号名称寻找 解析对应之宣告式的过程）<br>resolution 决议程序、决议过程 解析过程<br>resolution 解析度 分辨率<br>restriction 局限<br>return 传回、回返 返回<br>return type 回返型别 返回类型<br>return value 回返值 返回值<br>robust 强固、稳健 健壮<br>robustness 强固性、稳健性 健壮性<br>routine 常式 例程<br>runtime 执行期 运行期、运行时<br>common language runtime (CLR) 译为「通用语言执行层」<br>rvalue 右值 右值</p>
+<p>save 保存<br>savepoint 保存点<br>SAX (Simple API for XML)scalable 可伸缩的、可扩展的<br>schedule 调度<br>scheduler 调度程序<br>schema 模式、纲目结构<br>scroll bar 滚动条<br>scope 作用域、生存空间<br>scope operator 生存空间操作符<br>scope resolution operator 生存空间解析操作符<br>screen 屏幕<br>SDK (Software Development Kit) 软件开发包<br>sealed class 密封类<br>search 查找<br>semantics 语义<br>semaphore 信号量<br>sequential container序列式容器<br>server 服务器、服务端<br>serial 串行<br>serialization/serialize 序列化<br>server cursor 服务端游标、服务器游标<br>session 会话<br>setter 设值函数<br>shared lock 共享锁<br>sibling 同级<br>side effect 副作用<br>signature 签名<br>single-threaded 单线程<br>slider 滑块<br>slot 槽<br>smart pointer 智能指针<br>SMTP (Simple Mail Transfer Protocol) 简单邮件传输协议<br>snapshot 截屏图<br>snapshot 快照<br>specialization 特化<br>specification 规范、规格<br>splitter 切分窗口<br>SOAP (simple object access protocol) 简单对象访问协议<br>software 软件<br>source code 源码、源代码<br>SQL (Structured Query Language) 结构化查询语言<br>stack 栈、堆栈<br>stack unwinding 叠辗转开解(此词用于exception主题)<br>standard library 标准库<br>standard template library 标准模板库<br>stateless 无状态的<br>statement 语句、声明<br>static cursor 静态游标<br>static SQL statements 静态SQL语句<br>stored procedure 存储过程<br>status bar 状态条<br>stream 流<br>string 字符串<br>stub 存根<br>subobject 子对象<br>subquery 子查询<br>subroutine 子例程<br>subscript operator 下标操作符<br>subset 子集<br>subtype 子类型<br>support 支持<br>suspend 挂起<br>symbol 记号<br>syntax 语法<br>system databases 系统数据库<br>system tables 系统表</p>
+<p>tag标签 标记 索引标签,页签<br>target 标的（例 target pointer：标的指标） 目标<br>task switch 工作切换 任务切换<br>template 模板、范本 模板<br>template argument deduction 模板引数推导 模板叁数推导<br>template explicit specialization 模板显式特化（版本） 模板显式特化<br>template parameter 模板叁数 模板叁数<br>temporary object 暂时物件 临时对象<br>text文字 文本<br>text file 程式本文档（放置程式原始码的档案） 文本文件<br>thread 执行绪 线程<br>thread safe 多绪安全 多线程安全<br>throw 丢掷（常指发出一个 exception） 丢掷、引发<br>token 语汇单元 符号、标记<br>transaction 交易 事务<br>transaction log 事务日志<br>transaction rollback 事务回滚<br>transactional replication 事务复制<br>translation unit 翻译单元<br>transparent(ly) 透通的(地)<br>traverse 巡访（来回走动） 遍历<br>trigger 触发 触发<br>type 型别 类型<br>table 表<br>table lock 表锁<br>table-level constraint 表级约束<br>tape backup 磁带备份<br>task switch 工作切换<br>TCP (Transport Control Protocol) 传输控制协议<br>temporary table 临时表<br>thin client 瘦客户端<br>third-party 第三方<br>trace 跟踪<br>traverse 遍历<br>two-phase commit 两阶段提交<br>tupletwo-phase lookup 两阶段查找</p>
+<p>UML unified modeling language 统一建模语言<br>unary function 一元函式 单叁函数<br>unary operator 一元运算子 一元操作符<br>underflow 下限溢位（相对於 overflow） 下溢<br>unchecked exception 不可控异常<br>unqualified 未经资格修饰（而直接取用）<br>user 使用者、用户 用户<br>user interface 使用者界面、用户界面、人机界面<br>UDDI(Universary Description, Discovery and Integration)统一描述、查询与集成<br>unboxing 拆箱、拆箱转换<br>Union query 联合查询<br>UNIQUE constraints UNIQUE约束<br>unique index 唯一索引<br>unmanaged code 非受控代码、非托管代码<br>unmarshal 散集<br>unqualified 未经限定的、未经修饰的<br>URI (Uniform Resource identifier) 统一资源标识符<br>URL (Uniform Resource Locator) 统一资源定位器</p>
+<p>variable 变数（相对於常数 const） 变量<br>vector 向量（一种容器，有点类似 array） 向量、矢量<br>viable 可实行的、可行的 可行的<br>viable function 可行函式 可行函数<br>video 视讯 视频<br>view (1) 视图<br>(document/view) 文档/视图<br>virtual function 虚拟函式 虚函数<br>virtual machine 虚拟机器 虚拟机<br>virtual memory虚拟记忆体 虚内存, 虚存<br>volatile 易挥发的、易变的<br>vowel 母音 元音字母</p>
+<p>window 视窗 窗口<br>window function 视窗函式 窗口函数<br>window procedure 视窗函式 窗口过程<br>word 字 单词<br>word processor 文书处理器 字处理器<br>wrapper 外覆、外包 包装<br>Web Services web 服务<br>WHERE clause WHERE子句<br>wildcard characters 通配符字符<br>wildcard search 通配符搜索<br>Windows authentication Windows 身份验证<br>wizard 向导<br>write enable 写启用<br>write-ahead log 预写日志<br>write-only 只写<br>WSDL (Web Service Description Language)Web Service 描述语言</p>
+<p>XML (eXtensible Markup Language) 可扩展标记语言<br>XSD (XML Schema Definition)  XML 模式定义语言<br>XSL (eXtensible Stylesheet Language) 可扩展样式表语言<br>XSLT (eXtensible Stylesheet Language Transformation)可扩展样式表语言转换<br>xxx based 基于xxx的<br>xxx oriented 面向xxxXML (eXtensible Markup Language) 可扩展标记语言</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/20/设计模式/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">23</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
