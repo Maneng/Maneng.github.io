@@ -10,7 +10,7 @@
     
     <title>
         
-            面向对象设计原则 | 
+            初探RxJS | 
         
         Marnner
     </title>
@@ -27,7 +27,7 @@
     <meta name="theme-color" content="#0097A7">
     <meta name="author" content="marnner">
     <meta name="description" content="Just do it">
-    <meta name="keywords" content="null,设计模式">
+    <meta name="keywords" content="null,Rxjs">
 
     <!--iOS -->
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
@@ -48,9 +48,9 @@
     <!-- The Open Graph protocol -->
     <meta property="og:url" content="http://yoursite.com">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="面向对象设计原则 | Marnner">
+    <meta property="og:title" content="初探RxJS | Marnner">
     <meta property="og:description" content="Just do it">
-    <meta property="og:article:tag" content="设计模式"> 
+    <meta property="og:article:tag" content="Rxjs"> 
 
     <!--[if lte IE 9]>
         <link rel="stylesheet" href="/css/ie-blocker.css">
@@ -234,7 +234,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#面向对象的三个基本特征：封装，继承，多态"><span class="post-toc-number">1.</span> <span class="post-toc-text">面向对象的三个基本特征：封装，继承，多态</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#面向对象设计原则"><span class="post-toc-number">2.</span> <span class="post-toc-text">面向对象设计原则</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#开闭原则-软件实体应对扩展开放，而对修改关闭"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">开闭原则:  软件实体应对扩展开放，而对修改关闭</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#单一职责原则-一个类只负责一个功能领域中的相应职责"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">单一职责原则:一个类只负责一个功能领域中的相应职责</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#接口隔离原则：使用多个专门的接口，而不使用单一的总接口"><span class="post-toc-number">2.6.</span> <span class="post-toc-text">接口隔离原则：使用多个专门的接口，而不使用单一的总接口</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的"><span class="post-toc-number">2.7.</span> <span class="post-toc-text">合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的</span></a></li></ol></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#什么是RxJs"><span class="post-toc-number">1.</span> <span class="post-toc-text">什么是RxJs</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Observer"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">Observer</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Observable"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Observable</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Subject"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Subject</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Operators"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Operators</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#订阅值的变动"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">订阅值的变动</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Making-our-first-HTTP-request"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Making our first HTTP request</span></a></li></ol></li></ol>
 
         <!--
         <li class="mdl-menu__item">
@@ -270,7 +270,7 @@
         
     
             <p class="article-headline-p">
-                面向对象设计原则
+                初探RxJS
             </p>
         </div>
 
@@ -289,7 +289,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>marnner</strong>
-        <span>5月 03, 2017</span>
+        <span>5月 26, 2017</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -313,7 +313,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/设计模式/">设计模式</a>
+        <a class="post_tag-link" href="/tags/Rxjs/">Rxjs</a>
     </ul>
     
 
@@ -327,7 +327,7 @@
     <!-- Leancloud Views -->
         <a class="post_share-link" href="#">
             <li class="mdl-menu__item">
-                <span id="/2017/05/03/面向对象设计原则/" class="leancloud-views_num" data-flag-title="面向对象设计原则">
+                <span id="/2017/05/26/初探RxJS/" class="leancloud-views_num" data-flag-title="初探RxJS">
      &nbsp;浏览量
 </span>
 
@@ -339,7 +339,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=面向对象设计原则&url=http://yoursite.com//2017/05/03/面向对象设计原则/index.html&pic=&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=初探RxJS&url=http://yoursite.com//2017/05/26/初探RxJS/index.html&pic=&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -348,7 +348,7 @@
 
     <!-- Share Twitter -->
     
-        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=面向对象设计原则&url=http://yoursite.com//2017/05/03/面向对象设计原则/index.html&via=marnner" target="_blank">
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=初探RxJS&url=http://yoursite.com//2017/05/26/初探RxJS/index.html&via=marnner" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Twitter
             </li>
@@ -357,7 +357,7 @@
 
     <!-- Share Facebook -->
     
-        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/05/03/面向对象设计原则/index.html" target="_blank">
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/05/26/初探RxJS/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Facebook
             </li>
@@ -366,7 +366,7 @@
 
     <!-- Share Google+ -->
     
-        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/05/03/面向对象设计原则/index.html" target="_blank">
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/05/26/初探RxJS/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 Google+
             </li>
@@ -390,49 +390,57 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <h2 id="面向对象的三个基本特征：封装，继承，多态"><a href="#面向对象的三个基本特征：封装，继承，多态" class="headerlink" title="面向对象的三个基本特征：封装，继承，多态"></a>面向对象的三个基本特征：封装，继承，多态</h2><h2 id="面向对象设计原则"><a href="#面向对象设计原则" class="headerlink" title="面向对象设计原则"></a>面向对象设计原则</h2><ul>
-<li><h3 id="迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用"><a href="#迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用" class="headerlink" title="迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用"></a>迪米特法则：一个软件实体应当尽可能少地与其他实体发生相互作用</h3><blockquote>
-<p>又叫最少知道原则。是强调了类之间的松耦合，类之间的耦合越弱,越有利于复用，<br>一个处在弱耦合的类被修改，不会对有关系的类造成影响，也就是说，信息的隐藏促进了软件的复用。</p>
-</blockquote>
-</li>
-<li><h3 id="里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象"><a href="#里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象" class="headerlink" title="里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象"></a>里氏代换原则：所有引用基类对象的地方能够透明地使用其子类的对象</h3><blockquote>
-<p>定义1: 如果对每一个类型为 T1的对象 o1，都有类型为 T2 的对象o2，<br>使得以 T1定义的所有程序 P 在所有的对象 o1 都代换成 o2 时，<br>程序 P 的行为没有发生变化，那么类型 T2 是类型 T1 的子类型。</p>
-<p>定义2：子类型必须能够替换掉它们的父类型</p>
-</blockquote>
-</li>
-<li><h3 id="开闭原则-软件实体应对扩展开放，而对修改关闭"><a href="#开闭原则-软件实体应对扩展开放，而对修改关闭" class="headerlink" title="开闭原则:  软件实体应对扩展开放，而对修改关闭"></a>开闭原则:  软件实体应对扩展开放，而对修改关闭</h3><blockquote>
-<p>开闭原则就是说对扩展开放，对修改关闭。<br>在程序需要进行拓展的时候，不能去修改原有的代码，实现一个热插拔的效果。<br>所以一句话概括就是：为了使程序的扩展性好，易于维护和升级。<br>想要达到这样的效果，我们需要使用接口和抽象类，后面的具体设计中我们会提到这点。</p>
-</blockquote>
-</li>
-<li><h3 id="单一职责原则-一个类只负责一个功能领域中的相应职责"><a href="#单一职责原则-一个类只负责一个功能领域中的相应职责" class="headerlink" title="单一职责原则:一个类只负责一个功能领域中的相应职责"></a>单一职责原则:一个类只负责一个功能领域中的相应职责</h3><blockquote>
-<p>不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责，<br>应该仅有一个引起它变化的原因。</p>
-</blockquote>
-<p><strong>遵循单一职责原的优点有：</strong></p>
-<ol>
-<li>可以降低类的复杂度，一个类只负责一项职责，其逻辑肯定要比负责多项职责简单的多；</li>
-<li>提高类的可读性，提高系统的可维护性；</li>
-<li>变更引起的风险降低，变更是必然的，如果单一职责原则遵守的好，当修改一个功能时，可以显著降低对其他功能的影响。</li>
-</ol>
-</li>
-<li><h3 id="依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象"><a href="#依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象" class="headerlink" title="依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象"></a>依赖倒转原则：抽象不应该依赖于细节，细节应该依赖于抽象</h3><blockquote>
-<p>高层模块不应该依赖低层模块，二者都应该依赖其抽象；<br>抽象不应该依赖细节；细节应该依赖抽象。即针对接口编程，不要针对实现编程。</p>
-</blockquote>
-<p><strong>在实际编程中，我们一般需要做到如下3点：</strong></p>
-<ul>
-<li>低层模块尽量都要有抽象类或接口，或者两者都有。</li>
-<li>变量的声明类型尽量是抽象类或接口。</li>
-<li>使用继承时遵循里氏替换原则。</li>
-</ul>
-</li>
-<li><h3 id="接口隔离原则：使用多个专门的接口，而不使用单一的总接口"><a href="#接口隔离原则：使用多个专门的接口，而不使用单一的总接口" class="headerlink" title="接口隔离原则：使用多个专门的接口，而不使用单一的总接口"></a>接口隔离原则：使用多个专门的接口，而不使用单一的总接口</h3><blockquote>
-<p>使用多个隔离的接口，比使用单个接口要好。<br>还是一个降低类之间的耦合度的意思，从这儿我们看出，其实设计模式就是一个软件的设计思想，<br>从大型软件架构出发，为了升级和维护方便。<br>所以上文中多次出现：降低依赖，降低耦合。</p>
-</blockquote>
-</li>
-<li><h3 id="合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的"><a href="#合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的" class="headerlink" title="合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的"></a>合成复用原则：尽量使用对象组合，而不是继承来达到复用的目的</h3><blockquote>
-<p>要尽量的使用合成和聚合，而不是继承关系达到复用的目的.<br>  该原则就是在一个新的对象里面使用一些已有的对象，使之成为新对象的一部分：<br>  新的对象通过向这些对象的委派达到复用已有功能的目的。</p>
-</blockquote>
-</li>
-</ul>
+        <h2 id="什么是RxJs"><a href="#什么是RxJs" class="headerlink" title="什么是RxJs"></a>什么是RxJs</h2><p>RxJS是一个JavaScript库，将“反应式编程”的概念带入网络。 反应式编程只是构建软件应用程序的另一种方法。<br>本质上，您的软件是为了对发生的变化进行“反应”（例如点击事件，获取的数据等），而不是典型的编写我们明确编写代码（也称为“命令式”编程）的软件来处理这些更改。<br>对于熟悉的人，您可以将RxJS视为异步数据操作的lodash。 如果你仍然感到困惑，别担心，这通常没有什么意义。让我们用类比来更好地解释一下：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">RxJS <span class="keyword">is</span> <span class="keyword">to</span> Javascript <span class="keyword">as</span> Henry Ford<span class="comment">'s assembly line was to cars.</span></div></pre></td></tr></table></figure>
+<p>RxJS是为了像亨利·福特的装配线一样用于汽车。</p>
+<p>我知道这听起来很棒，但是听到我的声音。 早在二十世纪初，产品完全由手工制造。所以任何产生的产品 - 让我们以座椅为例 - 是由一个人建造的。要做椅子，这个人会把木头切成适当的尺寸。然后，他们将这些块拼合在一起，将粗糙的边缘砂磨。然后他们会画它，完成它，最后卖掉它。然后他们将重复从步骤1的过程。</p>
+<p>这可能听起来不是那么糟糕，但是考虑一下：定制颜色的椅子会花多少钱？你会认为这不会太多，对吧？实际上是相反的 - 不仅你会为自己的颜色付钱，而且你必须付钱给那个人整天坐下来，为你创造一个全新的椅子。所以你在宜家买的20美元的椅子可能会花费200美元以上。</p>
+<p>为什么？因为这是不被分解成模块化和异步进程的系统的成本。</p>
+<p>当亨利·福特（Henry Ford）批量生产第一辆燃烧车的时候，他有一个辉煌的想法：如果你将装配过程分解成由单人负责的模块化件？这样，大会的每一部分都是可以互换的，也消除了一个人负责创造整个汽车的巨大的低效率。事实上，一个人在一个12小时内搭建了一辆满车，他的装配线减少了两个半小时。</p>
+<p>这也打开了通常成本高昂的定制和配置级别。例如，如果客户想要汽车的不同颜色的内部，那么他们可以简单地将完成的灯箱重定向到不同的工作人员。</p>
+<p>装配线提供了两个主要优点：工人能够异步工作（导致完成所需的总工作时间大大减少），现在重新配置/定制最终产品将是非常便宜的。</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">In</span> this sense, RxJS (<span class="keyword">and</span> reactive programming <span class="keyword">in</span> general) can be thought <span class="keyword">of</span> <span class="keyword">as</span> writing <span class="keyword">assembly</span> lines <span class="keyword">in</span> your software applications. It allows you <span class="keyword">to</span> <span class="keyword">write</span> software that <span class="keyword">is</span> reusable, configurable, <span class="keyword">and</span> asynchronous.</div></pre></td></tr></table></figure>
+<p>在这个意义上，RxJS（一般说响应式编程）可以被认为是在您的软件应用程序中编写装配线。它允许您编写可重复使用，可配置和异步的软件。</p>
+<p>我认为这里的关键词是异步的。大多数库/框架已经允许您编写可重用且可配置的代码，但可以从异步操作中轻松调用？例如，如果我们正在等待聊天消息从网络套接字回来，新聊天消息如何更新正在运行的应用程序的状态？如果你已经建立了一个有意义的大型实时应用程序，那么你知道写这种逻辑可能是多么痛苦。</p>
+<p>虽然websockets和其他实时事件是RxJS真正闪耀的地方，但RxJS还提供了更强大的功能来执行甚至标准的AJAX请求。与promises（解决AJAX请求的正常方法）不同，RxJS的Observable序列是可以取消的。它们也可以轻松链接，操纵和配置。</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">The possibilities are endless. You can <span class="built_in">create</span> assembly <span class="keyword">lines</span> (i.e. RxJS Observables) that can be chained together, <span class="built_in">split</span> apart, configured slightly different, <span class="keyword">or</span> just used <span class="keyword">without</span> <span class="keyword">any</span> modification <span class="keyword">at</span> all. It<span class="string">'s really up to you.</span></div></pre></td></tr></table></figure>
+<p>可能性是无止境的。您可以创建可以链接在一起，拆分，配置稍微不同或刚刚使用而不进行任何修改的装配线（即RxJS Observables）。这真的取决于你</p>
+<p>就这样说，现在我们来探讨一些真正的RxJS和Observables的例子！</p>
+<p>重要的是覆盖RxJS包含的基本术语及其相应的功能，然后再继续实例。在上面的视频中，我们介绍了marble diagrams的可观察序列的总体思路，以及以下主题与之相互作用。</p>
+<h3 id="Observer"><a href="#Observer" class="headerlink" title="Observer"></a>Observer</h3><p> 您通常不会直接与Observer对象进行交互，因为您可能会与主题进行交互（我们将在下面介绍），但重要的是要知道它的作用。</p>
+<p> 观察者允许您将新数据“推”到可观察的序列中。您可以将其视为修改可观察序列的“只写”方式（要回到我们类似的装配线，观察者只能将新车添加到装配线上）。</p>
+<h3 id="Observable"><a href="#Observable" class="headerlink" title="Observable"></a>Observable</h3><p> 一个可观察的是我们可以用来听，又名订阅，也就是发现一个观察者发出的新的变化。将其视为“只读”装配线（只能观察新车从装配线中脱落）。</p>
+<h3 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h3><p> 主题只是一个观察者和可观察者。您可以推新值并订阅。将其视为“读写”装配线（您可以将车辆添加到装配线上，观察从装配线下车的车辆）。</p>
+<h3 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h3><p> RxJS中的运算符的目的与其他编程语言/库中的大多数运算符相同：它们允许您对代码执行操作。</p>
+<p> 在RxJS中，您可以将运算符视为在发送到Observable之前操纵来自主题（或观察者）的数据的一种方法。这相当于指示装配线以某种方式修改汽车（即涂漆黑色，闪耀等），然后将其返回到下一个装配线。</p>
+<p> 在RxJS中有一些不同类型的主题，但是在构建真实世界应用程序时弹出的最常见的主题是BehaviorSubject。</p>
+<p> 假设我们想要存储用户的名字，但是我们也希望他们能够更改它。我们想要存储一个初始名称，有能力更新它，并且还可以在任何给定的时间访问当前的名称设置。</p>
+<p> 这正是BehaviorSubject允许你做的事情。让我们看看这个例子的用例实际上是如何工作的：</p>
+<p> 使用初始值实例化一个新的BehaviorSubject</p>
+<p> 在这个例子中，初始值将是一个字符串（Eric）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> currentNameSubject = <span class="keyword">new</span> BehaviorSubject(<span class="string">'Eric'</span>);</div></pre></td></tr></table></figure>
+<p>要获取当前值，请调用getValue方法：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">currentNameSubject.getValue();</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Eric'</span></div></pre></td></tr></table></figure>
+<p>要更改现有BehaviorSubject的值，请使用新值调用下一个方法：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">currentNameSubject.<span class="keyword">next</span>(<span class="string">'Obama'</span>);</div></pre></td></tr></table></figure>
+<p>如果我们再次调用getValue：</p>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">currentNameSubject.getValue();</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Obama'</span></div></pre></td></tr></table></figure>
+<h4 id="订阅值的变动"><a href="#订阅值的变动" class="headerlink" title="订阅值的变动"></a>订阅值的变动</h4><p>使用RxJS的全部要点是跨应用程序异步更新和共享数据。这是通过订阅Observable而不是同步调用getValue完成的：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">let currentNameSubject = <span class="keyword">new</span> BehaviorSubject(<span class="string">'Eric'</span>);</div><div class="line"></div><div class="line">currentNameSubject.subscribe(<span class="function"><span class="params">(val)</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(val);</div><div class="line">&#125;)</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Eric'</span></div><div class="line"></div><div class="line">currentNameSubject.next(<span class="string">'Obama'</span>);</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Obama'</span></div><div class="line"></div><div class="line">currentNameSubject.next(<span class="string">'Jacob'</span>);</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Jacob'</span></div></pre></td></tr></table></figure>
+<p>在RxJS世界中，被认为是最佳实践，仅将Subjects暴露给您的应用程序的部分，将新数据添加到Observable序列中。这只是允许对您的应用程序，私人和公共类成员等的某些部分进行写入访问的相同想法。</p>
+<p>要从主题创建一个Observable，您可以在任何主题上简单地调用asObservable：</p>
+<figure class="highlight ocaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> currentUserSubject = <span class="keyword">new</span> <span class="type">BehaviorSubject</span>&lt;<span class="built_in">string</span>&gt;(<span class="symbol">'Eric'</span>);</div><div class="line"><span class="keyword">let</span> currentUser = currentUserSubject.asObservable<span class="literal">()</span>;</div></pre></td></tr></table></figure>
+<p>我们现在有一个名为currentUser的新变量，它是currentUserSubject的可观察序列的可观察值。要看看它是如何工作的，可以订阅currentUser observable，然后将一些数据添加到currentUserSubject：</p>
+<figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">let currentUserSubject = <span class="keyword">new</span> BehaviorSubject&lt;string&gt;(<span class="string">'Eric'</span>);</div><div class="line">let currentUser = currentUserSubject.asObservable();</div><div class="line"></div><div class="line">currentUserSubject.subscribe(<span class="function"><span class="params">(val)</span> =&gt;</span> &#123;</div><div class="line">    <span class="built_in">console</span>.log(val)</div><div class="line">&#125;)</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'Eric'</span></div><div class="line"></div><div class="line">currentUserSubject.next(<span class="string">'hello'</span>);</div><div class="line"><span class="regexp">//</span> =&gt; <span class="string">'hello'</span></div></pre></td></tr></table></figure>
+<p>请注意，如果您尝试调用currentUser.next（），它将抛出一个错误，因为Observables只能观察序列 - 从而为您提供只读访问currentUserSubject</p>
+<h3 id="Making-our-first-HTTP-request"><a href="#Making-our-first-HTTP-request" class="headerlink" title="Making our first HTTP request"></a>Making our first HTTP request</h3><p>向API发出请求，使用observable来映射和返回数据</p>
+<p>就像Angular 1.x一样，建议Http调用包含在服务中，而不是直接在组件中使用。这可以为您的应用程序结构提供更大的灵活性，因为您可以在整个应用程序中重用您的呼叫，以及实现更高级功能（如缓存）的能力。 要使用Http服务，我们需要（你猜到它）import＆并注入它：</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Injectable &#125; <span class="keyword">from</span> <span class="string">'@angular/core'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Http, Response &#125; <span class="keyword">from</span> <span class="string">'@angular/http'</span>;</div><div class="line"><span class="keyword">import</span> <span class="string">'rxjs/add/operator/map'</span>;</div><div class="line"></div><div class="line"><span class="meta">@Injectable</span>()</div><div class="line"><span class="keyword">export</span> <span class="keyword">class</span> UserService &#123;</div><div class="line">  <span class="keyword">constructor</span> (<span class="params"></span></div><div class="line">    <span class="keyword">private</span> http: Http</div><div class="line">  ) &#123;&#125;</div><div class="line"></div><div class="line">  getUser() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.http.get(<span class="string">`https://conduit.productionready.io/api/profiles/eric`</span>)</div><div class="line">    .map(<span class="function">(<span class="params">res:Response</span>) =&gt;</span> res.json());</div><div class="line">  &#125;</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们需要从rxjs导入map才能使用地图运算符。 $ http从Angular 1.x和Http在Angular 2之间有一些区别。Http返回一个Observable与Response对象，而$ http返回Promises。 Promises和Observables之间的主要区别在于Observables可能会多次发布数据，这就是为什么它们可以被订阅和取消订阅。 $ http和Http之间的另一个主要区别是Http实际上没有向服务器发出请求，直到有一个订阅observable。</p>
+<p>虽然可观察是在angular2处理数据的推荐方法，您可以通过导入rxjs / add / operator / toPromise然后调用您的observable的Promise（）将它们转换为promises。起初我发现自己想要使用像Angular 1的好日子这样的承诺，但是我最终发现Observables实际上是相当不错的，与你写承诺代码的方式没有太大的不同。</p>
+<p>getUser方法从服务器上关闭对我的配置文件信息的GET请求。当数据回来时，我们使用map操作符来获取响应数据，将其转换为JSON，然后将其重新输入到等待数据解析的任何订阅者。</p>
+<p>在home组件中，允许订阅该Observable并将返回给组件中的profile变量的数据分配：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; <span class="type">Component</span> &#125; <span class="keyword">from</span> '@angular/core';</div><div class="line"></div><div class="line"><span class="keyword">import</span> &#123; <span class="type">UserService</span> &#125; <span class="keyword">from</span> './<span class="literal">shared</span>/index';</div><div class="line"></div><div class="line">@<span class="type">Component</span>(&#123;</div><div class="line">  selector: 'home-page',</div><div class="line">  <span class="keyword">template</span>: `</div><div class="line">  &lt;<span class="keyword">div</span>&gt;</div><div class="line">    &lt;button (click)=<span class="string">"loadUser()"</span>&gt;<span class="type">Load</span> profile&lt;/button&gt;</div><div class="line">    &#123;&#123; profile | json &#125;&#125;</div><div class="line">  &lt;/<span class="keyword">div</span>&gt;</div><div class="line">  `</div><div class="line">&#125;)</div><div class="line"><span class="keyword">export</span> class <span class="type">HomeComponent</span> &#123;</div><div class="line">  constructor(private userService: <span class="type">UserService</span>) &#123;&#125;</div><div class="line">  profile = &#123;&#125;;</div><div class="line"></div><div class="line">  loadUser() &#123;</div><div class="line">    this.userService.getUser().subscribe(data =&gt; this.profile = data);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
     
 
@@ -456,21 +464,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/05/20/设计模式/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/05/02/理解ThreadLocal/" id="post_nav-older" class="next-content">
+        <a href="/2017/05/23/陌生单词笔记本/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
