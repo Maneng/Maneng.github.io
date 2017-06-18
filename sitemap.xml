@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/06/18/Implementing%20a%20Custom%20Spring%20AOP%20Annotation/</loc>
+    
+    <lastmod>2017-06-18T14:55:13.995Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/06/18/Intro%20to%20AspectJ/</loc>
     
     <lastmod>2017-06-18T14:49:42.392Z</lastmod>
@@ -191,14 +198,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2017-03-11T13:00:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-03-11T13:00:04.000Z</lastmod>
     
