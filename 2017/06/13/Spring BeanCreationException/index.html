@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring BeanCreationException | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,springException">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring BeanCreationException | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="springException"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spring-BeanCreationException"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring BeanCreationException</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#1-概述"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">1.概述</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Cause-org-springframework-beans-factory-NoSuchBeanDefinitionException"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">2.Cause: org.springframework.beans.factory.NoSuchBeanDefinitionException</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-Cause-org-springframework-beans-factory-NoUniqueBeanDefinitionException"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">3.Cause:org.springframework.beans.factory.NoUniqueBeanDefinitionException</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#4-Cause-org-springframework-beans-BeanInstantiationException"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">4. Cause: org.springframework.beans.BeanInstantiationException</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-1-自定义异常"><span class="post-toc-number">1.4.1.</span> <span class="post-toc-text">4.1 自定义异常</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-2-java-lang-InstantiationException"><span class="post-toc-number">1.4.2.</span> <span class="post-toc-text">4.2 java.lang.InstantiationException</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-3-java-lang-NoSuchMethodException"><span class="post-toc-number">1.4.3.</span> <span class="post-toc-text">4.3. java.lang.NoSuchMethodException</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-org-springframework-beans-NotWritablePropertyException"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">6.org.springframework.beans.NotWritablePropertyException</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#6-org-springframework-beans-CannotLoadBeanClassException"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">6.org.springframework.beans.CannotLoadBeanClassException</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#7-org-springframework-beans-Children-of-BeanCreationException"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">7.org.springframework.beans.Children of BeanCreationException</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-1-The-org-springframework-beans-factory-BeanCurrentlyInCreationException"><span class="post-toc-number">1.7.1.</span> <span class="post-toc-text">7.1. The org.springframework.beans.factory.BeanCurrentlyInCreationException</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-2-The-org-springframework-beans-factory-BeanIsAbstractException"><span class="post-toc-number">1.7.2.</span> <span class="post-toc-text">7.2. The org.springframework.beans.factory.BeanIsAbstractException</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#8-总结-…"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">8.总结 …</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring BeanCreationException
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 13, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/springException/">springException</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/13/Spring BeanCreationException/" class="leancloud-views_num" data-flag-title="Spring BeanCreationException">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring BeanCreationException&url=http://yoursite.com//2017/06/13/Spring BeanCreationException/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring BeanCreationException&url=http://yoursite.com//2017/06/13/Spring BeanCreationException/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/13/Spring BeanCreationException/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/13/Spring BeanCreationException/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Spring-BeanCreationException"><a href="#Spring-BeanCreationException" class="headerlink" title="Spring BeanCreationException"></a>Spring BeanCreationException</h1><h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a><strong>1.概述</strong></h2><p>在这片文章中，我们会讨论关于Spring的异常：</p>
+<blockquote>
+<p>Spring org.springframework.beans.factory.BeanCreationException </p>
+</blockquote>
+<p>当<strong>BeanFactory</strong>创建定义的<strong>bean</strong>的时候，本文中将会讨论这种常见的异常，<br>以及它们解决方案。</p>
+<h2 id="2-Cause-org-springframework-beans-factory-NoSuchBeanDefinitionException"><a href="#2-Cause-org-springframework-beans-factory-NoSuchBeanDefinitionException" class="headerlink" title="2.Cause: org.springframework.beans.factory.NoSuchBeanDefinitionException"></a><strong>2.Cause: org.springframework.beans.factory.NoSuchBeanDefinitionException</strong></h2><p><strong>BeanCreationException</strong>最常见的原因是Spring试图注入上下文中不存在的bean。</p>
+<p>例如，BeanA尝试注入BeanB：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> BeanB dependency;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果在上下文中找不到BeanB，则会抛出以下异常（创建Bean时出错）：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: Injection <span class="keyword">of</span> autowired dependencies failed; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanCreationException: </div><div class="line">Could <span class="keyword">not</span> autowire field: <span class="keyword">private</span> org.baeldung.web.BeanB org.baeldung.web.BeanA.dependency; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.NoSuchBeanDefinitionException: </div><div class="line">No qualifying bean <span class="keyword">of</span> <span class="keyword">type</span> [org.baeldung.web.BeanB] found <span class="keyword">for</span> dependency: </div><div class="line">expected at least <span class="number">1</span> bean which qualifies <span class="keyword">as</span> autowire candidate <span class="keyword">for</span> this dependency. </div><div class="line">Dependency annotations: <span class="comment">&#123;@org.springframework.beans.factory.annotation.Autowired(required=true)&#125;</span></div></pre></td></tr></table></figure>
+<p>要诊断这种类型的问题 - 首先，确保bean被声明：</p>
+<ul>
+<li>在使用<code>&lt;bean /&gt;</code>元素的XML配置文件中</li>
+<li>或通过<strong>@Bean</strong>注解在Java @Configuration类中</li>
+<li>或者注解为：<strong>@Component</strong>，<strong>@Repository</strong>，<strong>@Service</strong>，<strong>@Controller</strong>和类路径扫描对于该包是active的</li>
+</ul>
+<p>还要检查配置文件或类真正正确的由Spring获取到并加载到主上下文中。</p>
+<h2 id="3-Cause-org-springframework-beans-factory-NoUniqueBeanDefinitionException"><a href="#3-Cause-org-springframework-beans-factory-NoUniqueBeanDefinitionException" class="headerlink" title="3.Cause:org.springframework.beans.factory.NoUniqueBeanDefinitionException"></a><strong>3.Cause:org.springframework.beans.factory.NoUniqueBeanDefinitionException</strong></h2><p>bean创建异常的另一个类似原因是Spring试图通过类型（即其接口）注入一个bean，并在上下文中找到两个或更多个bean来实现该接口。 例如，BeanB1和BeanB2都实现了相同的接口：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanB1</span> <span class="keyword">implements</span> <span class="title">IBeanB</span> </span>&#123; ... &#125;</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanB2</span> <span class="keyword">implements</span> <span class="title">IBeanB</span> </span>&#123; ... &#125;</div><div class="line"> </div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> IBeanB dependency;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这将导致Spring bean工厂抛出以下异常：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: Injection <span class="keyword">of</span> autowired dependencies failed; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanCreationException: </div><div class="line">Could <span class="keyword">not</span> autowire field: <span class="keyword">private</span> org.baeldung.web.IBeanB org.baeldung.web.BeanA.b; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.NoUniqueBeanDefinitionException: </div><div class="line">No qualifying bean <span class="keyword">of</span> <span class="keyword">type</span> [org.baeldung.web.IBeanB] <span class="keyword">is</span> defined: </div><div class="line">expected single <span class="keyword">matching</span> bean but found <span class="number">2</span>: beanB1,beanB2</div></pre></td></tr></table></figure>
+<h2 id="4-Cause-org-springframework-beans-BeanInstantiationException"><a href="#4-Cause-org-springframework-beans-BeanInstantiationException" class="headerlink" title="4. Cause: org.springframework.beans.BeanInstantiationException"></a><strong>4. Cause: org.springframework.beans.BeanInstantiationException</strong></h2><h3 id="4-1-自定义异常"><a href="#4-1-自定义异常" class="headerlink" title="4.1 自定义异常"></a>4.1 自定义异常</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BeanA</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> NullPointerException();</div><div class="line">    &#125;</div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如预期的那样，这将导致Spring很快的失败，并且抛出异常：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span> defined <span class="keyword">in</span> file [...BeanA.class]: </div><div class="line">Instantiation <span class="keyword">of</span> bean failed; <span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.BeanInstantiationException: </div><div class="line">Could <span class="keyword">not</span> instantiate bean <span class="keyword">class</span> [org.baeldung.web.BeanA]: </div><div class="line"><span class="function"><span class="keyword">Constructor</span> <span class="title">threw</span> <span class="title">exception</span>;</span> </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> java.lang.NullPointerException</div></pre></td></tr></table></figure>
+<h3 id="4-2-java-lang-InstantiationException"><a href="#4-2-java-lang-InstantiationException" class="headerlink" title="4.2 java.lang.InstantiationException"></a>4.2 java.lang.InstantiationException</h3><p><strong>BeanInstantiationException</strong>的另一个可能的发生是将抽象类定义为XML中的bean;这必须在XML中，因为在Java <strong>@Configuration</strong>文件中没有办法这样做，而类路径扫描将忽略抽象类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> <span class="keyword">implements</span> <span class="title">IBeanA</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>bean的XML定义：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanA"</span> <span class="attr">class</span>=<span class="string">"org.baeldung.web.BeanA"</span> /&gt;</span></div></pre></td></tr></table></figure>
+<p>此设置将导致类似异常：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">org.springframework.beans.factory.BeanCreationException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span> defined <span class="keyword">in</span> <span class="keyword">class</span> path resource [beansInXml.xml]: </div><div class="line">Instantiation <span class="keyword">of</span> bean failed; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.BeanInstantiationException: </div><div class="line">Could <span class="keyword">not</span> instantiate bean <span class="keyword">class</span> [org.baeldung.web.BeanA]: </div><div class="line"><span class="keyword">Is</span> it an <span class="keyword">abstract</span> <span class="keyword">class</span>?; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> java.lang.InstantiationException</div></pre></td></tr></table></figure>
+<h3 id="4-3-java-lang-NoSuchMethodException"><a href="#4-3-java-lang-NoSuchMethodException" class="headerlink" title="4.3. java.lang.NoSuchMethodException"></a>4.3. java.lang.NoSuchMethodException</h3><p>如果一个bean没有默认构造函数，并且Spring尝试通过查找该构造函数实例化它，这将导致运行时异常;例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> <span class="keyword">implements</span> <span class="title">IBeanA</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BeanA</span><span class="params">(<span class="keyword">final</span> String name)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        System.out.println(name);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当这个bean被类路径扫描机制获取时，将会导致：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span> defined <span class="keyword">in</span> file [...BeanA.class]: Instantiation <span class="keyword">of</span> bean failed; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.BeanInstantiationException: </div><div class="line">Could <span class="keyword">not</span> instantiate bean <span class="keyword">class</span> [org.baeldung.web.BeanA]: </div><div class="line">No <span class="keyword">default</span> <span class="function"><span class="keyword">constructor</span> <span class="title">found</span>;</span> </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> java.lang.NoSuchMethodException: org.baeldung.web.BeanA.&lt;init&gt;()</div></pre></td></tr></table></figure>
+<p>当类中的Spring依赖关系不具有相同的版本时，可能会出现类似异常但是更难诊断的异常是由于API更改，此类版本不兼容可能会导致<strong>NoSuchMethodException</strong>异常。解决这个问题的方法是确保所有的Spring库在项目中都有完全相同的版本。</p>
+<h2 id="6-org-springframework-beans-NotWritablePropertyException"><a href="#6-org-springframework-beans-NotWritablePropertyException" class="headerlink" title="6.org.springframework.beans.NotWritablePropertyException"></a><strong>6.org.springframework.beans.NotWritablePropertyException</strong></h2><p>另一个可能性是定义一个bean - BeanA - 引用另一个Bean - BeanB–在BeanA中没有相应的setter方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> IBeanB dependency;</div><div class="line">    ...</div><div class="line">&#125;</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanB</span> <span class="keyword">implements</span> <span class="title">IBeanB</span> </span>&#123; ... &#125;</div></pre></td></tr></table></figure>
+<p>Spring XML配置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">bean</span> <span class="attr">id</span>=<span class="string">"beanA"</span> <span class="attr">class</span>=<span class="string">"org.baeldung.web.BeanA"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">property</span> <span class="attr">name</span>=<span class="string">"beanB"</span> <span class="attr">ref</span>=<span class="string">"beanB"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">bean</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>再次，这只能发生在XML配置中，因为在使用Java <strong>@Configuration</strong>时，编译器会使此问题无法再现。</p>
+<p>当然，为了解决这个问题，需要为IBeanB添加setter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> IBeanB dependency;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setDependency</span><span class="params">(<span class="keyword">final</span> IBeanB dependency)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.dependency = dependency;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="6-org-springframework-beans-CannotLoadBeanClassException"><a href="#6-org-springframework-beans-CannotLoadBeanClassException" class="headerlink" title="6.org.springframework.beans.CannotLoadBeanClassException"></a><strong>6.org.springframework.beans.CannotLoadBeanClassException</strong></h2><p>当Spring无法加载定义的bean的类时，抛出此异常 - 如果Spring XML配置包含一个根本没有相应类的bean，则可能会发生此异常。例如，如果类BeanZ不存在，以下定义将导致异常：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"beanZ"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.baeldung.web.BeanZ"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>根本原因是<strong>ClassNotFoundException</strong>这种异常：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanCreationException: </div><div class="line">...</div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.CannotLoadBeanClassException: </div><div class="line">Cannot find <span class="keyword">class</span> [org.baeldung.web.BeanZ] <span class="keyword">for</span> bean <span class="keyword">with</span> name <span class="string">'beanZ'</span></div><div class="line">defined <span class="keyword">in</span> <span class="keyword">class</span> path resource [beansInXml.xml]; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> java.lang.ClassNotFoundException: org.baeldung.web.BeanZ</div></pre></td></tr></table></figure>
+<h2 id="7-org-springframework-beans-Children-of-BeanCreationException"><a href="#7-org-springframework-beans-Children-of-BeanCreationException" class="headerlink" title="7.org.springframework.beans.Children of BeanCreationException"></a><strong>7.org.springframework.beans.Children of BeanCreationException</strong></h2><h3 id="7-1-The-org-springframework-beans-factory-BeanCurrentlyInCreationException"><a href="#7-1-The-org-springframework-beans-factory-BeanCurrentlyInCreationException" class="headerlink" title="7.1. The org.springframework.beans.factory.BeanCurrentlyInCreationException"></a>7.1. The org.springframework.beans.factory.BeanCurrentlyInCreationException</h3><p><strong>BeanCreationException</strong>的子类之一是<strong>BeanCurrentlyInCreationException</strong>;这通常在使用构造函数注入时出现 - 例如，在循环依赖性的情况下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> <span class="keyword">implements</span> <span class="title">IBeanA</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> IBeanB beanB;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BeanA</span><span class="params">(<span class="keyword">final</span> IBeanB beanB)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.beanB = beanB;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanB</span> <span class="keyword">implements</span> <span class="title">IBeanB</span> </span>&#123;</div><div class="line">    <span class="keyword">final</span> IBeanA beanA;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BeanB</span><span class="params">(<span class="keyword">final</span> IBeanA beanA)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">        <span class="keyword">this</span>.beanA = beanA;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Spring将无法解决这种情况，最终的结果将是：</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">org.springframework.beans.factory.BeanCurrentlyInCreationException: </div><div class="line"><span class="keyword">Error</span> creating bean <span class="keyword">with</span> name <span class="comment">'beanA': </span></div><div class="line">Requested bean <span class="keyword">is</span> currently <span class="keyword">in</span> creation: <span class="keyword">Is</span> there an unresolvable circular reference?</div></pre></td></tr></table></figure>
+<p>完整的异常是非常冗长的：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">org.springframework.beans.factory.UnsatisfiedDependencyException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span> defined <span class="keyword">in</span> file [...BeanA.class]: </div><div class="line">Unsatisfied dependency expressed through <span class="function"><span class="keyword">constructor</span> <span class="title">argument</span> <span class="title">with</span> <span class="title">index</span> 0 </span></div><div class="line"><span class="title">of</span> <span class="title">type</span> [<span class="title">org</span>.<span class="title">baeldung</span>.<span class="title">web</span>.<span class="title">IBeanB</span>]: : </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanB'</span> defined <span class="keyword">in</span> file [...BeanB.class]: </div><div class="line">Unsatisfied dependency expressed through <span class="function"><span class="keyword">constructor</span> <span class="title">argument</span> <span class="title">with</span> <span class="title">index</span> 0 </span></div><div class="line"><span class="title">of</span> <span class="title">type</span> [<span class="title">org</span>.<span class="title">baeldung</span>.<span class="title">web</span>.<span class="title">IBeanA</span>]: : </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: Requested bean <span class="keyword">is</span> currently <span class="keyword">in</span> creation: </div><div class="line"><span class="keyword">Is</span> there an unresolvable circular <span class="keyword">reference</span>?; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanCurrentlyInCreationException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: </div><div class="line">Requested bean <span class="keyword">is</span> currently <span class="keyword">in</span> creation: </div><div class="line"><span class="keyword">Is</span> there an unresolvable circular <span class="keyword">reference</span>?; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.UnsatisfiedDependencyException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanB'</span> defined <span class="keyword">in</span> file [...BeanB.class]: </div><div class="line">Unsatisfied dependency expressed through <span class="function"><span class="keyword">constructor</span> <span class="title">argument</span> <span class="title">with</span> <span class="title">index</span> 0 </span></div><div class="line"><span class="title">of</span> <span class="title">type</span> [<span class="title">org</span>.<span class="title">baeldung</span>.<span class="title">web</span>.<span class="title">IBeanA</span>]: : </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: </div><div class="line">Requested bean <span class="keyword">is</span> currently <span class="keyword">in</span> creation: </div><div class="line"><span class="keyword">Is</span> there an unresolvable circular <span class="keyword">reference</span>?; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanCurrentlyInCreationException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: </div><div class="line">Requested bean <span class="keyword">is</span> currently <span class="keyword">in</span> creation: <span class="keyword">Is</span> there an unresolvable circular <span class="keyword">reference</span>?</div></pre></td></tr></table></figure>
+<h3 id="7-2-The-org-springframework-beans-factory-BeanIsAbstractException"><a href="#7-2-The-org-springframework-beans-factory-BeanIsAbstractException" class="headerlink" title="7.2. The org.springframework.beans.factory.BeanIsAbstractException"></a>7.2. The org.springframework.beans.factory.BeanIsAbstractException</h3><p>当Bean Factory尝试检索和实例化被声明为抽象的bean时，可能会发生此实例化异常。例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">BeanA</span> <span class="keyword">implements</span> <span class="title">IBeanA</span> </span>&#123;</div><div class="line">   ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在XML配置中声明为：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"beanA"</span> <span class="keyword">abstract</span>=<span class="string">"true"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.baeldung.web.BeanA"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>现在，如果我们尝试通过名称从Spring上下文中检索BeanA，例如实例化另一个bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Config</span> </span>&#123;</div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    BeanFactory beanFactory;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> BeanB <span class="title">beanB</span><span class="params">()</span> </span>&#123;</div><div class="line">        beanFactory.getBean(<span class="string">"beanA"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> BeanB();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这将导致以下异常：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">org.springframework.beans.factory.BeanCreationException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanB'</span> defined <span class="keyword">in</span> <span class="keyword">class</span> path resource </div><div class="line">[org/baeldung/spring/config/WebConfig.class]: Instantiation <span class="keyword">of</span> bean failed; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanDefinitionStoreException: </div><div class="line">Factory <span class="function"><span class="keyword">method</span> </span></div><div class="line">[<span class="title">public</span> <span class="title">org</span>.<span class="title">baeldung</span>.<span class="title">web</span>.<span class="title">BeanB</span> <span class="title">org</span>.<span class="title">baeldung</span>.<span class="title">spring</span>.<span class="title">config</span>.<span class="title">WebConfig</span>.<span class="title">beanB</span><span class="params">()</span>] <span class="title">threw</span> <span class="title">exception</span>; </div><div class="line"><span class="keyword">nested</span> exception <span class="keyword">is</span> org.springframework.beans.factory.BeanIsAbstractException: </div><div class="line">Error creating bean <span class="keyword">with</span> name <span class="string">'beanA'</span>: Bean definition <span class="keyword">is</span> <span class="keyword">abstract</span></div></pre></td></tr></table></figure>
+<h2 id="8-总结-…"><a href="#8-总结-…" class="headerlink" title="8.总结 …"></a><strong>8.总结 …</strong></h2><p>在本文末尾，我们应该有一个清晰的地图来浏览可能导致Spring中的BeanCreationException异常的原因和问题，以及如何解决所有这些问题。</p>
+<p>在<a href="https://github.com/eugenp/tutorials/tree/master/spring-all" target="_blank" rel="external">Github</a>项目中可以找到一些这些例外示例的实现<br>这是一个基于Eclipse的项目，所以应该很容易导入和运行。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/18/Intro to AspectJ/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/05/26/初探RxJS/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">26</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
