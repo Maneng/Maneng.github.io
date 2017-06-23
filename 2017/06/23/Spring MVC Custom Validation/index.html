@@ -1,0 +1,931 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Spring MVC Custom Validation | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,spring,springmvc">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Spring MVC Custom Validation | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="spring,springmvc"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-Overview"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Overview</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-Setup"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Setup</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-Custom-Validation"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. Custom Validation</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#4-The-New-Annotation"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. The New Annotation</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#5-Creating-a-Validator"><span class="post-toc-number">5.</span> <span class="post-toc-text">5. Creating a Validator</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#6-Applying-Validation-Annotation"><span class="post-toc-number">6.</span> <span class="post-toc-text">6. Applying Validation Annotation</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#7-The-View"><span class="post-toc-number">7.</span> <span class="post-toc-text">7. The View</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#8-Tests"><span class="post-toc-number">8.</span> <span class="post-toc-text">8. Tests</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#9-Custom-Class-Level-Validation"><span class="post-toc-number">9.</span> <span class="post-toc-text">9. Custom Class Level Validation</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-1-Creating-the-Annotation"><span class="post-toc-number">9.1.</span> <span class="post-toc-text">9.1. Creating the Annotation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-2-Creating-the-Validator"><span class="post-toc-number">9.2.</span> <span class="post-toc-text">9.2. Creating the Validator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-3-Applying-the-Annotation"><span class="post-toc-number">9.3.</span> <span class="post-toc-text">9.3. Applying the Annotation</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#9-4-Testing-the-Annotatio"><span class="post-toc-number">9.4.</span> <span class="post-toc-text">9.4. Testing the Annotatio</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#10-Summary"><span class="post-toc-number">9.5.</span> <span class="post-toc-text">10. Summary</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Spring MVC Custom Validation
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/spring-springmvc/">spring,springmvc</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/23/Spring MVC Custom Validation/" class="leancloud-views_num" data-flag-title="Spring MVC Custom Validation">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Spring MVC Custom Validation&url=http://yoursite.com//2017/06/23/Spring MVC Custom Validation/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Spring MVC Custom Validation&url=http://yoursite.com//2017/06/23/Spring MVC Custom Validation/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/23/Spring MVC Custom Validation/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/23/Spring MVC Custom Validation/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a><strong>1. Overview</strong></h1><p>通常，当我们需要验证用户输入时，Spring MVC提供了标准的预定义验证器。</p>
+<p>但是，当我们需要验证一个更具体的类型输入时，我们有可能创建自己的定制验证逻辑。</p>
+<p>在本文中，我们将这样做 - 我们将创建一个自定义验证器来验证具有电话号码字段的表单，然后显示多个字段的自定义验证器.</p>
+<h1 id="2-Setup"><a href="#2-Setup" class="headerlink" title="2. Setup"></a><strong>2. Setup</strong></h1><p>要从获得API，请将依赖关系添加到您的pom.xml文件中：</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.validation<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>validation-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1.0.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.hibernate<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>hibernate-validator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>5.4.1.Final<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="3-Custom-Validation"><a href="#3-Custom-Validation" class="headerlink" title="3. Custom Validation"></a><strong>3. Custom Validation</strong></h1><p>创建自定义验证器需要我们自己的注释，并在我们的模型中使用它来强制验证规则。</p>
+<p>所以，我们来创建我们的自定义验证器 - 它检查电话号码。电话号码必须是数字超过8位，但不能超过11位数字</p>
+<h1 id="4-The-New-Annotation"><a href="#4-The-New-Annotation" class="headerlink" title="4. The New Annotation"></a><strong>4. The New Annotation</strong></h1><p>让我们创建一个新的@interface来定义我们的注释：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Documented</span></div><div class="line"><span class="meta">@Constraint</span>(validatedBy = ContactNumberValidator.class)</div><div class="line"><span class="meta">@Target</span>( &#123; ElementType.METHOD, ElementType.FIELD &#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> ContactNumberConstraint &#123;</div><div class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "Invalid phone number"</span>;</div><div class="line">    Class&lt;?&gt;[] groups() <span class="keyword">default</span> &#123;&#125;;</div><div class="line">    Class&lt;? extends Payload&gt;[] payload() <span class="keyword">default</span> &#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用@Constraint注释，我们定义了要验证我们的字段的类，message（）是在用户界面中显示的错误消息，附加代码是符合Spring标准的大多数样板代码。</p>
+<h1 id="5-Creating-a-Validator"><a href="#5-Creating-a-Validator" class="headerlink" title="5. Creating a Validator"></a><strong>5. Creating a Validator</strong></h1><p>现在让我们创建一个验证器类来强制验证规则：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContactNumberValidator</span> <span class="keyword">implements</span></span></div><div class="line">  <span class="title">ConstraintValidator</span>&lt;<span class="title">ContactNumberConstraint</span>, <span class="title">String</span>&gt; &#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(ContactNumberConstraint contactNumber)</span> </span>&#123;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(String contactField,</span></span></div><div class="line">      ConstraintValidatorContext cxt) &#123;</div><div class="line">        <span class="keyword">return</span> contactField != <span class="keyword">null</span> &amp;&amp; contactField.matches(<span class="string">"[0-9]+"</span>)</div><div class="line">          &amp;&amp; (contactField.length() &gt; <span class="number">8</span>) &amp;&amp; (contactField.length() &lt; <span class="number">14</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>验证类实现ConstraintValidator接口，必须实现isValid方法;我们在这种方法中定义了我们的验证规则。</p>
+<p>当然，我们将在这里提供一个简单的验证规则，以显示验证器的工作原理。</p>
+<p>ConstraintValidator定义用于验证给定对象的给定约束的逻辑。实施必须遵守以下限制：</p>
+<ul>
+<li>该对象必须解析为非参数类型</li>
+<li>对象的通用参数必须是无界通配符类型</li>
+</ul>
+<h1 id="6-Applying-Validation-Annotation"><a href="#6-Applying-Validation-Annotation" class="headerlink" title="6. Applying Validation Annotation"></a><strong>6. Applying Validation Annotation</strong></h1><p>在我们的例子中，我们创建了一个简单的类，其中包含一个字段来应用验证规则。在这里，我们正在设置要验证的注释字段：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ContactNumberConstraint</span></div><div class="line"><span class="keyword">private</span> String phone;</div></pre></td></tr></table></figure>
+<p>我们定义了一个字符串字段，并用我们的自定义注释@ContactNumberConstraint对它进行了注释。在我们的控制器中，我们创建了我们的映射，并处理了错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValidatedPhoneController</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/validatePhone"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">loadFormPage</span><span class="params">(Model m)</span> </span>&#123;</div><div class="line">        m.addAttribute(<span class="string">"validatedPhone"</span>, <span class="keyword">new</span> ValidatedPhone());</div><div class="line">        <span class="keyword">return</span> <span class="string">"phoneHome"</span>;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/addValidatePhone"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">submitForm</span><span class="params">(@Valid ValidatedPhone validatedPhone,</span></span></div><div class="line">      BindingResult result, Model m) &#123;</div><div class="line">        <span class="keyword">if</span>(result.hasErrors()) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"phoneHome"</span>;</div><div class="line">        &#125;</div><div class="line">        m.addAttribute(<span class="string">"message"</span>, <span class="string">"Successfully saved phone: "</span></div><div class="line">          + validatedPhone.toString());</div><div class="line">        <span class="keyword">return</span> <span class="string">"phoneHome"</span>;</div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们定义了具有单个JSP页面的简单控制器，并使用submitForm方法来强制验证我们的电话号码。</p>
+<h1 id="7-The-View"><a href="#7-The-View" class="headerlink" title="7. The View"></a><strong>7. The View</strong></h1><p>我们的视图是一个基本的JSP页面，其窗体具有单个字段。当用户提交表单时，该字段将被我们的自定义验证器验证，并重定向到同一页面，并显示验证成功或失败的消息：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">form:form</span></span></div><div class="line">  <span class="attr">action</span>=<span class="string">"/$&#123;pageContext.request.contextPath&#125;/addValidatePhone"</span></div><div class="line">  <span class="attr">modelAttribute</span>=<span class="string">"validatedPhone"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"phoneInput"</span>&gt;</span>Phone: <span class="tag">&lt;/<span class="name">label</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">form:input</span> <span class="attr">path</span>=<span class="string">"phone"</span> <span class="attr">id</span>=<span class="string">"phoneInput"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">form:errors</span> <span class="attr">path</span>=<span class="string">"phone"</span> <span class="attr">cssClass</span>=<span class="string">"error"</span> /&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">value</span>=<span class="string">"Submit"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">form:form</span>&gt;</span></div></pre></td></tr></table></figure>
+<h1 id="8-Tests"><a href="#8-Tests" class="headerlink" title="8. Tests"></a><strong>8. Tests</strong></h1><p>现在让我们测试我们的控制器，并检查它是否给我们适当的响应和视图：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givenPhonePageUri_whenMockMvc_thenReturnsPhonePage</span><span class="params">()</span></span>&#123;</div><div class="line">    <span class="keyword">this</span>.mockMvc.</div><div class="line">      perform(get(<span class="string">"/validatePhone"</span>)).andExpect(view().name(<span class="string">"phoneHome"</span>));</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>另外，我们根据用户输入测试我们的字段是否被验证：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span></span></div><div class="line">  <span class="title">givenPhoneURIWithPostAndFormData_whenMockMVC_thenVerifyErrorResponse</span><span class="params">()</span> &#123;</div><div class="line">  </div><div class="line">    <span class="keyword">this</span>.mockMvc.perform(MockMvcRequestBuilders.post(<span class="string">"/addValidatePhone"</span>).</div><div class="line">      accept(MediaType.TEXT_HTML).</div><div class="line">      param(<span class="string">"phoneInput"</span>, <span class="string">"123"</span>)).</div><div class="line">      andExpect(model().attributeHasFieldErrorCode(</div><div class="line">          <span class="string">"validatedPhone"</span>,<span class="string">"phone"</span>,<span class="string">"ContactNumberConstraint"</span>)).</div><div class="line">      andExpect(view().name(<span class="string">"phoneHome"</span>)).</div><div class="line">      andExpect(status().isOk()).</div><div class="line">      andDo(print());</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在测试中，我们为用户提供“123”的输入，并且 - 正如我们预期的那样 - 一切正常，我们在客户端看到错误。</p>
+<h1 id="9-Custom-Class-Level-Validation"><a href="#9-Custom-Class-Level-Validation" class="headerlink" title="9. Custom Class Level Validation"></a><strong>9. Custom Class Level Validation</strong></h1><p>也可以在类级别定义自定义验证注释，以验证该类的多个属性。</p>
+<p>这种情况的常见用例是验证类中的两个字段是否具有匹配值。</p>
+<h2 id="9-1-Creating-the-Annotation"><a href="#9-1-Creating-the-Annotation" class="headerlink" title="9.1. Creating the Annotation"></a><strong>9.1. Creating the Annotation</strong></h2><p>我们添加一个名为FieldsValueMatch的新注释，可以稍后在类中应用。注释将具有两个参数field和fieldMatch，它们表示要比较的字段的名称：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Constraint</span>(validatedBy = FieldsValueMatchValidator.class)</div><div class="line"><span class="meta">@Target</span>(&#123; ElementType.TYPE &#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FieldsValueMatch &#123;</div><div class="line"> </div><div class="line">    <span class="function">String <span class="title">message</span><span class="params">()</span> <span class="keyword">default</span> "Fields values don't match!"</span>;</div><div class="line"> </div><div class="line">    <span class="function">String <span class="title">field</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">    <span class="function">String <span class="title">fieldMatch</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">    <span class="meta">@Target</span>(&#123; ElementType.TYPE &#125;)</div><div class="line">    <span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line">    <span class="meta">@interface</span> List &#123;</div><div class="line">        FieldsValueMatch[] value();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们可以看到我们的自定义注释还包含一个List子界面，用于在类上定义多个FieldsValueMatch注释。</p>
+<h2 id="9-2-Creating-the-Validator"><a href="#9-2-Creating-the-Validator" class="headerlink" title="9.2. Creating the Validator"></a><strong>9.2. Creating the Validator</strong></h2><p>接下来，我们需要添加将包含实际验证逻辑的FieldsValueMatchValidator类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FieldsValueMatchValidator</span> </span></div><div class="line">  <span class="keyword">implements</span> <span class="title">ConstraintValidator</span>&lt;<span class="title">FieldsValueMatch</span>, <span class="title">Object</span>&gt; &#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> String field;</div><div class="line">    <span class="keyword">private</span> String fieldMatch;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(FieldsValueMatch constraintAnnotation)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.field = constraintAnnotation.field();</div><div class="line">        <span class="keyword">this</span>.fieldMatch = constraintAnnotation.fieldMatch();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isValid</span><span class="params">(Object value, </span></span></div><div class="line">      ConstraintValidatorContext context) &#123;</div><div class="line"> </div><div class="line">        Object fieldValue = <span class="keyword">new</span> BeanWrapperImpl(value)</div><div class="line">          .getPropertyValue(field);</div><div class="line">        Object fieldMatchValue = <span class="keyword">new</span> BeanWrapperImpl(value)</div><div class="line">          .getPropertyValue(fieldMatch);</div><div class="line">         </div><div class="line">        <span class="keyword">if</span> (fieldValue != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">return</span> fieldValue.equals(fieldMatchValue);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">return</span> fieldMatchValue == <span class="keyword">null</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>isValid（）方法检索两个字段的值，并检查它们是否相等。</p>
+<h2 id="9-3-Applying-the-Annotation"><a href="#9-3-Applying-the-Annotation" class="headerlink" title="9.3. Applying the Annotation"></a><strong>9.3. Applying the Annotation</strong></h2><p>我们创建一个NewUserForm模型类，用于用户注册所需的数据，它具有两个电子邮件和密码属性，以及两个verifyEmail和verifyPassword属性，以重新输入两个值。</p>
+<p>由于我们有两个字段来检查其对应的匹配字段，所以我们在NewUserForm类上添加两个@FieldsValueMatch注释，一个用于电子邮件值，一个用于密码值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FieldsValueMatch</span>.List(&#123; </div><div class="line">    <span class="meta">@FieldsValueMatch</span>(</div><div class="line">      field = <span class="string">"password"</span>, </div><div class="line">      fieldMatch = <span class="string">"verifyPassword"</span>, </div><div class="line">      message = <span class="string">"Passwords do not match!"</span></div><div class="line">    ), </div><div class="line">    <span class="meta">@FieldsValueMatch</span>(</div><div class="line">      field = <span class="string">"email"</span>, </div><div class="line">      fieldMatch = <span class="string">"verifyEmail"</span>, </div><div class="line">      message = <span class="string">"Email addresses do not match!"</span></div><div class="line">    )</div><div class="line">&#125;)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewUserForm</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String email;</div><div class="line">    <span class="keyword">private</span> String verifyEmail;</div><div class="line">    <span class="keyword">private</span> String password;</div><div class="line">    <span class="keyword">private</span> String verifyPassword;</div><div class="line"> </div><div class="line">    <span class="comment">// standard constructor, getters, setters</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>为了在Spring MVC中验证模型，让我们创建一个带有/ user POST映射的控制器，该控件接收一个用@Valid注释的NewUserForm对象，并验证是否有任何验证错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NewUserController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/user"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">loadFormPage</span><span class="params">(Model model)</span> </span>&#123;</div><div class="line">        model.addAttribute(<span class="string">"newUserForm"</span>, <span class="keyword">new</span> NewUserForm());</div><div class="line">        <span class="keyword">return</span> <span class="string">"userHome"</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/user"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">submitForm</span><span class="params">(@Valid NewUserForm newUserForm, </span></span></div><div class="line">      BindingResult result, Model model) &#123;</div><div class="line">        <span class="keyword">if</span> (result.hasErrors()) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="string">"userHome"</span>;</div><div class="line">        &#125;</div><div class="line">        model.addAttribute(<span class="string">"message"</span>, <span class="string">"Valid form"</span>);</div><div class="line">        <span class="keyword">return</span> <span class="string">"userHome"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="9-4-Testing-the-Annotatio"><a href="#9-4-Testing-the-Annotatio" class="headerlink" title="9.4. Testing the Annotatio"></a><strong>9.4. Testing the Annotatio</strong></h2><p>要验证我们的自定义类级别注释，让我们编写一个JUnit测试，它将匹配信息发送到/ user端点，然后验证响应是否包含错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ClassValidationMvcTest</span> </span>&#123;</div><div class="line">  <span class="keyword">private</span> MockMvc mockMvc;</div><div class="line">     </div><div class="line">    <span class="meta">@Before</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.mockMvc = MockMvcBuilders</div><div class="line">          .standaloneSetup(<span class="keyword">new</span> NewUserController()).build();</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="meta">@Test</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givenMatchingEmailPassword_whenPostNewUserForm_thenOk</span><span class="params">()</span> </span></div><div class="line">      <span class="keyword">throws</span> Exception &#123;</div><div class="line">        <span class="keyword">this</span>.mockMvc.perform(MockMvcRequestBuilders</div><div class="line">          .post(<span class="string">"/user"</span>)</div><div class="line">          .accept(MediaType.TEXT_HTML).</div><div class="line">          .param(<span class="string">"email"</span>, <span class="string">"john@yahoo.com"</span>)</div><div class="line">          .param(<span class="string">"verifyEmail"</span>, <span class="string">"john@yahoo.com"</span>)</div><div class="line">          .param(<span class="string">"password"</span>, <span class="string">"pass"</span>)</div><div class="line">          .param(<span class="string">"verifyPassword"</span>, <span class="string">"pass"</span>))</div><div class="line">          .andExpect(model().errorCount(<span class="number">0</span>))</div><div class="line">          .andExpect(status().isOk());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接下来，我们还添加一个JUnit测试，它将不匹配的信息发送到/ user端点，并声明结果将包含两个错误：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Test</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">givenNotMatchingEmailPassword_whenPostNewUserForm_thenOk</span><span class="params">()</span> </span></div><div class="line">  <span class="keyword">throws</span> Exception &#123;</div><div class="line">    <span class="keyword">this</span>.mockMvc.perform(MockMvcRequestBuilders</div><div class="line">      .post(<span class="string">"/user"</span>)</div><div class="line">      .accept(MediaType.TEXT_HTML)</div><div class="line">      .param(<span class="string">"email"</span>, <span class="string">"john@yahoo.com"</span>)</div><div class="line">      .param(<span class="string">"verifyEmail"</span>, <span class="string">"john@yahoo.commmm"</span>)</div><div class="line">      .param(<span class="string">"password"</span>, <span class="string">"pass"</span>)</div><div class="line">      .param(<span class="string">"verifyPassword"</span>, <span class="string">"passsss"</span>))</div><div class="line">      .andExpect(model().errorCount(<span class="number">2</span>))</div><div class="line">      .andExpect(status().isOk());</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h2 id="10-Summary"><a href="#10-Summary" class="headerlink" title="10. Summary"></a><strong>10. Summary</strong></h2><p>在这篇快速的文章中，我们展示了如何创建自定义验证器来验证一个字段或类，并将它们连接到Spring MVC中。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/23/A Guide to the ViewResolver in Spring MVC/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/23/An Intro to the Spring DispatcherServlet/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">30</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">54</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Error Handling for REST with Spring | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,spring">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Error Handling for REST with Spring | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="spring"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-Overview"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Overview</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2-Solution-1-–-The-Controller-level-ExceptionHandler"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">2. Solution 1 – The Controller level @ExceptionHandler</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Error Handling for REST with Spring
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/spring/">spring</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/23/Error Handling for REST with Spring/" class="leancloud-views_num" data-flag-title="Error Handling for REST with Spring">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Error Handling for REST with Spring&url=http://yoursite.com//2017/06/23/Error Handling for REST with Spring/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Error Handling for REST with Spring&url=http://yoursite.com//2017/06/23/Error Handling for REST with Spring/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/23/Error Handling for REST with Spring/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/23/Error Handling for REST with Spring/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a><strong>1. Overview</strong></h1><p>本文将说明如何使用Spring为REST API实现异常处理。我们将在Spring 3.2和4.x中查看推荐的解决方案，但也可以使用较旧的选项。</p>
+<p>在Spring 3.2之前，在Spring MVC应用程序中处理异常的两种主要方法是：HandlerExceptionResolver或@ExceptionHandler注释。这两个都有一些明显的缺点。</p>
+<p>3.2之后，我们现在有了新的@ControllerAdvice注释来解决前面两个解决方案的局限性。</p>
+<p>所有这些都有一个共同点 - 他们处理分离问题非常好。应用程序可以正常抛出异常以指示某种类型的异常 - 然后将单独处理异常。</p>
+<h2 id="2-Solution-1-–-The-Controller-level-ExceptionHandler"><a href="#2-Solution-1-–-The-Controller-level-ExceptionHandler" class="headerlink" title="2. Solution 1 – The Controller level @ExceptionHandler"></a><strong>2. Solution 1 – The Controller level @ExceptionHandler</strong></h2><p>第一个解决方案在@Controller级别工作 - 我们将定义一个方法来处理异常，并用@ExceptionHandler注释它：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</div><div class="line">     </div><div class="line">    <span class="comment">//...</span></div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123; CustomException1.class, CustomException2.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleException</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">//</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种方法有一个主要的缺点 - @ExceptionHandler注释方法只对该特定的Controller有效，而不是整个应用程序的全局。当然，将它添加到每个控制器中使得它不适合一般的异常处理机制。</p>
+<p>通过让所有的控制器扩展一个基本控制器类，这个限制通常会被解决 - 但是，无论何种原因，控制器都不能从这样一个类扩展，这可能是一个问题。例如，控制器可能已经从可能在另一个jar中的另一个基类扩展或者不可直接修改，或者本身不能直接修改。</p>
+<p>接下来，我们将看另一种方法来解决异常处理问题 - 一个是全局的，不包括对现有工件（如Controllers）的任何更改。</p>
+<p><strong>3. Solution 2 – The HandlerExceptionResolver</strong></p>
+<p>第二个解决方案是定义一个HandlerExceptionResolver - 这将解决应用程序抛出的任何异常。它还将允许我们在REST API中实现一个统一的异常处理机制。 在进行自定义解析器之前，我们来看看现有的实现。</p>
+<p><strong>3.1. ExceptionHandlerExceptionResolver</strong></p>
+<p>该解析器在Spring 3.1中引入，默认情况下在DispatcherServlet中启用。这实际上是前面介绍的@ExceptionHandler机制的核心组件。</p>
+<p><strong>3.2. DefaultHandlerExceptionResolver</strong></p>
+<p>该解析器在Spring 3.0中引入，默认情况下在DispatcherServlet中启用。它用于将标准Spring异常解析为相应的HTTP状态代码，即客户端错误 - 4xx和服务器错误 - 5xx状态代码。以下是它处理的Spring异常的完整列表，以及它们如何映射到状态代码。</p>
+<p>虽然它正确地设置了响应的状态代码，但一个限制是它没有对响应的正文设置任何内容。对于REST API，状态代码实际上还没有足够的信息呈现给客户端 - 响应也必须拥有一个机构，以允许应用程序提供关于故障的其他信息。</p>
+<p>这可以通过使用ModelAndView配置View分辨率和渲染错误内容来解决，但解决方案显然不是最佳的 - 这就是Spring 3.2中提供了更好的选择的原因 - 我们将在本文的后半部分中讨论。</p>
+<p><strong>3.3. ResponseStatusExceptionResolver</strong></p>
+<p>此解析器也在Spring 3.0中引入，默认情况下在DispatcherServlet中启用。它的主要职责是使用可用于自定义异常的@ResponseStatus注释，并将这些异常映射到HTTP状态代码。</p>
+<p>这样的自定义异常可能如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>(value = HttpStatus.NOT_FOUND)</div><div class="line">publi <span class="class"><span class="keyword">class</span> <span class="title">ResourceNotFoundException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResourceNotFoundException</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResourceNotFoundException</span><span class="params">(String message, Throwable cause)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(message, cause);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResourceNotFoundException</span><span class="params">(String message)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(message);</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ResourceNotFoundException</span><span class="params">(Throwable cause)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(cause);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>与DefaultHandlerExceptionResolver相同，该解析器的处理方式受到响应的正文的限制 - 它会将状态代码映射到响应中，但主体仍为空。</p>
+<p><strong>3.4. SimpleMappingExceptionResolver and AnnotationMethodHandlerExceptionResolver</strong></p>
+<p>SimpleMappingExceptionResolver已经存在了一段时间 - 它来自较早的Spring MVC模型，并且与REST服务不是非常相关。它用于映射异常类名称以查看名称。</p>
+<p>AnnotationMethodHandlerExceptionResolver在Spring 3.0中引入，通过@ExceptionHandler注释来处理异常，但是从Spring 3.2开始，ExceptionHandlerExceptionResolver已经不推荐使用。</p>
+<p><strong>3.5. Custom HandlerExceptionResolver</strong></p>
+<p>DefaultHandlerExceptionResolver和ResponseStatusExceptionResolver的组合对于为Spring RESTful服务提供一个很好的错误处理机制有很大的帮助。如前所述，缺点是无法控制响应的内容。</p>
+<p>理想情况下，我们希望能够输出JSON或XML，具体取决于客户端要求的格式（通过Accept标头）。</p>
+<p>下面来证明创建一个新的，自定义的异常解决</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">@Component</div><div class="line">public class RestResponseStatusExceptionResolver extends AbstractHandlerExceptionResolver &#123;</div><div class="line"> </div><div class="line">    @Override</div><div class="line">    protected ModelAndView doResolveException</div><div class="line">      (HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) &#123;</div><div class="line">        try &#123;</div><div class="line">            if (ex instanceof IllegalArgumentException) &#123;</div><div class="line">                return handleIllegalArgument((IllegalArgumentException) ex, response, handler);</div><div class="line">            &#125;</div><div class="line">            ...</div><div class="line">        &#125; catch (Exception handlerException) &#123;</div><div class="line">            logger.warn("Handling of [" + ex.getClass().getName() + "] </div><div class="line">              resulted in Exception", handlerException);</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    private ModelAndView handleIllegalArgument</div><div class="line">      (IllegalArgumentException ex, HttpServletResponse response) throws IOException &#123;</div><div class="line">        response.sendError(HttpServletResponse.SC_CONFLICT);</div><div class="line">        String accept = request.getHeader(HttpHeaders.ACCEPT);</div><div class="line">        ...</div><div class="line">        return new ModelAndView();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>要注意的一个细节是请求本身可用，因此应用程序可以考虑客户端发送的Accept标头的值。例如，如果客户端要求application / json，则在出现错误的情况下，应用程序仍然应该返回用application / json编码的响应主体。</p>
+<p>另一个重要的实现细节是返回一个ModelAndView - 这是响应的正文，它将允许应用程序设置它所需的任何内容。</p>
+<p>这种方法是用于Spring REST服务的错误处理的一致且易于配置的机制。然而，它有限制：它与低级别的HtttpServletResponse进行交互，它适合使用ModelAndView的旧MVC模型，因此仍有改进的余地。</p>
+<p><strong>4. New Solution 3 – The New @ControllerAdvice (Spring 3.2 And Above)</strong></p>
+<p>Spring 3.2使用新的@ControllerAdvice注释来支持全局@ExceptionHandler。这使得能够脱离旧的MVC模型的机制，并使用ResponseEntity以及@ExceptionHandler的类型安全性和灵活性：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestResponseEntityExceptionHandler</span> <span class="keyword">extends</span> <span class="title">ResponseEntityExceptionHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(value = &#123; IllegalArgumentException.class, IllegalStateException.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">protected</span> ResponseEntity&lt;Object&gt; <span class="title">handleConflict</span><span class="params">(RuntimeException ex, WebRequest request)</span> </span>&#123;</div><div class="line">        String bodyOfResponse = <span class="string">"This should be application specific"</span>;</div><div class="line">        <span class="keyword">return</span> handleExceptionInternal(ex, bodyOfResponse, </div><div class="line">          <span class="keyword">new</span> HttpHeaders(), HttpStatus.CONFLICT, request);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新的注释允许从之前的多个分散的@ExceptionHandler合并到一个单一的全局错误处理组件中。</p>
+<p>实际机制非常简单，但也非常灵活：</p>
+<ul>
+<li>它允许完全控制响应的body以及状态代码</li>
+<li>它允许将几个异常映射到相同的方法，一起处理</li>
+<li>它很好地利用了较新的RESTful ResposeEntity响应</li>
+</ul>
+<p>需要注意的一件事是匹配用@ExceptionHandler声明的异常，并将异常用作该方法的参数。如果这些不匹配，编译器就不会抱怨 - 没有理由，Spring也不会抱怨。</p>
+<p>但是，当运行时实际抛出异常时，异常解析机制将失败</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">java<span class="selector-class">.lang</span><span class="selector-class">.IllegalStateException</span>: No suitable resolver <span class="keyword">for</span> argument [<span class="number">0</span>] [type=...]</div><div class="line">HandlerMethod <span class="selector-tag">details</span>: ...</div></pre></td></tr></table></figure>
+<p><strong>5. Handle the Access Denied in Spring Security</strong></p>
+<p>访问被拒绝发生在经过身份验证的用户尝试访问他没有足够权限访问的资源时。</p>
+<p><strong>5.1. MVC – Custom Error Page</strong></p>
+<p>首先，让我们来看看解决方案的MVC风格，看看如何自定义访问被拒绝的错误页面： XML配置：</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;http&gt;</div><div class="line">    &lt;intercept-url pattern="/admin/*" access="hasAnyRole('ROLE_ADMIN')"/&gt;   </div><div class="line">    ... </div><div class="line">    &lt;access-denied-handler error-page="/my-error-page" /&gt;</div><div class="line">&lt;/http&gt;</div></pre></td></tr></table></figure>
+<p>And the Java configuration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    http.authorizeRequests()</div><div class="line">        .antMatchers(<span class="string">"/admin/*"</span>).hasAnyRole(<span class="string">"ROLE_ADMIN"</span>)</div><div class="line">        ...</div><div class="line">        .and()</div><div class="line">        .exceptionHandling().accessDeniedPage(<span class="string">"/my-error-page"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当用户尝试访问资源而没有足够的权限时，他们将被重定向到“/ my-error-page”。</p>
+<figure class="highlight vbnet"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="number">5.2</span>. <span class="keyword">Custom</span> AccessDeniedHandler</div></pre></td></tr></table></figure>
+<p>Next, let’s see how to write our custom AccessDeniedHandler:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomAccessDeniedHandler</span> <span class="keyword">implements</span> <span class="title">AccessDeniedHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handle</span></span></div><div class="line">      <span class="params">(HttpServletRequest request, HttpServletResponse response, AccessDeniedException ex)</span> </div><div class="line">      <span class="keyword">throws</span> IOException, ServletException &#123;</div><div class="line">        response.sendRedirect(<span class="string">"/my-error-page"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And now let’s configure it using XML Configuration:</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;http&gt;</div><div class="line">    &lt;intercept-url pattern=<span class="string">"/admin/*"</span> access=<span class="string">"hasAnyRole('ROLE_ADMIN')"</span>/&gt; </div><div class="line">    ...</div><div class="line">    &lt;access-denied-handler <span class="keyword">ref</span>=<span class="string">"customAccessDeniedHandler"</span> /&gt;</div><div class="line">&lt;/http&gt;</div></pre></td></tr></table></figure>
+<p>或使用Java配置：@Autowired<br>private CustomAccessDeniedHandler accessDeniedHandler;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</div><div class="line">    http.authorizeRequests()</div><div class="line">        .antMatchers(<span class="string">"/admin/*"</span>).hasAnyRole(<span class="string">"ROLE_ADMIN"</span>)</div><div class="line">        ...</div><div class="line">        .and()</div><div class="line">        .exceptionHandling().accessDeniedHandler(accessDeniedHandler)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>请注意，在我们的CustomAccessDeniedHandler中，我们可以通过重定向或显示自定义错误消息来自定义响应。</p>
+<p><strong>5.3. REST and Method Level Security</strong></p>
+<p>最后，我们来看看如何处理方法级别的安全性@PreAuthorize，@PostAuthorize和@Secure访问被拒绝。</p>
+<p>我们当然会使用前面讨论过的全局异常处理机制来处理新的AccessDeniedException：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestResponseEntityExceptionHandler</span> <span class="keyword">extends</span> <span class="title">ResponseEntityExceptionHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123; AccessDeniedException.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Object&gt; <span class="title">handleAccessDeniedException</span><span class="params">(Exception ex, WebRequest request)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;Object&gt;(</div><div class="line">          <span class="string">"Access denied message here"</span>, <span class="keyword">new</span> HttpHeaders(), HttpStatus.FORBIDDEN);</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>6. Conclusion</strong></p>
+<p>本教程讨论了在Spring中实现REST API的异常处理机制的几种方法，从旧的机制开始，继续使用Spring 3.2支持，并进入4.0和4.1。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/23/Guide to Spring @Autowired/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/23/Introduction to Spring MVC HandlerInterceptor/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">30</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">54</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

@@ -4,6 +4,465 @@
 
     
   <url>
+    <loc>http://yoursite.com/2017/06/23/Building%20a%20REST%20API/</loc>
+    <lastmod>2017-06-23T01:35:24.019Z</lastmod>
+    <data>
+        <display>
+        <title>Building a REST API</title>
+        <pubTime>2017-06-23T01:35:23.944Z</pubTime>
+        
+        <tag>rest with spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Top%20Spring%20Framework%20Interview%20Questions/</loc>
+    <lastmod>2017-06-23T01:35:11.919Z</lastmod>
+    <data>
+        <display>
+        <title>Top Spring Framework Interview Questions</title>
+        <pubTime>2017-06-23T01:35:11.845Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/springboot%20actuator/</loc>
+    <lastmod>2017-06-23T01:35:06.133Z</lastmod>
+    <data>
+        <display>
+        <title>springboot actuator</title>
+        <pubTime>2017-06-23T01:35:06.064Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/springSecurity%20for%20a%20rest%20api/</loc>
+    <lastmod>2017-06-23T01:35:01.083Z</lastmod>
+    <data>
+        <display>
+        <title>springSecurity for a rest api</title>
+        <pubTime>2017-06-23T01:35:01.007Z</pubTime>
+        
+        <tag>springSecurity</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20DataIntegrityViolationException/</loc>
+    <lastmod>2017-06-23T01:34:48.721Z</lastmod>
+    <data>
+        <display>
+        <title>Spring DataIntegrityViolationException</title>
+        <pubTime>2017-06-23T01:34:48.649Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/No%20bean%20named%20%E2%80%98springSecurityFilterChain%E2%80%99%20is%20defined/</loc>
+    <lastmod>2017-06-23T01:34:43.575Z</lastmod>
+    <data>
+        <display>
+        <title>No bean named ‘springSecurityFilterChain’ is defined</title>
+        <pubTime>2017-06-23T01:34:43.494Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Guide%20to%20Spring%20NonTransientDataAccessException/</loc>
+    <lastmod>2017-06-23T01:34:38.804Z</lastmod>
+    <data>
+        <display>
+        <title>Guide to Spring NonTransientDataAccessException</title>
+        <pubTime>2017-06-23T01:34:38.735Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20NoSuchBeanDefinitionException/</loc>
+    <lastmod>2017-06-23T01:34:33.728Z</lastmod>
+    <data>
+        <display>
+        <title>Spring NoSuchBeanDefinitionException</title>
+        <pubTime>2017-06-23T01:34:33.660Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/13/Spring%20BeanCreationException/</loc>
+    <lastmod>2017-06-23T01:34:29.402Z</lastmod>
+    <data>
+        <display>
+        <title>Spring BeanCreationException</title>
+        <pubTime>2017-06-13T06:35:17.661Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Dependency%20Injection%20with%20Spring/</loc>
+    <lastmod>2017-06-23T01:34:23.494Z</lastmod>
+    <data>
+        <display>
+        <title>Dependency Injection with Spring</title>
+        <pubTime>2017-06-23T01:34:23.423Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Guide%20to%20Spring%20@Autowired/</loc>
+    <lastmod>2017-06-23T01:34:17.977Z</lastmod>
+    <data>
+        <display>
+        <title>Guide to Spring @Autowired</title>
+        <pubTime>2017-06-23T01:34:17.907Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Error%20Handling%20for%20REST%20with%20Spring/</loc>
+    <lastmod>2017-06-23T01:34:12.603Z</lastmod>
+    <data>
+        <display>
+        <title>Error Handling for REST with Spring</title>
+        <pubTime>2017-06-23T01:34:12.538Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Introduction%20to%20Spring%20MVC%20HandlerInterceptor/</loc>
+    <lastmod>2017-06-23T01:34:05.070Z</lastmod>
+    <data>
+        <display>
+        <title>Introduction to Spring MVC HandlerInterceptor</title>
+        <pubTime>2017-06-23T01:34:05.000Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Quick%20Guide%20to%20Spring%20Controllers/</loc>
+    <lastmod>2017-06-23T01:33:57.490Z</lastmod>
+    <data>
+        <display>
+        <title>Quick Guide to Spring Controllers</title>
+        <pubTime>2017-06-23T01:33:57.421Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20@RequestMapping%20New%20Shortcut%20Annotations/</loc>
+    <lastmod>2017-06-23T01:33:51.853Z</lastmod>
+    <data>
+        <display>
+        <title>Spring @RequestMapping New Shortcut Annotations</title>
+        <pubTime>2017-06-23T01:33:51.766Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20MVC%20and%20the%20@ModelAttribute%20Annotation/</loc>
+    <lastmod>2017-06-23T01:33:46.654Z</lastmod>
+    <data>
+        <display>
+        <title>Spring MVC and the @ModelAttribute Annotation</title>
+        <pubTime>2017-06-23T01:33:46.580Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Http%20Message%20Converters%20with%20the%20Spring%20Framework/</loc>
+    <lastmod>2017-06-23T01:33:40.502Z</lastmod>
+    <data>
+        <display>
+        <title>Http Message Converters with the Spring Framework</title>
+        <pubTime>2017-06-23T01:33:40.433Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/A%20Guide%20to%20the%20ViewResolver%20in%20Spring%20MVC/</loc>
+    <lastmod>2017-06-23T01:33:35.386Z</lastmod>
+    <data>
+        <display>
+        <title>A Guide to the ViewResolver in Spring MVC</title>
+        <pubTime>2017-06-23T01:33:35.297Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20MVC%20Custom%20Validation/</loc>
+    <lastmod>2017-06-23T01:33:29.825Z</lastmod>
+    <data>
+        <display>
+        <title>Spring MVC Custom Validation</title>
+        <pubTime>2017-06-23T01:33:29.759Z</pubTime>
+        
+        <tag>spring,springmvc</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/An%20Intro%20to%20the%20Spring%20DispatcherServlet/</loc>
+    <lastmod>2017-06-23T01:33:23.906Z</lastmod>
+    <data>
+        <display>
+        <title>An Intro to the Spring DispatcherServlet</title>
+        <pubTime>2017-06-23T01:33:23.838Z</pubTime>
+        
+        <tag>spring,springmvc</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/18/Implementing%20a%20Custom%20Spring%20AOP%20Annotation/</loc>
+    <lastmod>2017-06-23T01:33:12.007Z</lastmod>
+    <data>
+        <display>
+        <title>Implementing a Custom Spring AOP Annotation</title>
+        <pubTime>2017-06-18T14:55:13.900Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/%E5%A6%82%E4%BD%95%E8%8E%B7%E5%8F%96spring%E7%AE%A1%E7%90%86%E7%9A%84%E6%89%80%E6%9C%89%E7%9A%84bean/</loc>
+    <lastmod>2017-06-23T01:33:03.300Z</lastmod>
+    <data>
+        <display>
+        <title>How to Get All Spring-Managed Beans?</title>
+        <pubTime>2017-06-23T01:33:03.228Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20RequestMapping/</loc>
+    <lastmod>2017-06-23T01:32:07.368Z</lastmod>
+    <data>
+        <display>
+        <title>Spring RequestMapping</title>
+        <pubTime>2017-06-23T01:32:07.306Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Java%20Bean%20Validation%20Basics/</loc>
+    <lastmod>2017-06-23T01:31:54.971Z</lastmod>
+    <data>
+        <display>
+        <title>Java Bean Validation Basics</title>
+        <pubTime>2017-06-23T01:31:54.901Z</pubTime>
+        
+        <tag>java</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/%E4%BB%8B%E7%BB%8DSpring%20Remoting%E4%B8%8EHTTP%20Invokers/</loc>
+    <lastmod>2017-06-23T01:31:46.295Z</lastmod>
+    <data>
+        <display>
+        <title>介绍Spring Remoting与HTTP Invokers</title>
+        <pubTime>2017-06-23T01:31:46.226Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Introduction%20to%20RabbitMQ/</loc>
+    <lastmod>2017-06-23T01:31:38.782Z</lastmod>
+    <data>
+        <display>
+        <title>Introduction to RabbitMQ</title>
+        <pubTime>2017-06-23T01:31:38.721Z</pubTime>
+        
+        <tag>programming</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yoursite.com/2017/06/23/Spring%20Remoting%20with%20AMQP/</loc>
+    <lastmod>2017-06-23T01:31:31.207Z</lastmod>
+    <data>
+        <display>
+        <title>Spring Remoting with AMQP</title>
+        <pubTime>2017-06-23T01:31:31.068Z</pubTime>
+        
+        <tag>spring</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yoursite.com/2017/06/22/Spring%20YAML%20Configuration/</loc>
     <lastmod>2017-06-22T13:16:37.992Z</lastmod>
     <data>
@@ -38,23 +497,6 @@
 
     
   <url>
-    <loc>http://yoursite.com/2017/06/18/Implementing%20a%20Custom%20Spring%20AOP%20Annotation/</loc>
-    <lastmod>2017-06-18T14:55:13.995Z</lastmod>
-    <data>
-        <display>
-        <title>Implementing a Custom Spring AOP Annotation</title>
-        <pubTime>2017-06-18T14:55:13.900Z</pubTime>
-        
-        <tag>spring</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://yoursite.com/2017/06/18/Intro%20to%20AspectJ/</loc>
     <lastmod>2017-06-18T14:49:42.392Z</lastmod>
     <data>
@@ -63,23 +505,6 @@
         <pubTime>2017-06-18T14:49:42.156Z</pubTime>
         
         <tag>spring,aop</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://yoursite.com/2017/06/13/Spring%20BeanCreationException/</loc>
-    <lastmod>2017-06-13T06:35:18.048Z</lastmod>
-    <data>
-        <display>
-        <title>Spring BeanCreationException</title>
-        <pubTime>2017-06-13T06:35:17.661Z</pubTime>
-        
-        <tag>springException</tag>
          
          
            

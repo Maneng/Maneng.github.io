@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            An Intro to the Spring DispatcherServlet | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,spring,springmvc">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="An Intro to the Spring DispatcherServlet | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="spring,springmvc"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#1-Introduction"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Introduction</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#2-DispatcherServlet-Request-Processing"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. DispatcherServlet Request Processing</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#3-HandlerAdapter-Interfaces"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. HandlerAdapter Interfaces</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-1-Mappings"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">3.1. Mappings</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-2-HTTP-Request-Handling"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">3.2. HTTP Request Handling</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-3-The-ViewResolver-Interface"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3.3. The ViewResolver Interface</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-6-The-MultipartResolver-Interface"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">3.6. The MultipartResolver Interface</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#3-7-The-HandlerExceptionResolver-Interface"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">3.7. The HandlerExceptionResolver Interface</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                An Intro to the Spring DispatcherServlet
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/spring-springmvc/">spring,springmvc</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/23/An Intro to the Spring DispatcherServlet/" class="leancloud-views_num" data-flag-title="An Intro to the Spring DispatcherServlet">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=An Intro to the Spring DispatcherServlet&url=http://yoursite.com//2017/06/23/An Intro to the Spring DispatcherServlet/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=An Intro to the Spring DispatcherServlet&url=http://yoursite.com//2017/06/23/An Intro to the Spring DispatcherServlet/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/23/An Intro to the Spring DispatcherServlet/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/23/An Intro to the Spring DispatcherServlet/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a><strong>1. Introduction</strong></h1><p>简单地说，在前端控制器设计模式中，单个控制器负责将传入的HttpRequest引导到所有应用程序的其他控制器和处理程序。</p>
+<p>Spring的DispatcherServlet实现了这种模式，因此负责正确地协调HttpRequests到他们的右边处理程序。</p>
+<p>在本文中，我们将检查Spring DispatcherServlet的请求处理工作流程以及如何实现参与此工作流程的多个接口。</p>
+<h1 id="2-DispatcherServlet-Request-Processing"><a href="#2-DispatcherServlet-Request-Processing" class="headerlink" title="2. DispatcherServlet Request Processing"></a><strong>2. DispatcherServlet Request Processing</strong></h1><p>DispatcherServlet本质上处理传入的HttpRequest，委托请求，并根据在Spring应用程序中实现的配置的HandlerAdapter接口以及指定处理程序，控制器端点和响应对象的附注进行处理。</p>
+<p>让我们深入了解DispatcherServlet如何处理组件：</p>
+<ul>
+<li>在DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE下关联到DispatcherServlet的WebApplicationContext被搜索并提供给进程的所有元素</li>
+<li>DispatcherServlet发现使用getHandler（）为您的调度程序配置的HandlerAdapter接口的所有实现 - 每个发现和配置的实现都通过handle（）方法通过该进程的其余部分来处理请求</li>
+<li>LocaleResolver可选地绑定到请求，以使进程中的元素能够解析该区域设置</li>
+<li>ThemeResolver可选地绑定到请求，让元素（如视图）确定要使用哪个主题</li>
+<li>如果指定了MultipartResolver，则会为MultipartFiles检查该请求 - 任何找到的都包含在MultipartHttpServletRequest中以进一步处理</li>
+<li>在WebApplicationContext中声明的HandlerExceptionResolver实现在处理请求期间提取异常</li>
+</ul>
+<h1 id="3-HandlerAdapter-Interfaces"><a href="#3-HandlerAdapter-Interfaces" class="headerlink" title="3. HandlerAdapter Interfaces"></a><strong>3. HandlerAdapter Interfaces</strong></h1><p>HandlerAdapter接口有助于通过几个特定接口使用控制器，servlet，HttpRequests和HTTP路径。 HandlerAdapter接口因此通过DispatcherServlet请求处理工作流程的许多阶段起着至关重要的作用</p>
+<p>首先，每个HandlerAdapter实现都从调度器的getHandler（）方法放入HandlerExecutionChain中。然后，随着执行链的进行，这些实现中的每个实现都会处理（）HttpServletRequest对象。</p>
+<p>在以下部分中，我们将更详细地探讨一些最重要和最常用的HandlerAdapter。</p>
+<h2 id="3-1-Mappings"><a href="#3-1-Mappings" class="headerlink" title="3.1. Mappings"></a><strong>3.1. Mappings</strong></h2><p>要了解映射，我们需要先看看如何注释控制器，因为控制器对于HandlerMapping接口是至关重要的。</p>
+<p>SimpleControllerHandlerAdapter允许在没有@Controller注释的情况下显式地实现控制器。</p>
+<p>RequestMappingHandlerAdapter支持使用@RequestMapping注释注释的方法。 我们将在此处关注@Controller注释，但是也可以使用一些有用的资源，并使用SimpleControllerHandlerAdapter的几个示例。</p>
+<p>@RequestMapping注释设置与它相关联的WebApplicationContext中处理程序可用的特定端点。</p>
+<p>我们来看一个公开和处理’/ user / example’端点的控制器的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</div><div class="line"><span class="meta">@ResponseBody</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/example"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">fetchUserExample</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由@RequestMapping注释指定的路径通过HandlerMapping接口在内部进行管理。</p>
+<p>RL结构自然相对于DispatcherServlet本身，并由servlet映射确定。<br>因此，如果DispatcherServlet映射到“/”，则所有映射将被该映射覆盖。 但是，如果servlet映射是’/ dispatcher’，那么任何@RequestMapping注释都将与该根URL相关。</p>
+<p>记住’/‘与servlet映射的’/ *’不一样！ ‘/‘是默认映射，并将所有URL公开给调度员的责任区域。</p>
+<p>‘/ *’让许多较新的Spring开发者感到困惑。它没有指定具有相同URL上下文的所有路径都属于调度员的责任区域。相反，它会覆盖并忽略其他调度器映射。所以’/ example’将会成为404！</p>
+<p>因此，除非非常有限的情况（如配置过滤器），否则不应使用’/ *’。</p>
+<h2 id="3-2-HTTP-Request-Handling"><a href="#3-2-HTTP-Request-Handling" class="headerlink" title="3.2. HTTP Request Handling"></a><strong>3.2. HTTP Request Handling</strong></h2><p>DispatcherServlet的核心职责是将传入的HttpRequests发送到使用@Controller或@RestController注释指定的正确处理程序。</p>
+<p>作为旁注，@Controller和@RestController的主要区别是如何生成响应 - @RestController默认定义了@ResponseBody。</p>
+<p>在这里我们可以找到关于Spring控制器的更深入的写作。</p>
+<h2 id="3-3-The-ViewResolver-Interface"><a href="#3-3-The-ViewResolver-Interface" class="headerlink" title="3.3. The ViewResolver Interface"></a><strong>3.3. The ViewResolver Interface</strong></h2><p>ViewResolver作为ApplicationContext对象上的配置设置附加到DispatcherServlet。 ViewResolver确定调度员提供什么样的视图以及从哪里提供的视图。</p>
+<p>以下是我们将放入WebMvcConfigurerAdapter中以呈现JSP页面的示例配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.baeldung.springdispatcherservlet"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UrlBasedViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        UrlBasedViewResolver resolver</div><div class="line">          = <span class="keyword">new</span> UrlBasedViewResolver();</div><div class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</div><div class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line">        resolver.setViewClass(JstlView.class);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一个常见的问题是调度员的ViewResolver和整个项目目录结构的关联程度。我们来看看基础知识。</p>
+<p>以下是使用Spring的XML配置的InternalViewResolver的示例路径配置：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property <span class="attr">name="prefix"</span> <span class="attr">value="/jsp/"/&gt;</span></div></pre></td></tr></table></figure>
+<p>为了我们的例子，我们假设我们的应用程序正在托管在：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">http:</span><span class="comment">//localhost:8080/</span></div></pre></td></tr></table></figure>
+<p>这是本地托管的Apache Tomcat服务器的默认地址和端口。 假设我们的应用程序称为dispatcherexample-1.0.0，我们的JSP视图将可以从以下位置访问：</p>
+<blockquote>
+<p><a href="http://localhost:8080/dispatcherexample-1.0.0/jsp/" target="_blank" rel="external">http://localhost:8080/dispatcherexample-1.0.0/jsp/</a></p>
+</blockquote>
+<p>在Maven的普通Spring项目中，这些视图的路径是：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src -<span class="string">|</span></div><div class="line">     main -<span class="string">|</span></div><div class="line">            java</div><div class="line">            resources</div><div class="line">            webapp -<span class="string">|</span></div><div class="line">                    jsp</div><div class="line">                    WEB-INF</div></pre></td></tr></table></figure>
+<p>视图的默认位置在WEB-INF中。在上面的代码段中为我们的InternalViewResolver指定的路径确定了您的视图可用的“src / main / webapp”的子目录。</p>
+<h2 id="3-6-The-MultipartResolver-Interface"><a href="#3-6-The-MultipartResolver-Interface" class="headerlink" title="3.6. The MultipartResolver Interface"></a><strong>3.6. The MultipartResolver Interface</strong></h2><p>MultipartResolver实现检查多部分的请求，并将它们包装在MultipartHttpServletRequest中，以便在发现至少一个multipart的过程中进一步处理其他元素。添加到AppConfig：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> CommonsMultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> </span></div><div class="line">  <span class="keyword">throws</span> IOException &#123;</div><div class="line">    CommonsMultipartResolver resolver</div><div class="line">      = <span class="keyword">new</span> CommonsMultipartResolver();</div><div class="line">    resolver.setMaxUploadSize(<span class="number">10000000</span>);</div><div class="line">    <span class="keyword">return</span> resolver;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们已经配置了MultipartResolver bean，我们设置一个控制器来处理MultipartFile请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultipartController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    ServletContext context;</div><div class="line"> </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">FileuploadController</span><span class="params">(</span></span></div><div class="line">      @RequestParam(<span class="string">"file"</span>) MultipartFile file) </div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</div><div class="line">        InputStream in = file.getInputStream();</div><div class="line">        String path = <span class="keyword">new</span> File(<span class="string">"."</span>).getAbsolutePath();</div><div class="line">        FileOutputStream f = <span class="keyword">new</span> FileOutputStream(</div><div class="line">          path.substring(<span class="number">0</span>, path.length()-<span class="number">1</span>)</div><div class="line">          + <span class="string">"/uploads/"</span> + file.getOriginalFilename());</div><div class="line">        <span class="keyword">int</span> ch;</div><div class="line">        <span class="keyword">while</span> ((ch = in.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            f.write(ch);</div><div class="line">        &#125;</div><div class="line">        f.flush();</div><div class="line">        f.close();</div><div class="line">        modelAndView.getModel()</div><div class="line">          .put(<span class="string">"message"</span>, <span class="string">"File uploaded successfully!"</span>);</div><div class="line">        <span class="keyword">return</span> modelAndView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-7-The-HandlerExceptionResolver-Interface"><a href="#3-7-The-HandlerExceptionResolver-Interface" class="headerlink" title="3.7. The HandlerExceptionResolver Interface"></a><strong>3.7. The HandlerExceptionResolver Interface</strong></h2><p>Spring的HandlerExceptionResolver为整个Web应用程序，单个控制器或一组控制器提供统一的错误处理。</p>
+<p>要提供应用程序范围的自定义异常处理，请创建一个使用@ControllerAdvice注释的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleGlobalExceptionHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span></div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handleExampleException</span><span class="params">(Exception e)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用@ExceptionHandler注释的类中的任何方法将在调度员的责任区域内的每个控制器上都可用。</p>
+<p>DispatcherServlet的ApplicationContext中的HandlerExceptionResolver接口的实现可用于在使用@ExceptionHandler作为注释时拦截该调度程序的责任区域下的特定控制器，并将正确的类作为参数传入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123; CustomException1.class, CustomException2.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleException</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果发生异常CustomException1或CustomException2，handleException（）方法现在将作为上述示例中的FooController的异常处理程序。 这是一篇关于Spring Web应用程序中的异常处理的文章。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/23/Spring MVC Custom Validation/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/23/如何获取spring管理的所有的bean/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">30</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">54</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

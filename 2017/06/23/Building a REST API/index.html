@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            Building a REST API | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,rest with spring">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Building a REST API | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="rest with spring"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Build-a-REST-API-with-Spring-4-and-Java-Config"><span class="post-toc-number">1.</span> <span class="post-toc-text">Build a REST API with Spring 4 and Java Config</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#目录"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">目录</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Overview"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">Overview</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Understanding-REST-in-Spring"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Understanding REST in Spring</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-Java-configuration"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">The Java configuration</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Testing-the-Spring-context"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">Testing the Spring context</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#The-Controller"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">The Controller</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Mapping-the-HTTP-response-codes"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">Mapping the HTTP response codes</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Additional-Maven-dependencies"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">Additional Maven dependencies</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Conclusion"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Conclusion</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                Building a REST API
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/rest-with-spring/">rest with spring</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/23/Building a REST API/" class="leancloud-views_num" data-flag-title="Building a REST API">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Building a REST API&url=http://yoursite.com//2017/06/23/Building a REST API/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=Building a REST API&url=http://yoursite.com//2017/06/23/Building a REST API/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/23/Building a REST API/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/23/Building a REST API/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Build-a-REST-API-with-Spring-4-and-Java-Config"><a href="#Build-a-REST-API-with-Spring-4-and-Java-Config" class="headerlink" title="Build a REST API with Spring 4 and Java Config"></a><strong>Build a REST API with Spring 4 and Java Config</strong></h1><h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><ul>
+<li><strong>1.<a href="#overview">概述</a></strong></li>
+<li><strong>2.<a href="#understanding-REST-in-Spring">Understanding REST in Spring</a></strong></li>
+<li><strong>3.<a href="#the-Java-configuration"> The Java configuration</a></strong></li>
+<li><strong>4.<a href="#testing-the-Spring-context">Testing the Spring context</a></strong></li>
+<li><strong>5<a href="#the-Controller">The Controller</a></strong></li>
+<li><strong>6<a href="#mapping-the-HTTP-response-codes">Mapping the HTTP response codes</a></strong></li>
+<li><strong>7<a href="#additional-Maven-dependencies">Additional Maven dependencies</a></strong></li>
+<li><strong>8<a href="#the-Controller">Conclusion</a></strong></li>
+</ul>
+<hr>
+<h2 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h2><p>本文介绍如何在Spring中设置REST - 控制器和HTTP响应代码，有效载荷编组和内容协商的配置。<br>Spring框架支持创建RESTful服务的两种方式：</p>
+<ul>
+<li>using MVC with ModelAndView</li>
+<li>using HTTP message converters</li>
+</ul>
+<h2 id="Understanding-REST-in-Spring"><a href="#Understanding-REST-in-Spring" class="headerlink" title="Understanding REST in Spring"></a>Understanding REST in Spring</h2><p><strong>ModelAndView</strong>方法更旧，更好的记录，而且更详细并且它尝试将REST模式推向旧模式，<br>这不是没有问题。 Spring团队了解了这一点，并从Spring 3.0开始提供了一流的REST支持。<br>新方法基于<strong>HttpMessageConverter**</strong>和annotations**，更轻便，易于实施。配置是最小的，它为您提供RESTful服务所期望的默认设置。然而，关于文件，它是较新的，有点轻<br>那是什么呢，这个参考并不排除在这两种方法之间作出区分和权衡的方式，就应该是明确的。然而，这是在Spring 3.0之后构建RESTful服务的方式。</p>
+<h2 id="The-Java-configuration"><a href="#The-Java-configuration" class="headerlink" title="The Java configuration"></a>The Java configuration</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">WebConfig</span></span>&#123;</div><div class="line">   <span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>新的@EnableWebMvc注释有许多有用的东西 - 特别是在REST的情况下，<br>它会检测到类路径中存在Jackson和JAXB 2，并自动创建和注册默认的JSON和XML转换器。注释的功能等同于XML版本：</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;mvc:annotation-driven /&gt;</div></pre></td></tr></table></figure>
+<p>这是一个捷径，虽然在许多情况下可能有用，但并不完美。当需要更复杂的配置时，删除注释并直接扩展<strong>WebMvcConfigurationSupport</strong>。</p>
+<h2 id="Testing-the-Spring-context"><a href="#Testing-the-Spring-context" class="headerlink" title="Testing the Spring context"></a>Testing the Spring context</h2><p>从Spring 3.1开始，我们为@Configuration类提供了一流的测试支持：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@RunWith</span>( SpringJUnit4ClassRunner.class )</div><div class="line"><span class="meta">@ContextConfiguration</span>( classes = &#123; ApplicationConfig.class, PersistenceConfig.class &#125;,</div><div class="line"> loader = AnnotationConfigContextLoader.class )</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SpringTest</span></span>&#123;</div><div class="line"> </div><div class="line">   <span class="meta">@Test</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">whenSpringContextIsInstantiated_thenNoExceptions</span><span class="params">()</span></span>&#123;</div><div class="line">      <span class="comment">// When</span></div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Java配置类仅用<strong>@ContextConfiguration</strong>注释指定，<br>新的<strong>AnnotationConfigContextLoader</strong>从<strong>@Configuration</strong>类加载bean定义。</p>
+<p>请注意，WebConfig配置类未包含在测试中，因为它需要在未提供的Servlet上下文中运行。</p>
+<h2 id="The-Controller"><a href="#The-Controller" class="headerlink" title="The Controller"></a>The Controller</h2><p>@Controller是RESTful API整个Web层中的中心工件。为了这个帖子的目的，控制器正在建模一个简单的REST资源 - Foo：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@RequestMapping</span>( value = <span class="string">"/foos"</span> )</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</div><div class="line"> </div><div class="line">   <span class="meta">@Autowired</span></div><div class="line">   IFooService service;</div><div class="line"> </div><div class="line">   <span class="meta">@RequestMapping</span>( method = RequestMethod.GET )</div><div class="line">   <span class="meta">@ResponseBody</span></div><div class="line">   <span class="keyword">public</span> List&lt; Foo &gt; findAll()&#123;</div><div class="line">      <span class="keyword">return</span> service.findAll();</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@RequestMapping</span>( value = <span class="string">"/&#123;id&#125;"</span>, method = RequestMethod.GET )</div><div class="line">   <span class="meta">@ResponseBody</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Foo <span class="title">findOne</span><span class="params">( @PathVariable( <span class="string">"id"</span> )</span> Long id )</span>&#123;</div><div class="line">      <span class="keyword">return</span> RestPreconditions.checkFound( service.findOne( id ) );</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@RequestMapping</span>( method = RequestMethod.POST )</div><div class="line">   <span class="meta">@ResponseStatus</span>( HttpStatus.CREATED )</div><div class="line">   <span class="meta">@ResponseBody</span></div><div class="line">   <span class="function"><span class="keyword">public</span> Long <span class="title">create</span><span class="params">( @RequestBody Foo resource )</span></span>&#123;</div><div class="line">      Preconditions.checkNotNull( resource );</div><div class="line">      <span class="keyword">return</span> service.create( resource );</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@RequestMapping</span>( value = <span class="string">"/&#123;id&#125;"</span>, method = RequestMethod.PUT )</div><div class="line">   <span class="meta">@ResponseStatus</span>( HttpStatus.OK )</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">( @PathVariable( <span class="string">"id"</span> )</span> Long id, @RequestBody Foo resource )</span>&#123;</div><div class="line">      Preconditions.checkNotNull( resource );</div><div class="line">      RestPreconditions.checkNotNull( service.getById( resource.getId() ) );</div><div class="line">      service.update( resource );</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">   <span class="meta">@RequestMapping</span>( value = <span class="string">"/&#123;id&#125;"</span>, method = RequestMethod.DELETE )</div><div class="line">   <span class="meta">@ResponseStatus</span>( HttpStatus.OK )</div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">( @PathVariable( <span class="string">"id"</span> )</span> Long id )</span>&#123;</div><div class="line">      service.deleteById( id );</div><div class="line">   &#125;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>你可能已经注意到我正在使用一个非常简单的类似guava风格的RestPreconditions实用程序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RestPreconditions</span> </span>&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> &lt;T&gt; <span class="function">T <span class="title">checkFound</span><span class="params">(<span class="keyword">final</span> T resource)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (resource == <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> MyResourceNotFoundException();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> resource;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>控制器实现是非公开的 - 这是因为它不需要。通常，控制器是依赖关系链中的最后一个 - 它接收来自Spring前端控制器（DispathcerServlet）的HTTP请求，并将它们转发到服务层。如果没有使用情况，控制器必须通过直接引用注入或操纵，那么我不喜欢将其声明为公开的。</p>
+<p>请求映射是直接的 - 与任何控制器一样，映射的实际值以及HTTP方法都用于确定请求的目标方法。 @RequestBody会将方法的参数绑定到HTTP请求的正文，而@ResponseBody对响应和返回类型执行相同的操作。他们还确保使用正确的HTTP转换器对资源进行编组和解组。将进行内容协商，以选择将使用哪个主动转换器，主要基于Accept标头，尽管也可以使用其他HTTP标头来确定表示。</p>
+<h2 id="Mapping-the-HTTP-response-codes"><a href="#Mapping-the-HTTP-response-codes" class="headerlink" title="Mapping the HTTP response codes"></a>Mapping the HTTP response codes</h2><p>HTTP响应的状态代码是REST服务的最重要部分之一，并且主题可以快速变得非常复杂。获得这些权利可以是什么造成或破坏了服务。</p>
+<p><strong>1.Unmapped requests</strong><br>如果Spring MVC接收到没有映射的请求，则认为该请求不被允许，并返回一个405 METHOD NOT ALLOWED回到客户端。在向客户端返回405时，包含Allow HTTP头也是一个很好的做法，以便指定允许的操作。这是Spring MVC的标准行为，不需要任何其他配置。</p>
+<p><strong>2. Valid, mapped requests</strong></p>
+<p>对于任何具有映射的请求，如果没有指定其他状态代码，则Spring MVC将请求有效并以200 OK作为响应。正因为如此，控制器为创建，更新和删除操作声明不同的@ResponseStatus，而不是为get声明，这应该确实返回默认的200 OK。</p>
+<p><strong>2.Client error</strong><br>在客户端错误的情况下，自定义异常被定义并映射到相应的错误代码。简单地从Web层的任何层中抛出这些异常将确保Spring映射HTTP响应的相应状态代码。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ResponseStatus</span>( value = HttpStatus.BAD_REQUEST )</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BadRequestException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</div><div class="line">   <span class="comment">//</span></div><div class="line">&#125;</div><div class="line"><span class="meta">@ResponseStatus</span>( value = HttpStatus.NOT_FOUND )</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ResourceNotFoundException</span> <span class="keyword">extends</span> <span class="title">RuntimeException</span></span>&#123;</div><div class="line">   <span class="comment">//</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这些异常是REST API的一部分，因此应该仅在与REST相应的适当层中使用;如果存在DAO / DAL层，则不应直接使用该异常。还要注意，这些不是检查异常，而是运行时异常 - 符合Spring实践和习语。</p>
+<p><strong>4. Using @ExceptionHandler</strong><br>将自定义异常映射到特定状态代码的另一个选项是在控制器中使用@ExceptionHandler注释。该方法的问题是注释仅适用于定义在其中的控制器，而不适用于整个Spring Container，这意味着需要在每个控制器中单独声明。这很快变得麻烦，特别是在更复杂的应用程序中，许多控制器。此时与Spring打开的几个JIRA问题正在处理这个和其他相关的限制：SPR-8124，SPR-7278，SPR-8406。</p>
+<h2 id="Additional-Maven-dependencies"><a href="#Additional-Maven-dependencies" class="headerlink" title="Additional Maven dependencies"></a>Additional Maven dependencies</h2><p>除了标准Web应用程序所需的spring-webmvc依赖之外，还需要为REST API设置内容编组和解组合：</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">&lt;dependencies&gt;</div><div class="line">   &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;com.fasterxml.jackson.core&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;</div><div class="line">      &lt;version&gt;$&#123;jackson.version&#125;&lt;/version&gt;</div><div class="line">   &lt;/dependency&gt;</div><div class="line">   &lt;dependency&gt;</div><div class="line">      &lt;groupId&gt;javax.xml.bind&lt;/groupId&gt;</div><div class="line">      &lt;artifactId&gt;jaxb-api&lt;/artifactId&gt;</div><div class="line">      &lt;version&gt;$&#123;jaxb-api.version&#125;&lt;/version&gt;</div><div class="line">      &lt;scope&gt;runtime&lt;/scope&gt;</div><div class="line">   &lt;/dependency&gt;</div><div class="line">&lt;/dependencies&gt;</div><div class="line"> </div><div class="line">&lt;properties&gt;</div><div class="line">   &lt;jackson.version&gt;2.4.0&lt;/jackson.version&gt;</div><div class="line">   &lt;jaxb-api.version&gt;2.2.11&lt;/jaxb-api.version&gt;</div><div class="line">&lt;/properties&gt;</div></pre></td></tr></table></figure>
+<p>这些是用于将REST资源的表示转换为JSON或XML的库。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>本教程介绍了如何使用Spring 4和基于Java的配置来实现和配置REST服务，讨论HTTP响应代码，基本内容协商和编组。 在本系列的下一篇文章中，我将重点介绍API的可发现性，高级内容协商以及使用资源的附加表示。</p>
+<p>在<a href="https://github.com/eugenp/tutorials/tree/master/spring-all" target="_blank" rel="external">Github</a>项目中可以找到一些这些例外示例的实现<br>这是一个基于Eclipse的项目，所以应该很容易导入和运行。</p>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/23/Top Spring Framework Interview Questions/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">30</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">54</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>

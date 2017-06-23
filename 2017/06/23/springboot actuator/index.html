@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="zh">
+    <head>
+    <!-- 
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.3.0 -->
+
+    <!-- Title -->
+    
+    <title>
+        
+            springboot actuator | 
+        
+        Marnner
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/favicon.png">
+    <link rel="icon" sizes="192x192" href="/img/favicon.png">
+    <link rel="apple-touch-icon" href="/img/favicon.png">
+
+    <!-- Meta & Info -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0097A7">
+    <meta name="author" content="marnner">
+    <meta name="description" content="Just do it">
+    <meta name="keywords" content="null,spring">
+
+    <!--iOS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-title" content="Title">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="480">
+
+    <!-- Add to homescreen for Chrome on Android -->
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Add to homescreen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Marnner">
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="http://yoursite.com">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="springboot actuator | Marnner">
+    <meta property="og:description" content="Just do it">
+    <meta property="og:article:tag" content="spring"> 
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import CSS -->
+    <link rel="stylesheet" href="/css/material.min.css">
+    <link rel="stylesheet" href="/css/style.min.css">
+    <!-- Config CSS -->
+
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/queue.js"></script>
+
+    <!-- UC Browser Compatible -->
+    <script>
+        var agent = navigator.userAgent.toLowerCase();
+        if(agent.indexOf('ucbrowser')>0) {
+            document.write("<link rel=\"stylesheet\" href=\"/css/uc.css\">");
+            alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+        }
+    </script>
+
+    
+
+    
+
+    <!-- Bing Background -->
+    
+
+    <!-- Custom Head -->
+    
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    
+                        <!-- Hamburger Button -->
+                        <button class="MD-burger-icon sidebar-toggle">
+                            <span class="MD-burger-layer"></span>
+                        </button>
+                    
+
+                    <!-- Post TOC -->
+
+    
+    <!-- Back Button -->
+    <!--
+    <div class="material-back" id="backhome-div" tabindex="0">
+        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
+           href="#" onclick="window.history.back();return false;"
+           target="_self"
+           role="button"
+           data-upgraded=",MaterialButton,MaterialRipple">
+            <i class="material-icons" role="presentation">arrow_back</i>
+            <span class="mdl-button__ripple-container">
+                <span class="mdl-ripple"></span>
+            </span>
+        </a>
+    </div>
+    -->
+
+    <!-- Left aligned menu below button -->
+    <button id="post-toc-trigger-btn"
+        class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">format_list_numbered</i>
+    </button>
+
+    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn">
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Spring-Boot-Actuator-A-Complete-Guide"><span class="post-toc-number">1.</span> <span class="post-toc-text">Spring Boot Actuator: A Complete Guide</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#What-is-an-Actuator"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">What is an Actuator?</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#How-to-Enable-Spring-Boot-Actuator"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">How to Enable Spring Boot Actuator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Different-Actuator-Endpoints"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">Different Actuator Endpoints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Customizing-Existing-Endpoints"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">Customizing Existing Endpoints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#health-Endpoint"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">/health Endpoint</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-Custom-HealthIndicator"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">A Custom HealthIndicator</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#info-Endpoint"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">/info Endpoint</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#metrics-Endpoint"><span class="post-toc-number">1.8.</span> <span class="post-toc-text">/metrics Endpoint</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Custom-Metric-Data"><span class="post-toc-number">1.9.</span> <span class="post-toc-text">Custom Metric Data</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Create-A-New-Endpoint"><span class="post-toc-number">1.10.</span> <span class="post-toc-text">Create A New Endpoint</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#A-New-Endpoint-To-List-All-Endpoints"><span class="post-toc-number">1.11.</span> <span class="post-toc-text">A New Endpoint To List All Endpoints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Further-Customization"><span class="post-toc-number">1.12.</span> <span class="post-toc-text">Further Customization</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Securing-Actuator-Endpoints"><span class="post-toc-number">1.13.</span> <span class="post-toc-text">Securing Actuator Endpoints</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Creating-a-Custom-Actuator-Endpoint"><span class="post-toc-number">1.14.</span> <span class="post-toc-text">Creating a Custom Actuator Endpoint</span></a></li></ol></li></ol>
+
+        <!--
+        <li class="mdl-menu__item">
+            Some Action
+        </li>
+        -->
+    </ul>
+
+
+
+
+<!-- Layouts -->
+
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="material-post mdl-grid">
+            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                <!-- Post Header(Thumbnail & Title) -->
+                
+    <!-- Paradox Post Header -->
+    
+        
+            <!-- Random Thumbnail -->
+            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
+            <script>
+    var randomNum = Math.floor(Math.random() * 19 + 1);
+
+    $('.post_thumbnail-random').css('background-image', 'url(' + '/img/random/material-' + randomNum + '.png' + ')');
+</script>
+
+        
+    
+            <p class="article-headline-p">
+                springboot actuator
+            </p>
+        </div>
+
+
+
+
+
+                
+                    <!-- Paradox Post Info -->
+                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/avatar.png" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>marnner</strong>
+        <span>6月 23, 2017</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Qrcode -->
+    
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/spring/">spring</a>
+    </ul>
+    
+
+    <!-- Share -->
+    <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2017/06/23/springboot actuator/" class="leancloud-views_num" data-flag-title="springboot actuator">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=springboot actuator&url=http://yoursite.com//2017/06/23/springboot actuator/index.html&pic=&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+        <a class="post_share-link" href="https://twitter.com/intent/tweet?text=springboot actuator&url=http://yoursite.com//2017/06/23/springboot actuator/index.html&via=marnner" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Twitter
+            </li>
+        </a>
+    
+
+    <!-- Share Facebook -->
+    
+        <a class="post_share-link" href="https://www.facebook.com/sharer/sharer.php?u=http://yoursite.com//2017/06/23/springboot actuator/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Facebook
+            </li>
+        </a>
+    
+
+    <!-- Share Google+ -->
+    
+        <a class="post_share-link" href="https://plus.google.com/share?url=http://yoursite.com//2017/06/23/springboot actuator/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 Google+
+            </li>
+        </a>
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+
+</div>
+
+                
+
+                <!-- Post Content -->
+                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h1 id="Spring-Boot-Actuator-A-Complete-Guide"><a href="#Spring-Boot-Actuator-A-Complete-Guide" class="headerlink" title="Spring Boot Actuator: A Complete Guide"></a>Spring Boot Actuator: A Complete Guide</h1><p><strong>1. Overview</strong></p>
+<p>在本文中，我们将介绍Spring Boot Actuator，并讨论在生产过程中使用它们的一些简单方法。<br> 如果要对端点进行增强的控制，包括调整灵敏度和安全性，则应该熟悉Spring Boot Actuator及其工具。</p>
+<p>Spring Boot Actuator是Spring Boot的子项目。它为您的应用程序提供了几个生产级服务开箱即用，<br>一旦您的Spring Boot应用程序中配置了Actuator，您可以通过调用Spring Boot Actuator公开的不同HTTP端点来交互和监视应用程序，例如应用程序运行状况，bean详细信息，版本详细信息，配置，记录器详细信息等。</p>
+<p>Spring Boot包括许多内置端点，您还可以添加自己的或甚至配置现有端点，以暴露在您选择的任何自定义端点上。很明显，所有的端点都不能被公开曝光，因为有许多敏感端点，如bean，env等。</p>
+<p>因此，Spring Boot还会通过HTTP访问需要用户名/密码的许多端点（或者如果Web安全性未启用，则简单禁用），将敏感默认设置为true。健康和信息默认不敏感。</p>
+<h2 id="What-is-an-Actuator"><a href="#What-is-an-Actuator" class="headerlink" title="What is an Actuator?"></a>What is an Actuator?</h2><p>执行器使Spring Boot应用程序的生产就绪功能无需实际自动实现。<br>它们主要用于暴露有关正在运行的应用程序的不同类型的信息 - 健康，指标，信息，转储，环境等。虽然这些信息不能替代生产级监控解决方案 - 它们是一个非常好的起点。</p>
+<h2 id="How-to-Enable-Spring-Boot-Actuator"><a href="#How-to-Enable-Spring-Boot-Actuator" class="headerlink" title="How to Enable Spring Boot Actuator"></a>How to Enable Spring Boot Actuator</h2><p>这很容易您只需要在现有的pom.xml文件中包含以下maven依赖关系：</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-actuator<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="Different-Actuator-Endpoints"><a href="#Different-Actuator-Endpoints" class="headerlink" title="Different Actuator Endpoints"></a>Different Actuator Endpoints</h2><p>一旦上述Maven依赖关系包含在POM文件中，就会显示16个不同的执行器REST端点，例如执行器，bean，转储，信息，记录器和度量。</p>
+<p>端点允许您监视应用程序，在某些情况下也可以与其进行交互。该引导带有许多内置端点，并且像Spring中的任何东西一样，您也可以自己滚动。<br>这里有一些最常见的端点Boot提供开箱即用：</p>
+<ul>
+<li>/health – Shows application health information (a simple ‘status’ when accessed over an unauthenticated connection or full message details when authenticated). It is not sensitive by default.</li>
+<li>/info – Displays arbitrary application info. Not sensitive by default.</li>
+<li>metrics – Shows ‘metrics’ information for the current application. It is also sensitive by default.</li>
+<li>/trace – Displays trace information (by default the last few HTTP requests).</li>
+</ul>
+<p>如果您使用Spring MVC，那么还有四个附加端点</p>
+<blockquote>
+<p>docs，heapdump，jolokia和logfile可以使用。</p>
+</blockquote>
+<h2 id="Customizing-Existing-Endpoints"><a href="#Customizing-Existing-Endpoints" class="headerlink" title="Customizing Existing Endpoints"></a>Customizing Existing Endpoints</h2><p>Each endpoint can be customized with properties using the following format: endpoints.[endpoint name].[property to customize]</p>
+<p>有三个属性可用：</p>
+<ul>
+<li>id - 通过HTTP访问此端点</li>
+<li>enabled - 如果为真，那么能够访问否则不能访问</li>
+<li>sensitive - 如果为真，则需要授权来通过HTTP显示重要信息的</li>
+</ul>
+<p>例如，添加以下属性将自定义/ beans端点：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">endpoints<span class="selector-class">.beans</span><span class="selector-class">.id</span>=springbeans</div><div class="line">endpoints<span class="selector-class">.beans</span><span class="selector-class">.sensitive</span>=false</div><div class="line">endpoints<span class="selector-class">.beans</span><span class="selector-class">.enabled</span>=true</div></pre></td></tr></table></figure>
+<h2 id="health-Endpoint"><a href="#health-Endpoint" class="headerlink" title="/health Endpoint"></a>/health Endpoint</h2><p>/ health端点用于检查正在运行的应用程序的运行状况。基本的监控软件通常使用它来提醒您，如果生产下降。</p>
+<p>默认情况下只有健康信息能被未经授权HTTP进行显示为</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"status"</span> : <span class="string">"UP"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>此健康信息是从在应用程序上下文中配置的<strong>HealthIndicator</strong>接口的所有Bean收集的。<br><strong>HealthIndicator</strong>返回的一些信息本质上是敏感的 - 但是您可以配置<strong>endpoints.health.sensitive = false</strong>来公开其他信息，如磁盘空间，数据源等。</p>
+<h2 id="A-Custom-HealthIndicator"><a href="#A-Custom-HealthIndicator" class="headerlink" title="A Custom HealthIndicator"></a>A Custom HealthIndicator</h2><p>您还可以自定义运行状况指示器 - 它可以收集特定于应用程序的任何类型的自定义运行状况数据，并将其提供给/ health端点：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">HealthCheck</span> <span class="keyword">implements</span> <span class="title">HealthIndicator</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Health <span class="title">health</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> errorCode = check(); <span class="comment">// perform some specific health check</span></div><div class="line">        <span class="keyword">if</span> (errorCode != <span class="number">0</span>) &#123;</div><div class="line">            <span class="keyword">return</span> Health.down()</div><div class="line">              .withDetail(<span class="string">"Error Code"</span>, errorCode).build();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> Health.up().build();</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">check</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Your logic to check health</span></div><div class="line">        <span class="keyword">return</span> <span class="number">0</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"status"</span> : <span class="string">"DOWN"</span>,</div><div class="line">    <span class="attr">"myHealthCheck"</span> : &#123;</div><div class="line">        <span class="attr">"status"</span> : <span class="string">"DOWN"</span>,</div><div class="line">        <span class="attr">"Error Code"</span> : <span class="number">1</span>,</div><div class="line">        <span class="attr">"Description"</span> : <span class="string">"You custom MyHealthCheck endpoint is down"</span></div><div class="line">     &#125;,</div><div class="line">     <span class="attr">"diskSpace"</span> : &#123;</div><div class="line">         <span class="attr">"status"</span> : <span class="string">"UP"</span>,</div><div class="line">         <span class="attr">"free"</span> : <span class="number">209047318528</span>,</div><div class="line">         <span class="attr">"threshold"</span> : <span class="number">10485760</span></div><div class="line">     &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="info-Endpoint"><a href="#info-Endpoint" class="headerlink" title="/info Endpoint"></a>/info Endpoint</h2><p>您还可以自定义/ info端点显示的数据，例如：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">info<span class="selector-class">.app</span><span class="selector-class">.name</span>=Spring Sample Application</div><div class="line">info<span class="selector-class">.app</span><span class="selector-class">.description</span>=This is my first spring boot application</div><div class="line">info<span class="selector-class">.app</span><span class="selector-class">.version</span>=<span class="number">1.0</span>.<span class="number">0</span></div></pre></td></tr></table></figure>
+<p>输出是：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"app"</span> : &#123;</div><div class="line">        <span class="attr">"version"</span> : <span class="string">"1.0.0"</span>,</div><div class="line">        <span class="attr">"description"</span> : <span class="string">"This is my first spring boot application"</span>,</div><div class="line">        <span class="attr">"name"</span> : <span class="string">"Spring Sample Application"</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="metrics-Endpoint"><a href="#metrics-Endpoint" class="headerlink" title="/metrics Endpoint"></a>/metrics Endpoint</h2><p>指标端点是收集和发布有关操作系统，JVM和应用程序级度量信息的更重要的端点之一;开箱即用，我们可以得到内存，堆，处理器，线程，加载的类，卸载的类，线程池以及一些HTTP指标。</p>
+<p>这个端点的输出看起来像这样：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"mem"</span> : <span class="number">193024</span>,</div><div class="line">    <span class="attr">"mem.free"</span> : <span class="number">87693</span>,</div><div class="line">    <span class="attr">"processors"</span> : <span class="number">4</span>,</div><div class="line">    <span class="attr">"instance.uptime"</span> : <span class="number">305027</span>,</div><div class="line">    <span class="attr">"uptime"</span> : <span class="number">307077</span>,</div><div class="line">    <span class="attr">"systemload.average"</span> : <span class="number">0.11</span>,</div><div class="line">    <span class="attr">"heap.committed"</span> : <span class="number">193024</span>,</div><div class="line">    <span class="attr">"heap.init"</span> : <span class="number">124928</span>,</div><div class="line">    <span class="attr">"heap.used"</span> : <span class="number">105330</span>,</div><div class="line">    <span class="attr">"heap"</span> : <span class="number">1764352</span>,</div><div class="line">    <span class="attr">"threads.peak"</span> : <span class="number">22</span>,</div><div class="line">    <span class="attr">"threads.daemon"</span> : <span class="number">19</span>,</div><div class="line">    <span class="attr">"threads"</span> : <span class="number">22</span>,</div><div class="line">    <span class="attr">"classes"</span> : <span class="number">5819</span>,</div><div class="line">    <span class="attr">"classes.loaded"</span> : <span class="number">5819</span>,</div><div class="line">    <span class="attr">"classes.unloaded"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"gc.ps_scavenge.count"</span> : <span class="number">7</span>,</div><div class="line">    <span class="attr">"gc.ps_scavenge.time"</span> : <span class="number">54</span>,</div><div class="line">    <span class="attr">"gc.ps_marksweep.count"</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">"gc.ps_marksweep.time"</span> : <span class="number">44</span>,</div><div class="line">    <span class="attr">"httpsessions.max"</span> : <span class="number">-1</span>,</div><div class="line">    <span class="attr">"httpsessions.active"</span> : <span class="number">0</span>,</div><div class="line">    <span class="attr">"counter.status.200.root"</span> : <span class="number">1</span>,</div><div class="line">    <span class="attr">"gauge.response.root"</span> : <span class="number">37.0</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Custom-Metric-Data"><a href="#Custom-Metric-Data" class="headerlink" title="Custom Metric Data"></a>Custom Metric Data</h2><p>这里实际上支持’<strong>gauge</strong>‘ - 单值数据和’<strong>counter</strong>‘ - 递增/递减数据类型的度量。我们利用一些这样的支持来将我们自己的自定义数据实现到/ metrics端点。</p>
+<p>例如 - 我们将自定义登录流程以记录成功和失败的日志尝试：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">LoginService</span> </span>&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">login</span><span class="params">(String userName, <span class="keyword">char</span>[] password)</span></span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>真正实现的时候，我们来增加相应的计数器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginServiceImpl</span> <span class="keyword">implements</span> <span class="title">LoginService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> CounterService counterService;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoginServiceImpl</span><span class="params">(CounterService counterService)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.counterService = counterService;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">login</span><span class="params">(String userName, <span class="keyword">char</span>[] password)</span> </span>&#123;</div><div class="line">        <span class="keyword">boolean</span> success;</div><div class="line">        <span class="keyword">if</span> (userName.equals(<span class="string">"admin"</span>) &amp;&amp; <span class="string">"secret"</span>.toCharArray().equals(password)) &#123;</div><div class="line">            counterService.increment(<span class="string">"counter.login.success"</span>);</div><div class="line">            success = <span class="keyword">true</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">else</span> &#123;</div><div class="line">            counterService.increment(<span class="string">"counter.login.failure"</span>);</div><div class="line">            success = <span class="keyword">false</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> success;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以下是输出的内容：</p>
+<figure class="highlight r"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="keyword">...</span></div><div class="line">    <span class="string">"counter.login.success"</span> : <span class="number">105</span>,</div><div class="line">    <span class="string">"counter.login.failure"</span> : <span class="number">12</span>,</div><div class="line">    <span class="keyword">...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Create-A-New-Endpoint"><a href="#Create-A-New-Endpoint" class="headerlink" title="Create A New Endpoint"></a>Create A New Endpoint</h2><p>除了使用Spring Boot提供的现有端点外，您还可以创建一个全新的端点。 首先 - 您需要使新的端点实现实现Endpoint<t> interface:</t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CustomEndpoint</span> <span class="keyword">implements</span> <span class="title">Endpoint</span>&lt;<span class="title">List</span>&lt;<span class="title">String</span>&gt;&gt; </span>&#123;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getId</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"customEndpoint"</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEnabled</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isSensitive</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;String&gt; <span class="title">invoke</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Custom logic to build the output</span></div><div class="line">        List&lt;String&gt; messages = <span class="keyword">new</span> ArrayList&lt;String&gt;();</div><div class="line">        messages.add(<span class="string">"This is message 1"</span>);</div><div class="line">        messages.add(<span class="string">"This is message 2"</span>);</div><div class="line">        <span class="keyword">return</span> messages;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>访问此新端点的方式是其id，在/ customEndpoint。 输出：</p>
+<blockquote>
+<p>[ “This is message 1”, “This is message 2” ]</p>
+</blockquote>
+<h2 id="A-New-Endpoint-To-List-All-Endpoints"><a href="#A-New-Endpoint-To-List-All-Endpoints" class="headerlink" title="A New Endpoint To List All Endpoints"></a>A New Endpoint To List All Endpoints</h2><p>另一个有趣的定制端点是暴露所有可用端点的定制端点。要实现这个，你需要扩展AbstractEndpoint <t>类：</t></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ListEndpoints</span> <span class="keyword">extends</span> <span class="title">AbstractEndpoint</span>&lt;<span class="title">List</span>&lt;<span class="title">Endpoint</span>&gt;&gt; </span>&#123;</div><div class="line">    <span class="keyword">private</span> List&lt;Endpoint&gt; endpoints;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ListEndpoints</span><span class="params">(List&lt;Endpoint&gt; endpoints)</span> </span>&#123;</div><div class="line">        <span class="keyword">super</span>(<span class="string">"listEndpoints"</span>);</div><div class="line">        <span class="keyword">this</span>.endpoints = endpoints;</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> List&lt;Endpoint&gt; <span class="title">invoke</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.endpoints;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>输出如下所示：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div></pre></td><td class="code"><pre><div class="line">[ </div><div class="line">   &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"customEndpoint"</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"mappings"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"env"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"myhealth"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"timeToLive"</span> : <span class="number">1000</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"beans"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"info"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">false</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"metrics"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"trace"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"dump"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"autoconfig"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"shutdown"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125;, &#123;</div><div class="line">       <span class="attr">"id"</span> : <span class="string">"configprops"</span>,</div><div class="line">       <span class="attr">"sensitive"</span> : <span class="literal">true</span>,</div><div class="line">       <span class="attr">"enabled"</span> : <span class="literal">true</span></div><div class="line">    &#125; </div><div class="line">]</div></pre></td></tr></table></figure>
+<h2 id="Further-Customization"><a href="#Further-Customization" class="headerlink" title="Further Customization"></a>Further Customization</h2><p>为了安全起见，您可以选择通过非标准端口公开执行器端点 - 可以轻松地使用manage.port属性进行配置。</p>
+<p>您还可以更改management.address属性以限制通过网络访问端点的位置：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">management.<span class="attr">port=8081</span></div><div class="line">management.<span class="attr">address=127.0.0.1</span></div><div class="line">management.security.<span class="attr">enabled=false</span></div></pre></td></tr></table></figure>
+<p>默认情况下，除/ info之外的所有内置端点都很敏感。如果应用程序使用Spring Security，您可以通过在application.properties文件中定义默认安全属性（用户名，密码和角色）来保护这些端点：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">security<span class="selector-class">.user</span><span class="selector-class">.name</span>=admin</div><div class="line">security<span class="selector-class">.user</span><span class="selector-class">.password</span>=secret</div><div class="line">management<span class="selector-class">.security</span><span class="selector-class">.role</span>=SUPERUSER</div></pre></td></tr></table></figure>
+<p>除此之外，您还可以自定义全局端点。以下示例将所有端点标记为敏感的，信息除外。</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">endpoints.<span class="attr">sensitive=true</span></div><div class="line">endpoints.info.<span class="attr">sensitive=false</span></div></pre></td></tr></table></figure>
+<h2 id="Securing-Actuator-Endpoints"><a href="#Securing-Actuator-Endpoints" class="headerlink" title="Securing Actuator Endpoints"></a>Securing Actuator Endpoints</h2><p>正如我们所看到的，只有两个端点，健康和信息，默认情况下不敏感。但是其他端点（如记录器和bean）是敏感的，因此需要授权才能访问。要访问这些敏感端点，您可以禁用灵敏度或使用Spring Security进行保护。</p>
+<p>要确保加强执行器端点的安全，请在您的pom.xml文件中包含以下maven依赖关系。</p>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-security<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>在Spring Boot中，包括上述依赖关系将默认提供内置的基于用户身份的基于表单的身份验证和随机生成的密码。然后需要以下条目来启用敏感端点的基本安全性。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">management<span class="selector-class">.security</span><span class="selector-class">.enabled</span>=true</div><div class="line">security<span class="selector-class">.basic</span><span class="selector-class">.enabled</span>=true</div><div class="line">security<span class="selector-class">.user</span><span class="selector-class">.name</span>=admin</div><div class="line">security<span class="selector-class">.user</span><span class="selector-class">.password</span>=admin</div></pre></td></tr></table></figure>
+<p>要访问执行器限制的端点，必须具有<strong>ACTUATOR</strong>角色。它是一个默认配置。</p>
+<p>除此之外，您还可以通过扩展Spring提供的<strong>WebSecurityConfigurerAdapter</strong>类来使用<strong>AuthenticationManagerBuilder</strong>来保护执行器REST端点。以下是使用<strong>AuthenticationManagerBuilder</strong>的完整实现。</p>
+<h2 id="Creating-a-Custom-Actuator-Endpoint"><a href="#Creating-a-Custom-Actuator-Endpoint" class="headerlink" title="Creating a Custom Actuator Endpoint"></a>Creating a Custom Actuator Endpoint</h2><p>Spring最好的一点是，它总是鼓励开发人员提出自己的配置和实现 - 这也是执行端点的情况。<br>要自定义端点并定义自己的端点，只需实现端点接口并覆盖其方法。就这样，你完成了自己的端点（<strong>endpoints</strong>）</p>
+<p>以下是在Spring Actuator中定义自定义端点的简单代码片段。它可以在<code>/ showendpoints</code>访问</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> org.springframework.boot.actuate.endpoint.<span class="type">AbstractEndpoint</span>;</div><div class="line"><span class="keyword">import</span> org.springframework.boot.actuate.endpoint.<span class="type">Endpoint</span>;</div><div class="line"><span class="keyword">import</span> org.springframework.stereotype.<span class="type">Component</span>;</div><div class="line"><span class="keyword">import</span> java.util.<span class="type">List</span>;</div><div class="line"><span class="meta">@Component</span></div><div class="line">public <span class="class"><span class="keyword">class</span> <span class="title">ListEndPoints</span> <span class="keyword">extends</span> <span class="title">AbstractEndpoint&lt;List&lt;Endpoint&gt;&gt;</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="type">List</span>&lt;<span class="type">Endpoint</span>&gt; endpoints;</div><div class="line">    public <span class="type">ListEndPoints</span>(<span class="type">List</span>&lt;<span class="type">Endpoint</span>&gt; endpoints) &#123;</div><div class="line">        <span class="keyword">super</span>(<span class="string">"showendpoints"</span>);</div><div class="line">        <span class="keyword">this</span>.endpoints = endpoints;</div><div class="line">    &#125;</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    public <span class="type">List</span>&lt;<span class="type">Endpoint</span>&gt; invoke() &#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.endpoints;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+    
+
+    
+</div>
+
+
+                
+
+                <!-- Post Comments -->
+                
+                    
+
+
+
+
+                
+            </div>
+
+            <!-- Post Prev & Next Nav -->
+            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <a href="/2017/06/23/Top Spring Framework Interview Questions/" id="post_nav-newer" class="prev-content">
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_back</i>
+            </button>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            新篇
+        </a>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <a href="/2017/06/23/springSecurity for a rest api/" id="post_nav-older" class="next-content">
+            旧篇
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                <i class="material-icons">arrow_forward</i>
+            </button>
+        </a>
+    
+</nav>
+
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image">
+        <img src="/img/avatar.png" alt="marnner's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
+        marnner@email.com
+        <b class="caret"></b>
+    </a>
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+                <li>
+                    <a href="marnner@qq.com" target="_blank" title="Email Me">
+                        
+                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
+                        
+                        Email Me
+                    </a>
+                </li>
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/" target="_self">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                    归档
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+            <li>
+                <a class="sidebar_archives-link" href="/archives/2017/06/">六月 2017<span class="sidebar_archives-count">30</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/05/">五月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/04/">四月 2017<span class="sidebar_archives-count">7</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/03/">三月 2017<span class="sidebar_archives-count">11</span></a>
+            </ul>
+        </li>
+        
+    
+
+    <!-- Categories  -->
+    
+        <li class="dropdown">
+            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+                <b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+                <li>
+                
+            </ul>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/about" title="关于">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                标签
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+        <li>
+            <a href="/archives">
+                文章总数
+                <span class="sidebar-badge">54</span>
+            </a>
+        </li>
+        
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+    <div class="sidebar-divider"></div>
+
+
+<!-- Theme Material -->
+
+    <a href="https://github.com/viosey/hexo-theme-material"  class="sidebar-footer-text-a" target="_blank">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+            主题 - Material
+            <span class="sidebar-badge badge-circle">i</span>
+        </div>
+    </a>
+
+
+<!-- Help & Support -->
+<!--
+
+-->
+
+<!-- Feedback -->
+<!--
+
+-->
+
+<!-- About Theme -->
+<!--
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+    <span id="footer-image">
+        <a href="https://www.upyun.com/" target="_blank" title="upyun_logo">
+            <img src="/img/upyun_logo.png" alt="upyun_logo">
+        </a>
+    </span>
+
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <div class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+        <a href="https://twitter.com/twitter" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-twitter.png);">
+                <span class="visuallyhidden">Twitter</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Facebook -->
+    
+        <a href="https://www.facebook.com/facebook" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-facebook.png);">
+                <span class="visuallyhidden">Facebook</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Google + -->
+    
+        <a href="https://www.google.com/" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn" style="background-image: url(/img/footer/footer_ico-gplus.png);">
+                <span class="visuallyhidden">Google Plus</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Weibo -->
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;
+            <script type="text/javascript">
+                var fd = new Date();
+                document.write(fd.getFullYear());
+            </script>
+            &nbsp;Marnner
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import File -->
+<script src="/js/lazyload.min.js"></script>
+<script src="/js/js.min.js"></script>
+<script src="/js/nprogress.js"></script>
+
+<script type="text/javascript">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('OoSlDSbIliFRAyiYasybSCBF-gzGzoHsz', 'wBoYp7LTE4ztlVNlSlVyd3by');
+    </script>
+    <script>
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- Swiftye -->
+
+
+<!-- Local Search-->
+
+
+<!-- Window Load-->
+<script>
+    $(window).load(function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+</script>
+
+<!-- MathJax Load-->
+
+
+                </main>
+            </div>
+        </body>
+    
+</html>
