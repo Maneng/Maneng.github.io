@@ -154,6 +154,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-WebSocket Java API指南" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/WebSocket Java API指南/">WebSocket Java API指南</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/WebSocket Java API指南/" class="archive-article-date">
+  	<time datetime="2017-06-23T02:16:27.190Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>WebSocket提供了通过提供双向，全双工，实时客户端/服务器通信来限制服务器和Web浏览器之间的有效通信的备选方案。服务器可以随时向客户端发送数据。因为它运行在TCP上，它还提供低延迟低级别通信，并减少每个消息的开销。</p>
+<h2 id="2-JSR-356"><a href="#2-JSR-356" class="headerlink" title="2. JSR 356"></a><strong>2. JSR 356</strong></h2><p>JSR 356或Java API for WebSocket指定了Java开发人员可以将WebSockets与其应用程序集成在一起的API，无论是在服务器端还是Java客户端。 该Java API提供了服务器端和客户端组件：</p>
+<ul>
+<li>服务器：一切都在javax.websocket.server包。</li>
+<li>客户端：javax.websocket包的内容，由客户端API组成，也是服务器端和客户端的公共库。</li>
+</ul>
+<h2 id="3-使用WebSockets构建聊天"><a href="#3-使用WebSockets构建聊天" class="headerlink" title="3.使用WebSockets构建聊天"></a><strong>3.使用WebSockets构建聊天</strong></h2><p>我们将构建一个非常简单的聊天应用程序。任何用户都可以从任何浏览器打开聊天，输入他的名字，登录聊天，并开始与所有连接聊天的人进行通信。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.websocket<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.websocket-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>为了将Java对象转换成JSON表示，反之亦然，我们将使用Gson：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.gson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-1。端点配置"><a href="#3-1。端点配置" class="headerlink" title="3.1。端点配置"></a><strong>3.1。端点配置</strong></h3><p>配置端点有两种方法：基于注释和扩展。您可以扩展javax.websocket.Endpoint类或使用专用的方法级注释。由于与编程模型相比，注释模型导致更清晰的代码，注释已经成为常规的编码选择。在这种情况下，WebSocket端点生命周期事件由以下注释处理：</p>
+<ul>
+<li>@ServerEndpoint：如果使用@ServerEndpoint进行装饰，容器可以确保该类作为侦听特定URI空间的WebSocket服务器的可用性</li>
+<li>@ClientEndpoint：使用此注释装饰的类被视为WebSocket客户端</li>
+<li>@OnOpen：当启动新的WebSocket连接时，容器调用带有@OnOpen的Java方法</li>
+<li>@OnMessage：使用@OnMessage注释的Java方法在将消息发送到端点时从WebSocket容器接收信息</li>
+<li>@OnError：当通信出现问题时，会调用带有@OnError的方法</li>
+<li>@OnClose：用于装饰WebSocket连接关闭时由容器调用的Java方法</li>
+</ul>
+<h3 id="3-2。编写服务器端点"><a href="#3-2。编写服务器端点" class="headerlink" title="3.2。编写服务器端点"></a><strong>3.2。编写服务器端点</strong></h3><p>我们通过用@ServerEndpoint注释它来声明一个Java类WebSocket服务器端点。我们还指定端点部署的URI。 URI相对于服务器容器的根目录定义，必须以正斜杠开头：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>(value = <span class="string">"/chat/&#123;username&#125;"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatEndpoint</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@OnOpen</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// Get session and WebSocket connection</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnMessage</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Session session, Message message)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// Handle new messages</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnClose</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// WebSocket connection closes</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnError</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Session session, Throwable throwable)</span> </span>&#123;</div><div class="line">        <span class="comment">// Do error handling here</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码是我们类似聊天的应用程序的服务器端点骨架。如您所见，我们有4个注释映射到各自的方法。下面你可以看到这样的方法的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>(value=<span class="string">"/chat/&#123;username&#125;"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatEndpoint</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> Session session;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Set&lt;ChatEndpoint&gt; chatEndpoints </div><div class="line">      = <span class="keyword">new</span> CopyOnWriteArraySet&lt;&gt;();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, String&gt; users = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"> </div><div class="line">    <span class="meta">@OnOpen</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">(</span></span></div><div class="line">      Session session, </div><div class="line">      @PathParam(<span class="string">"username"</span>) String username) <span class="keyword">throws</span> IOException &#123;</div><div class="line">  </div><div class="line">        <span class="keyword">this</span>.session = session;</div><div class="line">        chatEndpoints.add(<span class="keyword">this</span>);</div><div class="line">        users.put(session.getId(), username);</div><div class="line"> </div><div class="line">        Message message = <span class="keyword">new</span> Message();</div><div class="line">        message.setFrom(username);</div><div class="line">        message.setContent(<span class="string">"Connected!"</span>);</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnMessage</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Session session, Message message)</span> </span></div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">  </div><div class="line">        message.setFrom(users.get(session.getId()));</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnClose</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">  </div><div class="line">        chatEndpoints.remove(<span class="keyword">this</span>);</div><div class="line">        Message message = <span class="keyword">new</span> Message();</div><div class="line">        message.setFrom(users.get(session.getId()));</div><div class="line">        message.setContent(<span class="string">"Disconnected!"</span>);</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnError</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Session session, Throwable throwable)</span> </span>&#123;</div><div class="line">        <span class="comment">// Do error handling here</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">broadcast</span><span class="params">(Message message)</span> </span></div><div class="line">      <span class="keyword">throws</span> IOException, EncodeException &#123;</div><div class="line">  </div><div class="line">        chatEndpoints.forEach(endpoint -&gt; &#123;</div><div class="line">            <span class="keyword">synchronized</span> (endpoint) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    endpoint.session.getBasicRemote().</div><div class="line">                      sendObject(message);</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException | EncodeException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当新用户登录时（@OnOpen）立即映射到活动用户的数据结构。然后，使用广播方法创建一条消息并发送到所有端点。</p>
+<p>当任何连接的用户发送新消息（@OnMessage）时，也会使用此方法 - 这是聊天的主要目的。</p>
+<p>如果在某些时候发生错误，则使用注释@OnError处理它的方法。您可以使用此方法记录有关错误的信息并清除端点。</p>
+<p>最后，当用户不再连接到聊天时，方法@OnClose清除端点并广播给用户已断开连接的所有用户。</p>
+<h2 id="4-消息类型"><a href="#4-消息类型" class="headerlink" title="4. 消息类型"></a><strong>4. 消息类型</strong></h2><p>WebSocket规范支持两种在线数据格式 - 文本和二进制。 API支持这两种格式，增加了使用Java对象的功能和规范中定义的运行状况检查消息（ping-pong）：</p>
+<ul>
+<li>文本：任何文本数据（java.lang.String，primitives或其等价的包装器类）</li>
+<li>二进制：由java.nio.ByteBuffer或byte []（字节数组）表示的二进制数据（例如音频，图像等）</li>
+<li>Java对象：API使您可以在代码中使用本机（Java对象）表示，并使用自定义变换器（编码器/解码器）将其转换为WebSocket协议允许的兼容在线格式（文本，二进制）</li>
+<li>Ping-Pong：一个javax.websocket.PongMessage是由一个WebSocket对等体响应健康检查（ping）请求发送的确认</li>
+</ul>
+<p>对于我们的应用程序，我们将使用Java对象。我们将创建用于编码和解码消息的类。</p>
+<p>###<strong>4.1. Encoder</strong></p>
+<p>编码器采用Java对象，并产生适合作为消息（如JSON，XML或二进制表示）传输的典型表示形式。可以通过实现Encoder.Text <t>或Encoder.Binary <t>接口来使用编码器。</t></t></p>
+<p>在下面的代码中，我们定义要编码的类Message，在编码方法中，我们使用Gson将Java对象编码为JSON</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String from;</div><div class="line">    <span class="keyword">private</span> String to;</div><div class="line">    <span class="keyword">private</span> String content;</div><div class="line">     </div><div class="line">    <span class="comment">//standard constructors, getters, setters</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageEncoder</span> <span class="keyword">implements</span> <span class="title">Encoder</span>.<span class="title">Text</span>&lt;<span class="title">Message</span>&gt; </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Gson gson = <span class="keyword">new</span> Gson();</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">encode</span><span class="params">(Message message)</span> <span class="keyword">throws</span> EncodeException </span>&#123;</div><div class="line">        <span class="keyword">return</span> gson.toJson(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(EndpointConfig endpointConfig)</span> </span>&#123;</div><div class="line">        <span class="comment">// Custom initialization logic</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Close resources</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-2-Decoder"><a href="#4-2-Decoder" class="headerlink" title="4.2. Decoder"></a><strong>4.2. Decoder</strong></h3><p>解码器与编码器相反，用于将数据转换回Java对象。解码器可以使用Decoder.Text <t>或Decoder.Binary <t>接口来实现。</t></t></p>
+<p>正如我们用编码器所看到的那样，解码方法是我们在发送到端点的消息中检索JSON，并使用Gson将其转换为一个名为Message的Java类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageDecoder</span> <span class="keyword">implements</span> <span class="title">Decoder</span>.<span class="title">Text</span>&lt;<span class="title">Message</span>&gt; </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Gson gson = <span class="keyword">new</span> Gson();</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">decode</span><span class="params">(String s)</span> <span class="keyword">throws</span> DecodeException </span>&#123;</div><div class="line">        <span class="keyword">return</span> gson.fromJson(s, Message.class);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">willDecode</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (s != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(EndpointConfig endpointConfig)</span> </span>&#123;</div><div class="line">        <span class="comment">// Custom initialization logic</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Close resources</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-3。在服务器端点设置编码器和解码器"><a href="#4-3。在服务器端点设置编码器和解码器" class="headerlink" title="4.3。在服务器端点设置编码器和解码器"></a><strong>4.3。在服务器端点设置编码器和解码器</strong></h3><p>让我们把所有的东西放在一起，在类级别注释@ServerEndpoint中添加为编码和解码数据而创建的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>( </div><div class="line">  value=<span class="string">"/chat/&#123;username&#125;"</span>, </div><div class="line">  decoders = MessageDecoder.class, </div><div class="line">  encoders = MessageEncoder.class )</div></pre></td></tr></table></figure>
+<p>每次将消息发送到端点时，它们将自动转换为JSON或Java对象。</p>
+<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a><strong>5. Conclusion</strong></h2><p>在本文中，我们研究了WebSockets的Java API以及如何帮助我们构建诸如此实时聊天之类的应用程序。</p>
+<p>我们看到了用于创建端点的两个编程模型：注释和编程。我们使用我们的应用程序的注释模型以及生命周期方法定义了一个端点。</p>
+<p>此外，为了能够在服务器和客户端之间进行通信，我们看到需要编码器和解码器将Java对象转换为JSON，反之亦然。</p>
+<p>JSR 356 API非常简单，并且基于注释的编程模型使构建WebSocket应用程序变得非常简单。</p>
+<p>要运行我们在示例中构建的应用程序，我们需要做的是将war文件部署在Web服务器中，并转到URL：http：// localhost：8080 / java-websocket /。您可以在这里找到存储库的链接<a href="&quot;https://github.com/eugenp/tutorials/tree/master/java-websocket&quot;">here</a>。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/WebSocket Java API指南/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Building a REST API" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1211,106 +1323,6 @@
 
 
   
-    <article id="post-Guide to Spring @Autowired" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/Guide to Spring @Autowired/">Guide to Spring @Autowired</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/23/Guide to Spring @Autowired/" class="archive-article-date">
-  	<time datetime="2017-06-23T01:34:17.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1.Overview"></a><strong>1.Overview</strong></h2><p>从Spring 2.5开始，该框架引入了由@Autowired注释驱动的新型依赖注入。此注释允许Spring解析并将bean注入到bean中。</p>
-<p>在本教程中，我们将介绍如何启用自动装配，以多种方式连接bean，使bean可选，使用@Qualifier注释解决bean冲突以及潜在的异常情况。</p>
-<h2 id="2-Enabling-Autowired-Annotations"><a href="#2-Enabling-Autowired-Annotations" class="headerlink" title="2. Enabling @Autowired Annotations"></a><strong>2. Enabling @Autowired Annotations</strong></h2><p>如果您在应用程序中使用基于Java的配置，则可以通过使用AnnotationConfigApplicationContext来加载spring配置来启用注释驱动的注入，如下所示：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.baeldung.autowire.sample"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
-<p>或者，在Spring XML中，可以通过在Spring XML文件中声明它来实现：<context：annotation-config></context：annotation-config></p>
-<h2 id="3-Using-Autowired"><a href="#3-Using-Autowired" class="headerlink" title="3. Using @Autowired"></a><strong>3. Using @Autowired</strong></h2><p>注释注入启用后，可以在属性，设置器和构造函数上使用自动装配。</p>
-<h2 id="3-1-Autowired-on-Properties"><a href="#3-1-Autowired-on-Properties" class="headerlink" title="3.1. @Autowired on Properties"></a><strong>3.1. @Autowired on Properties</strong></h2><p>注释可以直接用于属性，因此不需要getter和setter：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"fooFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在上面的例子中，Spring创建FooService时，寻找并注入fooFormatter。</p>
-<h2 id="3-2-Autowired-on-Setters"><a href="#3-2-Autowired-on-Setters" class="headerlink" title="3.2. @Autowired on Setters"></a><strong>3.2. @Autowired on Setters</strong></h2><p>@Autowired注释可以用于setter方法。在下面的示例中，当在setter方法上使用注释时，在创建FooService时，setter方法将使用FooFormatter的实例调用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFooFormatter</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.fooFormatter = fooFormatter;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-3-Autowired-on-Constructors"><a href="#3-3-Autowired-on-Constructors" class="headerlink" title="3.3. @Autowired on Constructors"></a><strong>3.3. @Autowired on Constructors</strong></h2><p>@Autowired注释也可以在构造函数上使用。在下面的示例中，当在构造函数上使用注释时，当创建FooService时，FooFormatter的实例将作为参数注入构造函数中：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooService</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.fooFormatter = fooFormatter;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="4-Autowired-and-Optional-Dependencies"><a href="#4-Autowired-and-Optional-Dependencies" class="headerlink" title="4. @Autowired and Optional Dependencies"></a><strong>4. @Autowired and Optional Dependencies</strong></h2><p>Spring希望在构建依赖bean时可以使用@Autowired依赖关系。如果框架无法解决用于装配的bean，它将抛出以下引用的异常并阻止Spring容器成功启动：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Caused <span class="string">by:</span> org.springframework.beans.factory.<span class="string">NoSuchBeanDefinitionException:</span> </div><div class="line">No qualifying bean of type [com.autowire.sample.FooDAO] found <span class="keyword">for</span> <span class="string">dependency:</span> </div><div class="line">expected at least <span class="number">1</span> bean which qualifies <span class="keyword">as</span> autowire candidate <span class="keyword">for</span> <span class="keyword">this</span> dependency. </div><div class="line">Dependency <span class="string">annotations:</span> </div><div class="line">&#123;<span class="meta">@org</span>.springframework.beans.factory.annotation.Autowired(required=<span class="literal">true</span>)&#125;</div></pre></td></tr></table></figure>
-<p>为了避免这种情况发生，可以通过以下指定bean：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span>(required = <span class="keyword">false</span>)</div><div class="line">    <span class="keyword">private</span> FooDAO dataAccessor; </div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="5-Autowire-Disambiguation-5-自动消除歧义"><a href="#5-Autowire-Disambiguation-5-自动消除歧义" class="headerlink" title="5. Autowire Disambiguation(5.自动消除歧义)"></a><strong>5. Autowire Disambiguation</strong>(5.自动消除歧义)</h2><p>默认情况下，Spring按类型解析@Autowired条目。如果同一类型的多个bean在容器中可用，则框架将抛出​​一个致命的异常，指示有多个bean可用于自动装配。</p>
-<h2 id="5-1-Autowiring-by-Qualifier"><a href="#5-1-Autowiring-by-Qualifier" class="headerlink" title="5.1. Autowiring by @Qualifier"></a><strong>5.1. Autowiring by @Qualifier</strong></h2><p>@Qualifier注释可用于提示和缩小所需的bean：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"fooFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Component</span>(<span class="string">"barFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"bar"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由于Spring容器可以使用两种格式化的实现，所以在构建FooService时，Spring会抛出一个NoUniqueBeanDefinitionException异常：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Caused by: org<span class="selector-class">.springframework</span><span class="selector-class">.beans</span><span class="selector-class">.factory</span><span class="selector-class">.NoUniqueBeanDefinitionException</span>: </div><div class="line">No qualifying bean of type [com<span class="selector-class">.autowire</span><span class="selector-class">.sample</span><span class="selector-class">.Formatter</span>] is defined: </div><div class="line">expected single matching bean but found <span class="number">2</span>: barFormatter,fooFormatter</div></pre></td></tr></table></figure>
-<p>这可以通过使用@Qualifier注释来缩小实现来避免：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="meta">@Qualifier</span>(<span class="string">"fooFormatter"</span>)</div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>通过使用具体实现的名称指定@Qualifier，在这种情况下，作为fooFormatter，当Spring找到同一类型的多个bean时，我们可以避免歧义。<br>请注意，@Qualifier注释的值与我们的FooFormatter实现的@Component注释中声明的名称相匹配。 5.2。自定义限定符自动装配</p>
-<p><strong>5.2. Autowiring by Custom Qualifier</strong> (自定义限定符自动装配)</p>
-<p>Spring允许我们创建我们自己的@Qualifier注释。要创建自定义限定符，请定义注释，并在定义中提供@Qualifier注释，如下所示</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Qualifier</span></div><div class="line"><span class="meta">@Target</span>(&#123;</div><div class="line">  ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FormatterType &#123;</div><div class="line">     </div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一旦定义，可以在各种实现中使用FormatterType来指定自定义值：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormatterType</span>(<span class="string">"Foo"</span>)</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormatterType</span>(<span class="string">"Bar"</span>)</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"bar"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一旦实现注释，自定义限定符注释可以如下使用：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="meta">@FormatterType</span>(<span class="string">"Foo"</span>)</div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>@Target注释中指定的值限制限定词可用于标记注入点的位置。 在上面的代码片段中，限定符可以用于消除Spring可以将bean注入到字段，方法，类型和参数中的点。</p>
-<h2 id="5-2-Autowiring-by-Name"><a href="#5-2-Autowiring-by-Name" class="headerlink" title="5.2. Autowiring by Name"></a><strong>5.2. Autowiring by Name</strong></h2><p>作为回馈，Spring使用bean名称作为默认限定符值。</p>
-<p>因此，通过定义bean属性名称，在这种情况下为fooFormatter，Spring与FooFormatter实现相匹配，并在构建FooService时注入该特定实现：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Formatter fooFormatter;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p><strong>6. Conclusion</strong><br>虽然@Qualifier和bean名称的后备匹配都可以用来缩小到一个特定的bean，但是自动装配实际上是关于按类型注入的，这是最好的方式来使用这个容器功能。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/23/Guide to Spring @Autowired/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1452,11 +1464,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">

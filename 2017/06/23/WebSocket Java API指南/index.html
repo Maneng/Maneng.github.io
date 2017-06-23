@@ -6,24 +6,21 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>深入理解Java虚拟机（目录） | Marnner</title>
+  <title>WebSocket Java API指南 | Marnner</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本书一共分为5个章节，13个小结第一部分 走进Java本书的第一部分为后文的讲解建立了良好的基础，尽管了解Java技术的来龙去脉，以及编译自己的OpenJDK对于读书理解Java虚拟机并不是必需的，但是这些准备可以过程可以为走进Java技术和虚拟机提供良好的引导，第一分部只有第一章：
-第一章介绍了Java技术体系的过去，现在和未来的一些发展趋势，并且介绍了如何独立的编译一个OpenJDK 7。
-第">
+  <meta name="description" content="1. 概述WebSocket提供了通过提供双向，全双工，实时客户端/服务器通信来限制服务器和Web浏览器之间的有效通信的备选方案。服务器可以随时向客户端发送数据。因为它运行在TCP上，它还提供低延迟低级别通信，并减少每个消息的开销。
+2. JSR 356JSR 356或Java API for WebSocket指定了Java开发人员可以将WebSockets与其应用程序集成在一起的API，无论是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="深入理解Java虚拟机（目录）">
-<meta property="og:url" content="http://yoursite.com/2017/03/17/深入理解Java虚拟机（目录）/index.html">
+<meta property="og:title" content="WebSocket Java API指南">
+<meta property="og:url" content="http://yoursite.com/2017/06/23/WebSocket Java API指南/index.html">
 <meta property="og:site_name" content="Marnner">
-<meta property="og:description" content="本书一共分为5个章节，13个小结第一部分 走进Java本书的第一部分为后文的讲解建立了良好的基础，尽管了解Java技术的来龙去脉，以及编译自己的OpenJDK对于读书理解Java虚拟机并不是必需的，但是这些准备可以过程可以为走进Java技术和虚拟机提供良好的引导，第一分部只有第一章：
-第一章介绍了Java技术体系的过去，现在和未来的一些发展趋势，并且介绍了如何独立的编译一个OpenJDK 7。
-第">
-<meta property="og:updated_time" content="2017-04-06T07:40:15.941Z">
+<meta property="og:description" content="1. 概述WebSocket提供了通过提供双向，全双工，实时客户端/服务器通信来限制服务器和Web浏览器之间的有效通信的备选方案。服务器可以随时向客户端发送数据。因为它运行在TCP上，它还提供低延迟低级别通信，并减少每个消息的开销。
+2. JSR 356JSR 356或Java API for WebSocket指定了Java开发人员可以将WebSockets与其应用程序集成在一起的API，无论是">
+<meta property="og:updated_time" content="2017-06-23T02:16:27.264Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="深入理解Java虚拟机（目录）">
-<meta name="twitter:description" content="本书一共分为5个章节，13个小结第一部分 走进Java本书的第一部分为后文的讲解建立了良好的基础，尽管了解Java技术的来龙去脉，以及编译自己的OpenJDK对于读书理解Java虚拟机并不是必需的，但是这些准备可以过程可以为走进Java技术和虚拟机提供良好的引导，第一分部只有第一章：
-第一章介绍了Java技术体系的过去，现在和未来的一些发展趋势，并且介绍了如何独立的编译一个OpenJDK 7。
-第">
+<meta name="twitter:title" content="WebSocket Java API指南">
+<meta name="twitter:description" content="1. 概述WebSocket提供了通过提供双向，全双工，实时客户端/服务器通信来限制服务器和Web浏览器之间的有效通信的备选方案。服务器可以随时向客户端发送数据。因为它运行在TCP上，它还提供低延迟低级别通信，并减少每个消息的开销。
+2. JSR 356JSR 356或Java API for WebSocket指定了Java开发人员可以将WebSockets与其应用程序集成在一起的API，无论是">
   
     <link rel="alternative" href="/atom.xml" title="Marnner" type="application/atom+xml">
   
@@ -159,45 +156,78 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-深入理解Java虚拟机（目录）" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-WebSocket Java API指南" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      深入理解Java虚拟机（目录）
+      WebSocket Java API指南
     </h1>
   
 
         
-        <a href="/2017/03/17/深入理解Java虚拟机（目录）/" class="archive-article-date">
-  	<time datetime="2017-03-17T02:48:59.770Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
+        <a href="/2017/06/23/WebSocket Java API指南/" class="archive-article-date">
+  	<time datetime="2017-06-23T02:16:27.190Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="本书一共分为5个章节，13个小结"><a href="#本书一共分为5个章节，13个小结" class="headerlink" title="本书一共分为5个章节，13个小结"></a>本书一共分为5个章节，13个小结</h1><h2 id="第一部分-走进Java"><a href="#第一部分-走进Java" class="headerlink" title="第一部分 走进Java"></a>第一部分 走进Java</h2><p>本书的第一部分为后文的讲解建立了良好的基础，尽管了解Java技术的来龙去脉，以及编译自己的OpenJDK对于读书理解Java虚拟机并不是必需的，但是这些准备可以过程可以为走进Java技术和虚拟机提供良好的引导，第一分部只有第一章：</p>
-<h3 id="第一章"><a href="#第一章" class="headerlink" title="第一章"></a>第一章</h3><pre><code>介绍了Java技术体系的过去，现在和未来的一些发展趋势，并且介绍了如何独立的编译一个OpenJDK 7。
-</code></pre><h2 id="第二部分-自动内存管理机制"><a href="#第二部分-自动内存管理机制" class="headerlink" title="第二部分 自动内存管理机制"></a>第二部分 自动内存管理机制</h2><p>因为程序员把内存控制的权利交给了Java虚拟机，所以可以在编码的时候享受自动内存管理的诸多优势，不过也正是这个原因，一旦出现内存泄漏和溢出得问题，如果不了解虚拟机是怎样使用内存的，那么排查错误将会成为一项艰难的工作。第二部分有2~5章。</p>
-<h3 id="第二章"><a href="#第二章" class="headerlink" title="第二章"></a>第二章</h3><pre><code>讲解了虚拟机内存是如何划分的，以及那部分区域，什么样的操作和代码可以导致内存溢出异常，讲解了各个区域出现内存溢出异常常见的原因。
-</code></pre><h3 id="第三章"><a href="#第三章" class="headerlink" title="第三章"></a>第三章</h3><pre><code>分析了垃圾收集的算法和JDK 1.7 中提供的几款垃圾收集器的特点以及运行的原理，通过代码示例验证了Java虚拟机中自动内存分配以及回收的主要规则。
-</code></pre><h3 id="第四章"><a href="#第四章" class="headerlink" title="第四章"></a>第四章</h3><pre><code>加少了JDK发布的6个命令工具和两个可视化的故障处理工具的使用方法。
-</code></pre><h3 id="第五章"><a href="#第五章" class="headerlink" title="第五章"></a>第五章</h3><pre><code>与读者分享了几个比较比较有代表性的实际案例。还准备了所有开发人员都能亲身实战的练习，读者可以通过实践来获得故障处理和调优的经验。
-</code></pre><h2 id="第三部分-虚拟机执行子系统"><a href="#第三部分-虚拟机执行子系统" class="headerlink" title="第三部分 虚拟机执行子系统"></a>第三部分 虚拟机执行子系统</h2><p>执行子系统是虚拟机中必不可少的组成部分，了解了虚拟机如何执行程序，才能写出优秀的代码。第三部分包括6~9章：</p>
-<h3 id="第六章"><a href="#第六章" class="headerlink" title="第六章"></a>第六章</h3><pre><code>讲解了Class文件中的各个组成部分，以及每个部分中的定义，数据结构和使用方法，以实战的方法演示了Class文件的数据是如何储存和访问的。
-</code></pre><h3 id="第七章"><a href="#第七章" class="headerlink" title="第七章"></a>第七章</h3><pre><code>介绍了类加载过程中的“加载”，“验证”，“准备”，“解析”和“初始化”的5个阶段和虚拟机分别执行了那些动作，还介绍了类加载器的工作原理以及其对虚拟机的意义。
-</code></pre><h3 id="第八章"><a href="#第八章" class="headerlink" title="第八章"></a>第八章</h3><pre><code>分析了虚拟机在执行代码的时候如何找到正确的方法，如何执行方法内的字节码，以及执行代码时设计的内存结构。
-</code></pre><h3 id="第九章"><a href="#第九章" class="headerlink" title="第九章"></a>第九章</h3><pre><code>通过四个类加载以及执行子系统的案例，分享了使用类加载器和处理字节码的一些值得欣赏和借鉴的思路，并且通过一些实战练习来加深对前面理论知识的理解。
-</code></pre><h2 id="第四部分"><a href="#第四部分" class="headerlink" title="第四部分"></a>第四部分</h2><p>Java程序从源码编译到字节码以及从字节码编译成本地机器码的两个过程，合并起来就等同于一个传统编译器所执行的编译过程，第四部分主要包括10~11章</p>
-<h3 id="第十章"><a href="#第十章" class="headerlink" title="第十章"></a>第十章</h3><pre><code>分析了Java语言中的泛型，主动装箱和拆箱，条件编译等多种语法糖的前因后果。并且通过实战演示了如何插入式注解处理器来实现一个检查程序命名规范的编译器插件。
-</code></pre><h3 id="第十一章"><a href="#第十一章" class="headerlink" title="第十一章"></a>第十一章</h3><pre><code>讲解了虚拟机的热点探测方法，HotSpot的即时编译器。编译触发条件，以及如何从虚拟机外部观察和分析JIT编译的数据和结果，此外，还讲解了几种常见的编译优化技术。
-</code></pre><h2 id="第五部分"><a href="#第五部分" class="headerlink" title="第五部分"></a>第五部分</h2><p>Java语言和虚拟机提供的原生的，完善的多线程支持，这使得它天生就适合开发多线程并发的应用程序。不过我们不能期望系统来完成所有的并打相关的处理，了解并发的内幕也是一个高级程序员不可缺少的课程，第五部分有12~13章</p>
-<h3 id="第十二章"><a href="#第十二章" class="headerlink" title="第十二章"></a>第十二章</h3><pre><code>讲解了虚拟机Java内存的结构和操作，以及原子性，可见性和有序性在Java内存模型中的体现，介绍了先行发生原则的规则和使用，还了解了线程在Java语言中是如何实现的。
-</code></pre><h3 id="第十三章"><a href="#第十三章" class="headerlink" title="第十三章"></a>第十三章</h3><pre><code>介绍了线程安全涉及的概念和分类，同步实现的方法以及虚拟机的底层运作原理，并且介绍了虚拟机实现高效并发所采取的一系列的锁优化措施。
-</code></pre>
+        <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a><strong>1. 概述</strong></h2><p>WebSocket提供了通过提供双向，全双工，实时客户端/服务器通信来限制服务器和Web浏览器之间的有效通信的备选方案。服务器可以随时向客户端发送数据。因为它运行在TCP上，它还提供低延迟低级别通信，并减少每个消息的开销。</p>
+<h2 id="2-JSR-356"><a href="#2-JSR-356" class="headerlink" title="2. JSR 356"></a><strong>2. JSR 356</strong></h2><p>JSR 356或Java API for WebSocket指定了Java开发人员可以将WebSockets与其应用程序集成在一起的API，无论是在服务器端还是Java客户端。 该Java API提供了服务器端和客户端组件：</p>
+<ul>
+<li>服务器：一切都在javax.websocket.server包。</li>
+<li>客户端：javax.websocket包的内容，由客户端API组成，也是服务器端和客户端的公共库。</li>
+</ul>
+<h2 id="3-使用WebSockets构建聊天"><a href="#3-使用WebSockets构建聊天" class="headerlink" title="3.使用WebSockets构建聊天"></a><strong>3.使用WebSockets构建聊天</strong></h2><p>我们将构建一个非常简单的聊天应用程序。任何用户都可以从任何浏览器打开聊天，输入他的名字，登录聊天，并开始与所有连接聊天的人进行通信。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>javax.websocket<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>javax.websocket-api<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.1<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>为了将Java对象转换成JSON表示，反之亦然，我们将使用Gson：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.google.code.gson<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>gson<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>2.8.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<h3 id="3-1。端点配置"><a href="#3-1。端点配置" class="headerlink" title="3.1。端点配置"></a><strong>3.1。端点配置</strong></h3><p>配置端点有两种方法：基于注释和扩展。您可以扩展javax.websocket.Endpoint类或使用专用的方法级注释。由于与编程模型相比，注释模型导致更清晰的代码，注释已经成为常规的编码选择。在这种情况下，WebSocket端点生命周期事件由以下注释处理：</p>
+<ul>
+<li>@ServerEndpoint：如果使用@ServerEndpoint进行装饰，容器可以确保该类作为侦听特定URI空间的WebSocket服务器的可用性</li>
+<li>@ClientEndpoint：使用此注释装饰的类被视为WebSocket客户端</li>
+<li>@OnOpen：当启动新的WebSocket连接时，容器调用带有@OnOpen的Java方法</li>
+<li>@OnMessage：使用@OnMessage注释的Java方法在将消息发送到端点时从WebSocket容器接收信息</li>
+<li>@OnError：当通信出现问题时，会调用带有@OnError的方法</li>
+<li>@OnClose：用于装饰WebSocket连接关闭时由容器调用的Java方法</li>
+</ul>
+<h3 id="3-2。编写服务器端点"><a href="#3-2。编写服务器端点" class="headerlink" title="3.2。编写服务器端点"></a><strong>3.2。编写服务器端点</strong></h3><p>我们通过用@ServerEndpoint注释它来声明一个Java类WebSocket服务器端点。我们还指定端点部署的URI。 URI相对于服务器容器的根目录定义，必须以正斜杠开头：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>(value = <span class="string">"/chat/&#123;username&#125;"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatEndpoint</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@OnOpen</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// Get session and WebSocket connection</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnMessage</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Session session, Message message)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// Handle new messages</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnClose</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">        <span class="comment">// WebSocket connection closes</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnError</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Session session, Throwable throwable)</span> </span>&#123;</div><div class="line">        <span class="comment">// Do error handling here</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面的代码是我们类似聊天的应用程序的服务器端点骨架。如您所见，我们有4个注释映射到各自的方法。下面你可以看到这样的方法的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>(value=<span class="string">"/chat/&#123;username&#125;"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ChatEndpoint</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="keyword">private</span> Session session;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Set&lt;ChatEndpoint&gt; chatEndpoints </div><div class="line">      = <span class="keyword">new</span> CopyOnWriteArraySet&lt;&gt;();</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> HashMap&lt;String, String&gt; users = <span class="keyword">new</span> HashMap&lt;&gt;();</div><div class="line"> </div><div class="line">    <span class="meta">@OnOpen</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onOpen</span><span class="params">(</span></span></div><div class="line">      Session session, </div><div class="line">      @PathParam(<span class="string">"username"</span>) String username) <span class="keyword">throws</span> IOException &#123;</div><div class="line">  </div><div class="line">        <span class="keyword">this</span>.session = session;</div><div class="line">        chatEndpoints.add(<span class="keyword">this</span>);</div><div class="line">        users.put(session.getId(), username);</div><div class="line"> </div><div class="line">        Message message = <span class="keyword">new</span> Message();</div><div class="line">        message.setFrom(username);</div><div class="line">        message.setContent(<span class="string">"Connected!"</span>);</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnMessage</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMessage</span><span class="params">(Session session, Message message)</span> </span></div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">  </div><div class="line">        message.setFrom(users.get(session.getId()));</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnClose</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClose</span><span class="params">(Session session)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">  </div><div class="line">        chatEndpoints.remove(<span class="keyword">this</span>);</div><div class="line">        Message message = <span class="keyword">new</span> Message();</div><div class="line">        message.setFrom(users.get(session.getId()));</div><div class="line">        message.setContent(<span class="string">"Disconnected!"</span>);</div><div class="line">        broadcast(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@OnError</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onError</span><span class="params">(Session session, Throwable throwable)</span> </span>&#123;</div><div class="line">        <span class="comment">// Do error handling here</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">broadcast</span><span class="params">(Message message)</span> </span></div><div class="line">      <span class="keyword">throws</span> IOException, EncodeException &#123;</div><div class="line">  </div><div class="line">        chatEndpoints.forEach(endpoint -&gt; &#123;</div><div class="line">            <span class="keyword">synchronized</span> (endpoint) &#123;</div><div class="line">                <span class="keyword">try</span> &#123;</div><div class="line">                    endpoint.session.getBasicRemote().</div><div class="line">                      sendObject(message);</div><div class="line">                &#125; <span class="keyword">catch</span> (IOException | EncodeException e) &#123;</div><div class="line">                    e.printStackTrace();</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>当新用户登录时（@OnOpen）立即映射到活动用户的数据结构。然后，使用广播方法创建一条消息并发送到所有端点。</p>
+<p>当任何连接的用户发送新消息（@OnMessage）时，也会使用此方法 - 这是聊天的主要目的。</p>
+<p>如果在某些时候发生错误，则使用注释@OnError处理它的方法。您可以使用此方法记录有关错误的信息并清除端点。</p>
+<p>最后，当用户不再连接到聊天时，方法@OnClose清除端点并广播给用户已断开连接的所有用户。</p>
+<h2 id="4-消息类型"><a href="#4-消息类型" class="headerlink" title="4. 消息类型"></a><strong>4. 消息类型</strong></h2><p>WebSocket规范支持两种在线数据格式 - 文本和二进制。 API支持这两种格式，增加了使用Java对象的功能和规范中定义的运行状况检查消息（ping-pong）：</p>
+<ul>
+<li>文本：任何文本数据（java.lang.String，primitives或其等价的包装器类）</li>
+<li>二进制：由java.nio.ByteBuffer或byte []（字节数组）表示的二进制数据（例如音频，图像等）</li>
+<li>Java对象：API使您可以在代码中使用本机（Java对象）表示，并使用自定义变换器（编码器/解码器）将其转换为WebSocket协议允许的兼容在线格式（文本，二进制）</li>
+<li>Ping-Pong：一个javax.websocket.PongMessage是由一个WebSocket对等体响应健康检查（ping）请求发送的确认</li>
+</ul>
+<p>对于我们的应用程序，我们将使用Java对象。我们将创建用于编码和解码消息的类。</p>
+<p>###<strong>4.1. Encoder</strong></p>
+<p>编码器采用Java对象，并产生适合作为消息（如JSON，XML或二进制表示）传输的典型表示形式。可以通过实现Encoder.Text <t>或Encoder.Binary <t>接口来使用编码器。</t></t></p>
+<p>在下面的代码中，我们定义要编码的类Message，在编码方法中，我们使用Gson将Java对象编码为JSON</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Message</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> String from;</div><div class="line">    <span class="keyword">private</span> String to;</div><div class="line">    <span class="keyword">private</span> String content;</div><div class="line">     </div><div class="line">    <span class="comment">//standard constructors, getters, setters</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageEncoder</span> <span class="keyword">implements</span> <span class="title">Encoder</span>.<span class="title">Text</span>&lt;<span class="title">Message</span>&gt; </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Gson gson = <span class="keyword">new</span> Gson();</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">encode</span><span class="params">(Message message)</span> <span class="keyword">throws</span> EncodeException </span>&#123;</div><div class="line">        <span class="keyword">return</span> gson.toJson(message);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(EndpointConfig endpointConfig)</span> </span>&#123;</div><div class="line">        <span class="comment">// Custom initialization logic</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Close resources</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-2-Decoder"><a href="#4-2-Decoder" class="headerlink" title="4.2. Decoder"></a><strong>4.2. Decoder</strong></h3><p>解码器与编码器相反，用于将数据转换回Java对象。解码器可以使用Decoder.Text <t>或Decoder.Binary <t>接口来实现。</t></t></p>
+<p>正如我们用编码器所看到的那样，解码方法是我们在发送到端点的消息中检索JSON，并使用Gson将其转换为一个名为Message的Java类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MessageDecoder</span> <span class="keyword">implements</span> <span class="title">Decoder</span>.<span class="title">Text</span>&lt;<span class="title">Message</span>&gt; </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Gson gson = <span class="keyword">new</span> Gson();</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Message <span class="title">decode</span><span class="params">(String s)</span> <span class="keyword">throws</span> DecodeException </span>&#123;</div><div class="line">        <span class="keyword">return</span> gson.fromJson(s, Message.class);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">willDecode</span><span class="params">(String s)</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> (s != <span class="keyword">null</span>);</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">init</span><span class="params">(EndpointConfig endpointConfig)</span> </span>&#123;</div><div class="line">        <span class="comment">// Custom initialization logic</span></div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">destroy</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// Close resources</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="4-3。在服务器端点设置编码器和解码器"><a href="#4-3。在服务器端点设置编码器和解码器" class="headerlink" title="4.3。在服务器端点设置编码器和解码器"></a><strong>4.3。在服务器端点设置编码器和解码器</strong></h3><p>让我们把所有的东西放在一起，在类级别注释@ServerEndpoint中添加为编码和解码数据而创建的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ServerEndpoint</span>( </div><div class="line">  value=<span class="string">"/chat/&#123;username&#125;"</span>, </div><div class="line">  decoders = MessageDecoder.class, </div><div class="line">  encoders = MessageEncoder.class )</div></pre></td></tr></table></figure>
+<p>每次将消息发送到端点时，它们将自动转换为JSON或Java对象。</p>
+<h2 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a><strong>5. Conclusion</strong></h2><p>在本文中，我们研究了WebSockets的Java API以及如何帮助我们构建诸如此实时聊天之类的应用程序。</p>
+<p>我们看到了用于创建端点的两个编程模型：注释和编程。我们使用我们的应用程序的注释模型以及生命周期方法定义了一个端点。</p>
+<p>此外，为了能够在服务器和客户端之间进行通信，我们看到需要编码器和解码器将Java对象转换为JSON，反之亦然。</p>
+<p>JSR 356 API非常简单，并且基于注释的编程模型使构建WebSocket应用程序变得非常简单。</p>
+<p>要运行我们在示例中构建的应用程序，我们需要做的是将war文件部署在Web服务器中，并转到URL：http：// localhost：8080 / java-websocket /。您可以在这里找到存储库的链接<a href="&quot;https://github.com/eugenp/tutorials/tree/master/java-websocket&quot;">here</a>。</p>
+
       
 
       
@@ -241,7 +271,7 @@
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
         		</li>
       		
 		</ul>
@@ -297,7 +327,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/03/17/深入理解Java虚拟机（目录）/" alt="微信分享二维码">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/23/WebSocket Java API指南/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -311,18 +341,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/03/17/深入理解Java虚拟机（一）/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          深入理解Java虚拟机（一）
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/03/16/undertow嵌入式web服务器初体验/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">undertow嵌入式web服务器初体验</div>
+    <a href="/2017/06/23/Building a REST API/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Building a REST API</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -336,7 +357,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="深入理解Java虚拟机（目录）" data-title="深入理解Java虚拟机（目录）" data-url="http://yoursite.com/2017/03/17/深入理解Java虚拟机（目录）/"></div>
+	<div class="ds-thread" data-thread-key="WebSocket Java API指南" data-title="WebSocket Java API指南" data-url="http://yoursite.com/2017/06/23/WebSocket Java API指南/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">

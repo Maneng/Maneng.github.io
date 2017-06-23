@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2017/06/23/WebSocket%20Java%20API%E6%8C%87%E5%8D%97/</loc>
+    
+    <lastmod>2017-06-23T02:16:27.264Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2017/06/23/Building%20a%20REST%20API/</loc>
     
     <lastmod>2017-06-23T01:35:24.019Z</lastmod>
@@ -387,14 +394,14 @@
   </url>
   
   <url>
-    <loc>http://yoursite.com/tags/index.html</loc>
+    <loc>http://yoursite.com/categories/index.html</loc>
     
     <lastmod>2017-03-11T13:00:04.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://yoursite.com/categories/index.html</loc>
+    <loc>http://yoursite.com/tags/index.html</loc>
     
     <lastmod>2017-03-11T13:00:04.000Z</lastmod>
     

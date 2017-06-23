@@ -154,6 +154,106 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Guide to Spring @Autowired" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/Guide to Spring @Autowired/">Guide to Spring @Autowired</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/Guide to Spring @Autowired/" class="archive-article-date">
+  	<time datetime="2017-06-23T01:34:17.907Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1.Overview"></a><strong>1.Overview</strong></h2><p>从Spring 2.5开始，该框架引入了由@Autowired注释驱动的新型依赖注入。此注释允许Spring解析并将bean注入到bean中。</p>
+<p>在本教程中，我们将介绍如何启用自动装配，以多种方式连接bean，使bean可选，使用@Qualifier注释解决bean冲突以及潜在的异常情况。</p>
+<h2 id="2-Enabling-Autowired-Annotations"><a href="#2-Enabling-Autowired-Annotations" class="headerlink" title="2. Enabling @Autowired Annotations"></a><strong>2. Enabling @Autowired Annotations</strong></h2><p>如果您在应用程序中使用基于Java的配置，则可以通过使用AnnotationConfigApplicationContext来加载spring配置来启用注释驱动的注入，如下所示：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.baeldung.autowire.sample"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;&#125;</div></pre></td></tr></table></figure>
+<p>或者，在Spring XML中，可以通过在Spring XML文件中声明它来实现：<context：annotation-config></context：annotation-config></p>
+<h2 id="3-Using-Autowired"><a href="#3-Using-Autowired" class="headerlink" title="3. Using @Autowired"></a><strong>3. Using @Autowired</strong></h2><p>注释注入启用后，可以在属性，设置器和构造函数上使用自动装配。</p>
+<h2 id="3-1-Autowired-on-Properties"><a href="#3-1-Autowired-on-Properties" class="headerlink" title="3.1. @Autowired on Properties"></a><strong>3.1. @Autowired on Properties</strong></h2><p>注释可以直接用于属性，因此不需要getter和setter：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"fooFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的例子中，Spring创建FooService时，寻找并注入fooFormatter。</p>
+<h2 id="3-2-Autowired-on-Setters"><a href="#3-2-Autowired-on-Setters" class="headerlink" title="3.2. @Autowired on Setters"></a><strong>3.2. @Autowired on Setters</strong></h2><p>@Autowired注释可以用于setter方法。在下面的示例中，当在setter方法上使用注释时，在创建FooService时，setter方法将使用FooFormatter的实例调用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setFooFormatter</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</div><div class="line">            <span class="keyword">this</span>.fooFormatter = fooFormatter;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-3-Autowired-on-Constructors"><a href="#3-3-Autowired-on-Constructors" class="headerlink" title="3.3. @Autowired on Constructors"></a><strong>3.3. @Autowired on Constructors</strong></h2><p>@Autowired注释也可以在构造函数上使用。在下面的示例中，当在构造函数上使用注释时，当创建FooService时，FooFormatter的实例将作为参数注入构造函数中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="keyword">private</span> FooFormatter fooFormatter;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FooService</span><span class="params">(FooFormatter fooFormatter)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.fooFormatter = fooFormatter;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="4-Autowired-and-Optional-Dependencies"><a href="#4-Autowired-and-Optional-Dependencies" class="headerlink" title="4. @Autowired and Optional Dependencies"></a><strong>4. @Autowired and Optional Dependencies</strong></h2><p>Spring希望在构建依赖bean时可以使用@Autowired依赖关系。如果框架无法解决用于装配的bean，它将抛出以下引用的异常并阻止Spring容器成功启动：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">Caused <span class="string">by:</span> org.springframework.beans.factory.<span class="string">NoSuchBeanDefinitionException:</span> </div><div class="line">No qualifying bean of type [com.autowire.sample.FooDAO] found <span class="keyword">for</span> <span class="string">dependency:</span> </div><div class="line">expected at least <span class="number">1</span> bean which qualifies <span class="keyword">as</span> autowire candidate <span class="keyword">for</span> <span class="keyword">this</span> dependency. </div><div class="line">Dependency <span class="string">annotations:</span> </div><div class="line">&#123;<span class="meta">@org</span>.springframework.beans.factory.annotation.Autowired(required=<span class="literal">true</span>)&#125;</div></pre></td></tr></table></figure>
+<p>为了避免这种情况发生，可以通过以下指定bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span>(required = <span class="keyword">false</span>)</div><div class="line">    <span class="keyword">private</span> FooDAO dataAccessor; </div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="5-Autowire-Disambiguation-5-自动消除歧义"><a href="#5-Autowire-Disambiguation-5-自动消除歧义" class="headerlink" title="5. Autowire Disambiguation(5.自动消除歧义)"></a><strong>5. Autowire Disambiguation</strong>(5.自动消除歧义)</h2><p>默认情况下，Spring按类型解析@Autowired条目。如果同一类型的多个bean在容器中可用，则框架将抛出​​一个致命的异常，指示有多个bean可用于自动装配。</p>
+<h2 id="5-1-Autowiring-by-Qualifier"><a href="#5-1-Autowiring-by-Qualifier" class="headerlink" title="5.1. Autowiring by @Qualifier"></a><strong>5.1. Autowiring by @Qualifier</strong></h2><p>@Qualifier注释可用于提示和缩小所需的bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span>(<span class="string">"fooFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="meta">@Component</span>(<span class="string">"barFormatter"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"bar"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由于Spring容器可以使用两种格式化的实现，所以在构建FooService时，Spring会抛出一个NoUniqueBeanDefinitionException异常：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Caused by: org<span class="selector-class">.springframework</span><span class="selector-class">.beans</span><span class="selector-class">.factory</span><span class="selector-class">.NoUniqueBeanDefinitionException</span>: </div><div class="line">No qualifying bean of type [com<span class="selector-class">.autowire</span><span class="selector-class">.sample</span><span class="selector-class">.Formatter</span>] is defined: </div><div class="line">expected single matching bean but found <span class="number">2</span>: barFormatter,fooFormatter</div></pre></td></tr></table></figure>
+<p>这可以通过使用@Qualifier注释来缩小实现来避免：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="meta">@Qualifier</span>(<span class="string">"fooFormatter"</span>)</div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过使用具体实现的名称指定@Qualifier，在这种情况下，作为fooFormatter，当Spring找到同一类型的多个bean时，我们可以避免歧义。<br>请注意，@Qualifier注释的值与我们的FooFormatter实现的@Component注释中声明的名称相匹配。 5.2。自定义限定符自动装配</p>
+<p><strong>5.2. Autowiring by Custom Qualifier</strong> (自定义限定符自动装配)</p>
+<p>Spring允许我们创建我们自己的@Qualifier注释。要创建自定义限定符，请定义注释，并在定义中提供@Qualifier注释，如下所示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Qualifier</span></div><div class="line"><span class="meta">@Target</span>(&#123;</div><div class="line">  ElementType.FIELD, ElementType.METHOD, ElementType.TYPE, ElementType.PARAMETER&#125;)</div><div class="line"><span class="meta">@Retention</span>(RetentionPolicy.RUNTIME)</div><div class="line"><span class="keyword">public</span> <span class="meta">@interface</span> FormatterType &#123;</div><div class="line">     </div><div class="line">    <span class="function">String <span class="title">value</span><span class="params">()</span></span>;</div><div class="line"> </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一旦定义，可以在各种实现中使用FormatterType来指定自定义值：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormatterType</span>(<span class="string">"Foo"</span>)</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"foo"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@FormatterType</span>(<span class="string">"Bar"</span>)</div><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BarFormatter</span> <span class="keyword">implements</span> <span class="title">Formatter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">format</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"bar"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一旦实现注释，自定义限定符注释可以如下使用：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Component</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="meta">@FormatterType</span>(<span class="string">"Foo"</span>)</div><div class="line">    <span class="keyword">private</span> Formatter formatter;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>@Target注释中指定的值限制限定词可用于标记注入点的位置。 在上面的代码片段中，限定符可以用于消除Spring可以将bean注入到字段，方法，类型和参数中的点。</p>
+<h2 id="5-2-Autowiring-by-Name"><a href="#5-2-Autowiring-by-Name" class="headerlink" title="5.2. Autowiring by Name"></a><strong>5.2. Autowiring by Name</strong></h2><p>作为回馈，Spring使用bean名称作为默认限定符值。</p>
+<p>因此，通过定义bean属性名称，在这种情况下为fooFormatter，Spring与FooFormatter实现相匹配，并在构建FooService时注入该特定实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Formatter fooFormatter;</div><div class="line">     </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>6. Conclusion</strong><br>虽然@Qualifier和bean名称的后备匹配都可以用来缩小到一个特定的bean，但是自动装配实际上是关于按类型注入的，这是最好的方式来使用这个容器功能。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/Guide to Spring @Autowired/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Error Handling for REST with Spring" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -310,7 +410,7 @@
 <p>拦截器可用于交叉切换的问题，并避免重复的处理程序代码，如：日志记录，在Spring模型中更改全局使用的参数。</p>
 <p>在接下来的几节中，正是我们将要看的 - 各种拦截器实现之间的差异。</p>
 <h2 id="3-Maven-Dependencies"><a href="#3-Maven-Dependencies" class="headerlink" title="3. Maven Dependencies"></a><strong>3. Maven Dependencies</strong></h2><p>为了使用Interceptor，您需要在pom.xml文件的依赖项部分中包含以下部分：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.3.2.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="4-Spring-Handler-Interceptor"><a href="#4-Spring-Handler-Interceptor" class="headerlink" title="4. Spring Handler Interceptor"></a><strong>4. Spring Handler Interceptor</strong></h2><p>在框架上使用HandlerMapping的拦截器必须实现HandlerInterceptor接口。</p>
 <p>此接口包含三个主要方法：</p>
 <ul>
@@ -1160,96 +1260,6 @@
 
 
   
-    <article id="post-如何获取spring管理的所有的bean" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/如何获取spring管理的所有的bean/">How to Get All Spring-Managed Beans?</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/23/如何获取spring管理的所有的bean/" class="archive-article-date">
-  	<time datetime="2017-06-23T01:33:03.228Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-概述"><a href="#1-概述" class="headerlink" title="1.概述"></a><strong>1.概述</strong></h1><p>在本文中，我们将探讨如何使用容器显示所有Spring管理的不同的bean。</p>
-<h1 id="2-The-IoC-Container"><a href="#2-The-IoC-Container" class="headerlink" title="2. The IoC Container"></a><strong>2. The IoC Container</strong></h1><p>一个bean是Spring管理的应用程序的基础;所有的bean都与IOC容器一起居住，IOC容器负责管理其生命周期。</p>
-<p>我们可以通过两种方式获取此容器中所有bean的列表：</p>
-<ul>
-<li>使用ListableBeanFactory接口</li>
-<li>使用 Spring Boot Actuator</li>
-</ul>
-<h1 id="3-Using-ListableBeanFactory-Interface"><a href="#3-Using-ListableBeanFactory-Interface" class="headerlink" title="3. Using ListableBeanFactory Interface"></a><strong>3. Using ListableBeanFactory Interface</strong></h1><p>ListableBeanFactory接口提供getBeanDefinitionNames（）方法，该方法返回此工厂中定义的所有bean的名称。<br>该接口由预先加载其bean定义以枚举其所有bean实例的所有bean工厂实现。<br>您可以在官方文档中找到所有已知子接口及其实现类的列表。<br>对于这个例子，我们将使用一个Spring引导应用程序。<br>首先，我们将创建一些Spring bean。我们来创建一个简单的Spring Controller FooController：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> FooService fooService;</div><div class="line">     </div><div class="line">    <span class="meta">@RequestMapping</span>(value=<span class="string">"/displayallbeans"</span>) </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getHeaderAndBody</span><span class="params">(Map model)</span></span>&#123;</div><div class="line">        model.put(<span class="string">"header"</span>, fooService.getHeader());</div><div class="line">        model.put(<span class="string">"message"</span>, fooService.getBody());</div><div class="line">        <span class="keyword">return</span> <span class="string">"displayallbeans"</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这个Controller依赖于另一个Spring bean FooService：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Service</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooService</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getHeader</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"Display All Beans"</span>;</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getBody</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="string">"This is a sample application that displays all beans "</span></div><div class="line">          + <span class="string">"in Spring IoC container using ListableBeanFactory interface "</span></div><div class="line">          + <span class="string">"and Spring Boot Actuators."</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>请注意，我们在这里创建了两个不同的bean：</p>
-<ul>
-<li>fooController</li>
-<li>fooService</li>
-</ul>
-<p>在执行此应用程序时，我们将使用applicationContext对象并调用其getBeanDefinitionNames（）方法，该方法将返回我们的applicationContext容器中的所有bean：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@SpringBootApplication</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Application</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> ApplicationContext applicationContext;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">        applicationContext = SpringApplication.run(Application.class, args);</div><div class="line">        displayAllBeans();</div><div class="line">    &#125;</div><div class="line">     </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">displayAllBeans</span><span class="params">()</span> </span>&#123;</div><div class="line">        String[] allBeanNames = applicationContext.getBeanDefinitionNames();</div><div class="line">        <span class="keyword">for</span>(String beanName : allBeanNames) &#123;</div><div class="line">            System.out.println(beanName);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>这将打印来自applicationContext容器的所有bean：</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">fooController</div><div class="line">fooService</div><div class="line"><span class="comment">//other beans</span></div></pre></td></tr></table></figure>
-<p>请注意，随着我们定义的bean，它还将记录在此容器中的所有其他bean。为了清楚起见，我们在这里省略了，因为它们有很多。</p>
-<h1 id="4-Using-Spring-Boot-Actuator"><a href="#4-Using-Spring-Boot-Actuator" class="headerlink" title="4. Using Spring Boot Actuator"></a><strong>4. Using Spring Boot Actuator</strong></h1><p>Spring Boot Actuator功能提供端点，用于监视我们应用程序的统计信息。</p>
-<p>它包括许多内置的端点，包括/ beans。这将显示我们应用程序中所有Spring管理bean的完整列表。您可以在官方文档中找到现有端点的完整列表。<br>现在我们将在我们的application.properties中配置我们的beans端点：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">endpoints<span class="selector-class">.beans</span><span class="selector-class">.id</span>=springbeans</div><div class="line">endpoints<span class="selector-class">.beans</span><span class="selector-class">.sensitive</span>=false</div></pre></td></tr></table></figure>
-<p>在这里，我们正在设置bean端点的id。这个springbeans id现在将映射到一个URL，该URL将用于通过HTTP访问它。我们将敏感属性设置为false，以便我们可以在不进行身份验证的情况下访问它。如果我们只想要验证的用户查看数据，我们可以将其保留为默认值true。</p>
-<p>现在，我们只需点击URL <code>http：// &lt;address&gt;：&lt;management-port&gt; / springbeans</code>。如果没有指定任何单独的管理端口，我们可以使用我们的默认服务器端口。这将返回显示Spring IoC容器中所有Bean的JSON响应：</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">[</div><div class="line">    &#123;</div><div class="line">        "context": "application:8080",</div><div class="line">        "parent": null,</div><div class="line">        "beans": [</div><div class="line">            &#123;</div><div class="line">                "bean": "fooController",</div><div class="line">                "aliases": [],</div><div class="line">                "scope": "singleton",</div><div class="line">                "type": "com.baeldung.displayallbeans.controller.FooController",</div><div class="line">                "resource": "file [E:/Workspace/tutorials-master/spring-boot/target</div><div class="line">                  /classes/com/baeldung/displayallbeans/controller/FooController.class]",</div><div class="line">                "dependencies": [</div><div class="line">                    "fooService"</div><div class="line">                ]</div><div class="line">            &#125;,</div><div class="line">            &#123;</div><div class="line">                "bean": "fooService",</div><div class="line">                "aliases": [],</div><div class="line">                "scope": "singleton",</div><div class="line">                "type": "com.baeldung.displayallbeans.service.FooService",</div><div class="line">                "resource": "file [E:/Workspace/tutorials-master/spring-boot/target/</div><div class="line">                  classes/com/baeldung/displayallbeans/service/FooService.class]",</div><div class="line">                "dependencies": []</div><div class="line">            &#125;,</div><div class="line">            // ...other beans</div><div class="line">        ]</div><div class="line">    &#125;</div><div class="line">]</div></pre></td></tr></table></figure>
-<p>当然，这也包含许多其他豆类，它们位于同一个spring容器中，但是为了清楚起见，我们在这里省略了它们。</p>
-<h1 id="5-Conclusion"><a href="#5-Conclusion" class="headerlink" title="5. Conclusion"></a><strong>5. Conclusion</strong></h1><p>在本文中，我们学习了如何使用ListableBeanFactory界面和Spring Boot Actuator在Spring IoC容器中显示所有bean。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/23/如何获取spring管理的所有的bean/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1391,11 +1401,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">

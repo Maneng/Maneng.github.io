@@ -154,6 +154,213 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-java类加载机制" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/07/java类加载机制/">java类加载机制</a>
+    </h1>
+  
+
+        
+        <a href="/2017/04/07/java类加载机制/" class="archive-article-date">
+  	<time datetime="2017-04-07T06:39:29.810Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-07</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <ul>
+<li><h2 id="类加载过程"><a href="#类加载过程" class="headerlink" title="类加载过程"></a>类加载过程</h2><ul>
+<li><h4 id="大致过程"><a href="#大致过程" class="headerlink" title="大致过程"></a>大致过程</h4><p>java中的类只有被JVM加载之后才能在程序中使用，加载的过程大致为加载-连接-初始化，其中连接又分为验证-准备-解析。<br>所以细分为<strong>加载-验证-准备-解析-初始化</strong>五个阶段。<br>其中加载、验证、准备和初始化这四个阶段发生的顺序是确定的，而解析阶段则不一定，有时为了动态绑定也会以在初始化阶段之后开始。<br><strong>类生命周期：</strong><br><img src="http://github-neng.oss-cn-hangzhou.aliyuncs.com/github/java_pic/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_01.png" alt="!\[JVM内存模型\](../../pics/java类加载机制_01.png)"></p>
+</li>
+<li><h4 id="类加载的条件"><a href="#类加载的条件" class="headerlink" title="类加载的条件"></a>类加载的条件</h4><p>JVM肯定不会无缘无故就去加载.class，只有主动使用时才会初始化。主动使用有以下几种情况：</p>
+<ol>
+<li>当创建一个类的实例时，比如使用new或者反射，克隆，反序列化。</li>
+<li>当调用类的静态方法时，即使用了字节码invokestatic指令。</li>
+<li>当时用类或接口的静态字段时(final常量除外)，即使用了字节码的getstatic和putstatic指令。</li>
+<li>当使用了java.lang.reflect包中的方法反射类的方法时。</li>
+<li>当初始化子类时，要求先初始化父类。</li>
+<li><p>作为启动虚拟机，含有main()方法那个类。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">public class Parent&#123;</div><div class="line">  static&#123;</div><div class="line">   System.out.println(&quot;parent init&quot;);</div><div class="line">  &#125;</div><div class="line">  public static int v=100;</div><div class="line">&#125;</div><div class="line">public class Child extends Parent&#123;</div><div class="line"> static&#123;</div><div class="line">   System.out.println(&quot;child init&quot;);</div><div class="line"> &#125;</div><div class="line">&#125;</div><div class="line">public class Main&#123;</div><div class="line"> public static void main(String args[])&#123;</div><div class="line">   System.out.println(Child.v);</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>运行输出：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">parent init</div><div class="line">100</div></pre></td></tr></table></figure>
+<p>可以看到只有父类被初始化，子类没有。可见，引用一个子类时(例子中的v)，只有直接定义该字段的类(例子中的父类)，才会被初始化。注意，child虽然没有被初始化但是已经被加载。</p>
+</li>
+</ol>
+</li>
+<li><h4 id="类加载的过程-加载"><a href="#类加载的过程-加载" class="headerlink" title="类加载的过程-加载"></a>类加载的过程-加载</h4><p>  <strong>目的：查找并加载类的二进制数据</strong><br>  加载一个类时，JVM需要完成的工作。</p>
+<ol>
+<li>通过类的全名，获取类的二进制数据流。</li>
+<li>解析类的二进制数据流为方法区内的数据结构。</li>
+<li>创建java.lang.Class类的实例，表示该类型。</li>
+</ol>
+</li>
+<li><h4 id="类加载的过程-验证"><a href="#类加载的过程-验证" class="headerlink" title="类加载的过程-验证"></a>类加载的过程-验证</h4><p>  <strong>目的：确保Class文件的字节流中包含的信息符合当前虚拟机的要求，并且不会危害虚拟机自身的安全。</strong></p>
+<blockquote>
+<p>验证阶段是非常重要的，但不是必须的，它对程序运行期没有影响。如果所引用的类经过反复验证，那么可以考虑采用-Xverifynone参数来关闭大部分的类验证措施，以缩短虚拟机类加载的时间。</p>
+</blockquote>
+<p>  验证阶段大致4个阶段：</p>
+<ol>
+<li>文件格式验证<br>验证字节流是否符合Class文件格式的规范；例如：是否以0xCAFEBABE开头、主次版本号是否在当前虚拟机的处理范围之内、常量池中的常量是否有不被支持的类型。</li>
+<li>元数据验证<br>对字节码描述的信息进行语义分析（注意：对比javac编译阶段的语义分析），以保证其描述的信息符合Java语言规范的要求；例如：这个类是否有父类，除了java.lang.Object之外。</li>
+<li>字节码验证<br>通过数据流和控制流分析，确定程序语义是合法的、符合逻辑的。</li>
+<li>符号引用验证<br>确保解析动作能正确执行。</li>
+</ol>
+</li>
+<li><h4 id="类加载的过程-准备"><a href="#类加载的过程-准备" class="headerlink" title="类加载的过程-准备"></a>类加载的过程-准备</h4><p>  <strong>目的：为类的静态变量分配内存，并将其初始化为默认值</strong></p>
+<blockquote>
+<p>准备阶段是正式为类变量分配内存并设置类变量初始值的阶段，这些变量所使用的内存都在方法区中进行分配。</p>
+</blockquote>
+<p>  注意：</p>
+<ul>
+<li>这时候进行内存分配的仅包括类变量，而不包括实例变量，实例变量会在对象实例化的时候随着对象一起分配在Java堆中；</li>
+<li>这里所说的初始值“通常情况”下是数据类型的零值：<br>假设一个类变量的定义为： public static int value = 123;<br>那变量value在准备阶段过后的初始值为0而不是123，因为此时尚未开始执行任何Java方法，而把value赋值为123的putstatic指令是在程序被编译之后，  存放于类构造器方法中，所以把value赋值为123的动作将在初始化阶段才会执行。但是假设类变量value的定义为：public static final int value = 123;在准备阶段虚拟机就会根据ConstantValue的设置将value赋值为123。<br><strong>JAVA类变量默认值：</strong><br><img src="http://github-neng.oss-cn-hangzhou.aliyuncs.com/github/java_pic/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_02.png" alt="!\[JVM内存模型\](../../pics/java类加载机制_02.jpg)"></li>
+</ul>
+</li>
+<li><h4 id="类加载的过程-解析"><a href="#类加载的过程-解析" class="headerlink" title="类加载的过程-解析"></a>类加载的过程-解析</h4><p><strong>目的： 把类中的符号引用转换为直接引用</strong></p>
+<blockquote>
+<p>解析阶段是虚拟机将常量池内的符号引用替换为直接引用的过程，解析动作主要针对类或接口、字段、类方法、接口方法、方法类型、方法句柄和调用点限定符7类符号引用进行。</p>
+</blockquote>
+<p><strong>符号引用：</strong></p>
+<blockquote>
+<p>符号引用以一组符号来描述所引用的目标，符号可以是任何形式的字面量，只要使用时能无歧义地定位到目标即可。符号引用与虚拟机实现的内存布局无关，引用的目标并不一定已经加载到内存当中。各种虚拟机实现的内存布局可以各不相同，但是它们能接受的符号引用必须都是一致的，因为符号引用的字面量形式明确定义在Java虚拟机规范的Class文件格式中。</p>
+</blockquote>
+<p><strong>直接引用:</strong></p>
+<blockquote>
+<p>直接引用可以是直接指向目标的指针、相对偏移量或者是一个能简介定位到目标的句柄。直接引用是和虚拟机实现的内存布局息息相关的，同一个符号引用在不同虚拟机实例上翻译出来的直接引用一般不会相同。如果有了直接引用，那引用的目标必定已经在内存中存在。</p>
+</blockquote>
+</li>
+<li><h4 id="类加载的过程-初始化"><a href="#类加载的过程-初始化" class="headerlink" title="类加载的过程-初始化"></a>类加载的过程-初始化</h4><p>除了在加载阶段用户应用程序可以通过自定义类加载器参与之外，其余动作均由虚拟机主导和控制。到了初始化阶段，才真正开始执行类中定义的Java程序代码（或者说是字节码）。初始化阶段是执行类构造器clinit方法的过程。<br><strong>在Java中对类变量进行初始值设定有两种方式：</strong><br>①声明类变量是指定初始值<br>②使用静态代码块为类变量指定初始值。<br><strong>clinit方法</strong></p>
+<ol>
+<li><p>由编译器收集类中的所有类变量的赋值动作（如果仅仅只是声明，不会被收集）和静态语句块中的语句合并产生的，收集顺序按照语句在源文件中出现的顺序所决定；在静态语句块中只能访问定义在静态语句之前的变量；而对于定义在静态语句块之后的变量，可以进行赋值，但是不能够访问。</p>
+</li>
+<li><p>不需要显示调用父类构造器，虚拟机会保证在子类的clinit()方法执行之前，父类的clinit()方法已经执行完毕，所以，第一个被执行的clinit()方法的类肯定是java.lang.Object。</p>
+</li>
+<li><p>父类中定义的静态语句块优先于子类的静态语句。</p>
+</li>
+<li><p>此方法对类和接口都不是必须的，若类中没有静态语句块和静态变量赋值操作，则不会生成clinit()方法。</p>
+</li>
+<li><p>接口会生成此方法，因为对接口的字段可以进行赋值操作。执行接口的clinit()方法不需要先执行父接口的clinit()方法，只有在使用父接口的变量时，才会进行初始化；接口的实现类在初始化时也不会执行接口的clinit()方法。</p>
+</li>
+<li><p>此方法在多线程环境中会被正确的加锁、同步。</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<hr>
+<ul>
+<li><h2 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h2><ul>
+<li><h4 id="类加载器种类"><a href="#类加载器种类" class="headerlink" title="类加载器种类"></a>类加载器种类</h4><p><img src="http://github-neng.oss-cn-hangzhou.aliyuncs.com/github/java_pic/JVM%E5%86%85%E5%AD%98%E6%A8%A1%E5%9E%8B_03.png" alt="!\[JVM内存模型\](../../pics/java类加载机制_03.jpg)"><br><strong>1. Bootstrap ClassLoader(启动类加载器)</strong><br>一般由C++实现，是虚拟机的一部分。该类加载器主要职责是将JAVA_HOME路径下的\lib目录中能被虚拟机识别的类库(比如rt.jar)加载到虚拟机内存中。Java程序无法直接引用该类加载器<br><strong>2. Extension ClassLoader(扩展类加载器)</strong><br>由Java实现，独立于虚拟机的外部。该类加载器主要职责将JAVA_HOME路径下的\lib\ext目录中的所有类库，开发者可直接使用扩展类加载器。 该加载器是由sun.misc.Launcher$ExtClassLoader实现。<br><strong>3 Application ClassLoader(应用程序类加载器)</strong><br>该加载器是由sun.misc.Launcher$AppClassLoader实现，该类加载器负责加载用户类路径上所指定的类库。开发者可通过ClassLoader.getSystemClassLoader()方法直接获取，故又称为系统类加载器。当应用程序没有自定义类加载器时，默认采用该类加载器。</p>
+</li>
+<li><h4 id="双亲委托模式"><a href="#双亲委托模式" class="headerlink" title="双亲委托模式"></a>双亲委托模式</h4><blockquote>
+<p>如果一个类加载器收到了类加载请求，他不会尝试自己去加载，而是把这个请求委派给父类加载器去完成，每一个层次的类加载器都是如此，因此所有类加载的请求最终都应该传到顶层的启动类加载器中，只有当父类加载器反馈自己无法完成这个类加载的请求时，子类才会尝试自己加载。但也有弊端， 顶层的ClassLoader无法访问底层的ClassLoader所加载的类所造成的问题。</p>
+</blockquote>
+<ul>
+<li>使用双亲委托模型来组织类加载器之间的关系，有一个显而易见的好处就是Java类随着它的类加载器一起具备了一种带有优先级的层次关系，例如java.lang.Object存放在rt.jar之中，无论那个类加载器要加载这个类，最终都是委托给启动类加载器进行加载，因此Object类在程序的各种类加载器环境中都是同一个类，相反，如果没有双亲委托模型，由各个类加载器去完成的话，如果用户自己写一个名为java.lang.Object的类，并放在classpath中，应用程序中可能会出现多个不同的Object类，java类型体系中最基本安全行为也就无法保证。</li>
+</ul>
+</li>
+<li><h4 id="java-lang-ClassLoader"><a href="#java-lang-ClassLoader" class="headerlink" title="java.lang.ClassLoader"></a>java.lang.ClassLoader</h4><p>java.lang.ClassLoader类的基本职责就是根据一个指定的类的名称，找到或者生成其对应的字节代码，然后从这些字节代码中定义出一个Java类,还负责加载 Java 应用所需的资源，如图像文件和配置文件等.<br><strong>ClassLoader 中与加载类相关的方法:</strong></p>
+</li>
+</ul>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getParent()</td>
+<td>返回该类加载器的父类加载器。</td>
+</tr>
+<tr>
+<td>loadClass(String name)</td>
+<td>加载名称为 name 的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>findClass(String name)</td>
+<td>查找名称为 name 的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>findLoadedClass(String name)</td>
+<td>查找名称为 name 的已经被加载过的类，返回的结果是 java.lang.Class 类的实例。</td>
+</tr>
+<tr>
+<td>defineClass(String name, byte[] b, int off, int len)</td>
+<td>把字节数组 b 中的内容转换成 Java 类，返回的结果是 java.lang.Class 类的实例。这个方法被声明为 final 的。</td>
+</tr>
+<tr>
+<td>resolveClass(Class&lt;?&gt; c)</td>
+<td>链接指定的 Java 类。</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><h4 id="自定义类加载器"><a href="#自定义类加载器" class="headerlink" title="自定义类加载器"></a>自定义类加载器</h4>定义类加载器可以选择 继承ClassLoader类，重写里面的方法来实现。loadClass()方法重写的话可能会破坏双亲委托模型，不推荐重写；defineClass：主要用于将原始字节转换为Class对象，不需要重写；findClass：根据名称来查找类，一般就重写这个方法。<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line">  public class Main &#123;</div><div class="line">    static class MyClassLoader extends ClassLoader &#123;</div><div class="line">        private String classPath;</div><div class="line">        public MyClassLoader(String classPath) &#123;</div><div class="line">            this.classPath = classPath;</div><div class="line">        &#125;</div><div class="line">        private byte[] loadByte(String name) throws Exception &#123;</div><div class="line">            name = name.replaceAll(&quot;\\.&quot;, &quot;/&quot;);</div><div class="line">            FileInputStream fis = new FileInputStream(classPath + &quot;/&quot; + name</div><div class="line">                    + &quot;.class&quot;);</div><div class="line">            int len = fis.available();</div><div class="line">            byte[] data = new byte[len];</div><div class="line">            fis.read(data);</div><div class="line">            fis.close();</div><div class="line">            return data;</div><div class="line">        &#125;</div><div class="line">        protected Class&lt;?&gt; findClass(String name) throws ClassNotFoundException &#123;</div><div class="line">            try &#123;</div><div class="line">                byte[] data = loadByte(name);</div><div class="line">                return defineClass(name, data, 0, data.length);</div><div class="line">            &#125; catch (Exception e) &#123;</div><div class="line">                e.printStackTrace();</div><div class="line">                throw new ClassNotFoundException();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    public static void main(String args[]) throws Exception &#123;</div><div class="line">        MyClassLoader classLoader = new MyClassLoader(&quot;D:/test&quot;);</div><div class="line">        Class clazz = classLoader.loadClass(&quot;com.huachao.cl.Test&quot;);</div><div class="line">        Object obj = clazz.newInstance();</div><div class="line">        Method helloMethod = clazz.getDeclaredMethod(&quot;hello&quot;, null);</div><div class="line">        helloMethod.invoke(obj, null);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><ul>
+<li>《实战java虚拟机》</li>
+<li><a href="http://www.jianshu.com/p/11cc2de9dbc2" target="_blank" rel="external">http://www.jianshu.com/p/11cc2de9dbc2</a></li>
+<li><a href="http://www.cnblogs.com/leesf456/p/5269545.html" target="_blank" rel="external">http://www.cnblogs.com/leesf456/p/5269545.html</a></li>
+<li><a href="http://www.jsondream.com/2016/11/16/jvm-class-load-parent-Delegate.html" target="_blank" rel="external">http://www.jsondream.com/2016/11/16/jvm-class-load-parent-Delegate.html</a></li>
+<li><a href="https://www.ibm.com/developerworks/cn/java/j-lo-classloader/#download" target="_blank" rel="external">https://www.ibm.com/developerworks/cn/java/j-lo-classloader/#download</a></li>
+<li><a href="http://www.jianshu.com/p/acc7595f1b9d?utm_source=tuicool&amp;utm_medium=referral" target="_blank" rel="external">http://www.jianshu.com/p/acc7595f1b9d?utm_source=tuicool&amp;utm_medium=referral</a></li>
+</ul>
+</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">java</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/04/07/java类加载机制/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-java注解总结" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -2344,93 +2551,6 @@
 
 
   
-    <article id="post-深入理解Java虚拟机（一）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/03/17/深入理解Java虚拟机（一）/">深入理解Java虚拟机（一）</a>
-    </h1>
-  
-
-        
-        <a href="/2017/03/17/深入理解Java虚拟机（一）/" class="archive-article-date">
-  	<time datetime="2017-03-17T03:47:06.765Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-03-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="第一部分-走进Java"><a href="#第一部分-走进Java" class="headerlink" title="第一部分 走进Java"></a>第一部分 走进Java</h1><h4 id="世界上没有完美的程序，但我们不能因此而沮丧，因为写程序本来就是一个不断追求完美的过程。"><a href="#世界上没有完美的程序，但我们不能因此而沮丧，因为写程序本来就是一个不断追求完美的过程。" class="headerlink" title="世界上没有完美的程序，但我们不能因此而沮丧，因为写程序本来就是一个不断追求完美的过程。"></a>世界上没有完美的程序，但我们不能因此而沮丧，因为写程序本来就是一个不断追求完美的过程。</h4><h2 id="1-1-概述"><a href="#1-1-概述" class="headerlink" title="1.1 概述"></a>1.1 概述</h2><p>Java不仅仅是一门变成语言，还是一个由一系列计算机软件和规范形成的技术体系，这个技术体系提供的完整的 用于软件开发和跨平台部署的支持环境，并且广泛应用于嵌入式系统，移动终端，企业服务器，大型机等各种场所。</p>
-<p>Java能获得如此广泛的认可，除了他拥有一门结构严谨，面向对象的编程语言之外，还有许多不可忽视的优点：他摆脱了硬件平台的束缚，实现了一次编写，到处运行的理想，他提供了一个向对安全的内存管理和访问机制，避免了绝大部分的内存泄漏和指针越界问题，它实现了热点检测代码和运行时编译以及优化，这使得Java应用能随着运行使劲按的增加而获得更高的性能，它有一套完整的应用程序接口，还有无数来自商业机构和开源社区的第三方库莱帮着它实现各种各样的功能。。。。。</p>
-<p><strong>当我们在使用一种技术的时候，如果不在依赖书本和他人就能得到这些答案，那才算是得到了“不惑”的境界</strong></p>
-<h2 id="1-2-Java技术体系"><a href="#1-2-Java技术体系" class="headerlink" title="1.2 Java技术体系"></a>1.2 Java技术体系</h2><p>从广义上讲，Clojure，JRuby，Groovy等运行在Java虚拟机上的语言以及相关的程序都属于Java中技术体系中的一部分，如果型传统意义上来说，Sun公司官方定义的Java技术体系包括以下几个组成部分：</p>
-<ol>
-<li>Java程序设计语言</li>
-<li>各种硬件平台上的Java虚拟机</li>
-<li>Class文件格式</li>
-<li>Java的API</li>
-<li>来自商业机构和开源社区的第三方Java类库</li>
-</ol>
-<p>JDK 包含了Java程序设计语言，Java虚拟机，和Java的API，来用于支持Java开发的最小的环境，另外的，Java API中的Java SE API子集和Java虚拟机这两部分统称为JRE（Java Runtime Environment），JRE 支持Java运行的标准环境。</p>
-<p><img src="http://upload-images.jianshu.io/upload_images/3458176-94078b720b210278.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="enter description here"></p>
-<p>  以上Java技术体系图是根据各个组成部分的功能来进行划分的。如果按照Java技术服务的领域来划分，可分为以下4个平台：</p>
-<p>1.Java Caard<br>2.Java ME<br>3.JavaSE（Standard Edition）：支持面向桌面级应用的java平台，提供了完整的Java核心API，这个版本以前称为J2SE。</p>
-<h2 id="JavaEE（Enterprise-Edition）："><a href="#JavaEE（Enterprise-Edition）：" class="headerlink" title="JavaEE（Enterprise Edition）："></a>JavaEE（Enterprise Edition）：</h2><p>支持使用多层架构的企业应用（如ERP、CRM应用)的Java平台，除了提高Java SE API外，还对其做了打了扩充，并提供了相关部署支持，这个版本以前称为J2EE。<br>javaEE对JavaSE提供的扩展一般以java.<em>作为包名，而以java.</em>为包名的都是javaSE API的核心包，但由于历史原因，一部分曾经是扩展包的API后来进入了核心包，因此核心包中也包含了不少javax.*的包名。</p>
-<h3 id="Java语言口号"><a href="#Java语言口号" class="headerlink" title="Java语言口号"></a>Java语言口号</h3><blockquote>
-<p>Write Once , Run Anywhere。</p>
-</blockquote>
-<h2 id="JDK命名"><a href="#JDK命名" class="headerlink" title="JDK命名"></a>JDK命名</h2><p>JDK从1.5版本开始，官方在正式文档与宣传上不再使用类似JDK1.5的命名，只在程序内部使用的的开发版本号（Developer Version，例如java –version的输出）中才继续沿用1.5,1.6…。而攻克版本号（Product Version）则改为JDK5、JDK6、JDK7的命名方式。<br>Java开源</p>
-<p>2006年11月13日的JavaOne大会上，Sun公司宣布开源java,JDK1.6在12月11日发布。并建立了OpenJDK组织对浙西源码进行独立管理，除了极少量的产权代码（Encumbered Code，这部分代码大多史Sun本身也无权限进行开源处理的）外，OpenJDK几乎包括了Sun JDK的全部代码。<br>Java虚拟机发展史</p>
-<h3 id="Sun公司的java虚拟机"><a href="#Sun公司的java虚拟机" class="headerlink" title="Sun公司的java虚拟机"></a>Sun公司的java虚拟机</h3><p>Sun Classic VM： JDK1.0提供的一个纯解释执行的Java虚拟机。<br>Exact VM:JDK1.2提供，具有两级及时编译器、编译器与解释器混合工作模式，使用了准确式内存管理（Exact Memory Management，也叫Non-Conservative/Accurate Memory Management）而得名，即虚拟机可以知道内存中某个位置的数据具体式什么类型。譬如内存中有一个32位的整数123456，它到底式一个reference类型指向123456的内存地址还是一个数值位123456的整数，虚拟机将有能力分辨出来，这样才能在GC（垃圾收集）的时候准确判断堆上的数据是否还可能被使用。Exact VM抛弃了Classic VM基于handler的对象查找方式（原因是进行GC后对象将可能会被移动位置，如果将地址为123456的对象移动到654321，在没有明确信息表明内存中哪些数据是reference的前提，虚拟机不敢把内存中所有为123456的值改成654321的，所以要使用句柄来保持reference值的稳定），这样每次对象都少了一次间接查找的开销，提升执行性能。<br>HotSpot VM：(目前一直使用)JDK1.2提供，内置了JIT(Just in Time)编译器，继承了前面2款虚拟机的优点如：Exact Memory Management。自己新技术，如其名：HotSpot指的就是它的热点代码探测技术，ExactVM中也有，热点探测可以通过执行计数器找出最具有编译价值的代码，然后通知JIT编译器以方法为单位进行编译。<br>其它公司的Java虚拟机</p>
-<p>JRockit VM：BEA公司收购的，并将其发展为一款专门为服务器硬件和服务器端应用场景高度优化的虚拟机，由于不太关注程序启动速度只专注与服务端应用，因此JRockit内部不包含解析器实现，全部代码都靠即使编译器编译执行，JRockit的垃圾收集器和MissionControl服务套件等部分的实现，在众多Java虚拟机中也处于领先。</p>
-<h3 id="可以运行在Java虚拟机上的语言"><a href="#可以运行在Java虚拟机上的语言" class="headerlink" title="可以运行在Java虚拟机上的语言"></a>可以运行在Java虚拟机上的语言</h3><p><img src="http://upload-images.jianshu.io/upload_images/3458176-c0b1cef7d2488e7e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="enter description here"></p>
-<p>  对于这些运行于java虚拟机之上，Java语言之外的语言，来自系统级的、底层底层的支持正在迅速增强，JSR-292为核心的一系列项目和功能改进，推动java虚拟机从“Java语言的虚拟机”向“多语言虚拟机”的方向发展</p>
-<h3 id="编写JDK使用的语言"><a href="#编写JDK使用的语言" class="headerlink" title="编写JDK使用的语言"></a>编写JDK使用的语言</h3><p>  OpenJDK的各个组成部分（Hotspot、JDK API、JAXWS、JAXP….)有的是使用C++编写的，更多的代码则是使用Java自身实现的。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color4">JVM</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/03/17/深入理解Java虚拟机（一）/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/4/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/6/">Next &raquo;</a>
@@ -2572,11 +2692,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">javascript</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">
