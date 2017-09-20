@@ -154,6 +154,123 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-An Intro to the Spring DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/An Intro to the Spring DispatcherServlet/">An Intro to the Spring DispatcherServlet</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/An Intro to the Spring DispatcherServlet/" class="archive-article-date">
+  	<time datetime="2017-06-23T01:33:23.838Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a><strong>1. Introduction</strong></h1><p>简单地说，在前端控制器设计模式中，单个控制器负责将传入的HttpRequest引导到所有应用程序的其他控制器和处理程序。</p>
+<p>Spring的DispatcherServlet实现了这种模式，因此负责正确地协调HttpRequests到他们的右边处理程序。</p>
+<p>在本文中，我们将检查Spring DispatcherServlet的请求处理工作流程以及如何实现参与此工作流程的多个接口。</p>
+<h1 id="2-DispatcherServlet-Request-Processing"><a href="#2-DispatcherServlet-Request-Processing" class="headerlink" title="2. DispatcherServlet Request Processing"></a><strong>2. DispatcherServlet Request Processing</strong></h1><p>DispatcherServlet本质上处理传入的HttpRequest，委托请求，并根据在Spring应用程序中实现的配置的HandlerAdapter接口以及指定处理程序，控制器端点和响应对象的附注进行处理。</p>
+<p>让我们深入了解DispatcherServlet如何处理组件：</p>
+<ul>
+<li>在DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE下关联到DispatcherServlet的WebApplicationContext被搜索并提供给进程的所有元素</li>
+<li>DispatcherServlet发现使用getHandler（）为您的调度程序配置的HandlerAdapter接口的所有实现 - 每个发现和配置的实现都通过handle（）方法通过该进程的其余部分来处理请求</li>
+<li>LocaleResolver可选地绑定到请求，以使进程中的元素能够解析该区域设置</li>
+<li>ThemeResolver可选地绑定到请求，让元素（如视图）确定要使用哪个主题</li>
+<li>如果指定了MultipartResolver，则会为MultipartFiles检查该请求 - 任何找到的都包含在MultipartHttpServletRequest中以进一步处理</li>
+<li>在WebApplicationContext中声明的HandlerExceptionResolver实现在处理请求期间提取异常</li>
+</ul>
+<h1 id="3-HandlerAdapter-Interfaces"><a href="#3-HandlerAdapter-Interfaces" class="headerlink" title="3. HandlerAdapter Interfaces"></a><strong>3. HandlerAdapter Interfaces</strong></h1><p>HandlerAdapter接口有助于通过几个特定接口使用控制器，servlet，HttpRequests和HTTP路径。 HandlerAdapter接口因此通过DispatcherServlet请求处理工作流程的许多阶段起着至关重要的作用</p>
+<p>首先，每个HandlerAdapter实现都从调度器的getHandler（）方法放入HandlerExecutionChain中。然后，随着执行链的进行，这些实现中的每个实现都会处理（）HttpServletRequest对象。</p>
+<p>在以下部分中，我们将更详细地探讨一些最重要和最常用的HandlerAdapter。</p>
+<h2 id="3-1-Mappings"><a href="#3-1-Mappings" class="headerlink" title="3.1. Mappings"></a><strong>3.1. Mappings</strong></h2><p>要了解映射，我们需要先看看如何注释控制器，因为控制器对于HandlerMapping接口是至关重要的。</p>
+<p>SimpleControllerHandlerAdapter允许在没有@Controller注释的情况下显式地实现控制器。</p>
+<p>RequestMappingHandlerAdapter支持使用@RequestMapping注释注释的方法。 我们将在此处关注@Controller注释，但是也可以使用一些有用的资源，并使用SimpleControllerHandlerAdapter的几个示例。</p>
+<p>@RequestMapping注释设置与它相关联的WebApplicationContext中处理程序可用的特定端点。</p>
+<p>我们来看一个公开和处理’/ user / example’端点的控制器的例子：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</div><div class="line"><span class="meta">@ResponseBody</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/example"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">fetchUserExample</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>由@RequestMapping注释指定的路径通过HandlerMapping接口在内部进行管理。</p>
+<p>RL结构自然相对于DispatcherServlet本身，并由servlet映射确定。<br>因此，如果DispatcherServlet映射到“/”，则所有映射将被该映射覆盖。 但是，如果servlet映射是’/ dispatcher’，那么任何@RequestMapping注释都将与该根URL相关。</p>
+<p>记住’/‘与servlet映射的’/ *’不一样！ ‘/‘是默认映射，并将所有URL公开给调度员的责任区域。</p>
+<p>‘/ *’让许多较新的Spring开发者感到困惑。它没有指定具有相同URL上下文的所有路径都属于调度员的责任区域。相反，它会覆盖并忽略其他调度器映射。所以’/ example’将会成为404！</p>
+<p>因此，除非非常有限的情况（如配置过滤器），否则不应使用’/ *’。</p>
+<h2 id="3-2-HTTP-Request-Handling"><a href="#3-2-HTTP-Request-Handling" class="headerlink" title="3.2. HTTP Request Handling"></a><strong>3.2. HTTP Request Handling</strong></h2><p>DispatcherServlet的核心职责是将传入的HttpRequests发送到使用@Controller或@RestController注释指定的正确处理程序。</p>
+<p>作为旁注，@Controller和@RestController的主要区别是如何生成响应 - @RestController默认定义了@ResponseBody。</p>
+<p>在这里我们可以找到关于Spring控制器的更深入的写作。</p>
+<h2 id="3-3-The-ViewResolver-Interface"><a href="#3-3-The-ViewResolver-Interface" class="headerlink" title="3.3. The ViewResolver Interface"></a><strong>3.3. The ViewResolver Interface</strong></h2><p>ViewResolver作为ApplicationContext对象上的配置设置附加到DispatcherServlet。 ViewResolver确定调度员提供什么样的视图以及从哪里提供的视图。</p>
+<p>以下是我们将放入WebMvcConfigurerAdapter中以呈现JSP页面的示例配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.baeldung.springdispatcherservlet"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UrlBasedViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        UrlBasedViewResolver resolver</div><div class="line">          = <span class="keyword">new</span> UrlBasedViewResolver();</div><div class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</div><div class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line">        resolver.setViewClass(JstlView.class);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>一个常见的问题是调度员的ViewResolver和整个项目目录结构的关联程度。我们来看看基础知识。</p>
+<p>以下是使用Spring的XML配置的InternalViewResolver的示例路径配置：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property <span class="attr">name="prefix"</span> <span class="attr">value="/jsp/"/&gt;</span></div></pre></td></tr></table></figure>
+<p>为了我们的例子，我们假设我们的应用程序正在托管在：</p>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">http:</span><span class="comment">//localhost:8080/</span></div></pre></td></tr></table></figure>
+<p>这是本地托管的Apache Tomcat服务器的默认地址和端口。 假设我们的应用程序称为dispatcherexample-1.0.0，我们的JSP视图将可以从以下位置访问：</p>
+<blockquote>
+<p><a href="http://localhost:8080/dispatcherexample-1.0.0/jsp/" target="_blank" rel="external">http://localhost:8080/dispatcherexample-1.0.0/jsp/</a></p>
+</blockquote>
+<p>在Maven的普通Spring项目中，这些视图的路径是：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src -<span class="string">|</span></div><div class="line">     main -<span class="string">|</span></div><div class="line">            java</div><div class="line">            resources</div><div class="line">            webapp -<span class="string">|</span></div><div class="line">                    jsp</div><div class="line">                    WEB-INF</div></pre></td></tr></table></figure>
+<p>视图的默认位置在WEB-INF中。在上面的代码段中为我们的InternalViewResolver指定的路径确定了您的视图可用的“src / main / webapp”的子目录。</p>
+<h2 id="3-6-The-MultipartResolver-Interface"><a href="#3-6-The-MultipartResolver-Interface" class="headerlink" title="3.6. The MultipartResolver Interface"></a><strong>3.6. The MultipartResolver Interface</strong></h2><p>MultipartResolver实现检查多部分的请求，并将它们包装在MultipartHttpServletRequest中，以便在发现至少一个multipart的过程中进一步处理其他元素。添加到AppConfig：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> CommonsMultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> </span></div><div class="line">  <span class="keyword">throws</span> IOException &#123;</div><div class="line">    CommonsMultipartResolver resolver</div><div class="line">      = <span class="keyword">new</span> CommonsMultipartResolver();</div><div class="line">    resolver.setMaxUploadSize(<span class="number">10000000</span>);</div><div class="line">    <span class="keyword">return</span> resolver;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>现在我们已经配置了MultipartResolver bean，我们设置一个控制器来处理MultipartFile请求：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultipartController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    ServletContext context;</div><div class="line"> </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">FileuploadController</span><span class="params">(</span></span></div><div class="line">      @RequestParam(<span class="string">"file"</span>) MultipartFile file) </div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</div><div class="line">        InputStream in = file.getInputStream();</div><div class="line">        String path = <span class="keyword">new</span> File(<span class="string">"."</span>).getAbsolutePath();</div><div class="line">        FileOutputStream f = <span class="keyword">new</span> FileOutputStream(</div><div class="line">          path.substring(<span class="number">0</span>, path.length()-<span class="number">1</span>)</div><div class="line">          + <span class="string">"/uploads/"</span> + file.getOriginalFilename());</div><div class="line">        <span class="keyword">int</span> ch;</div><div class="line">        <span class="keyword">while</span> ((ch = in.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            f.write(ch);</div><div class="line">        &#125;</div><div class="line">        f.flush();</div><div class="line">        f.close();</div><div class="line">        modelAndView.getModel()</div><div class="line">          .put(<span class="string">"message"</span>, <span class="string">"File uploaded successfully!"</span>);</div><div class="line">        <span class="keyword">return</span> modelAndView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-7-The-HandlerExceptionResolver-Interface"><a href="#3-7-The-HandlerExceptionResolver-Interface" class="headerlink" title="3.7. The HandlerExceptionResolver Interface"></a><strong>3.7. The HandlerExceptionResolver Interface</strong></h2><p>Spring的HandlerExceptionResolver为整个Web应用程序，单个控制器或一组控制器提供统一的错误处理。</p>
+<p>要提供应用程序范围的自定义异常处理，请创建一个使用@ControllerAdvice注释的类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleGlobalExceptionHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span></div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handleExampleException</span><span class="params">(Exception e)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>使用@ExceptionHandler注释的类中的任何方法将在调度员的责任区域内的每个控制器上都可用。</p>
+<p>DispatcherServlet的ApplicationContext中的HandlerExceptionResolver接口的实现可用于在使用@ExceptionHandler作为注释时拦截该调度程序的责任区域下的特定控制器，并将正确的类作为参数传入：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123; CustomException1.class, CustomException2.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleException</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果发生异常CustomException1或CustomException2，handleException（）方法现在将作为上述示例中的FooController的异常处理程序。 这是一篇关于Spring Web应用程序中的异常处理的文章。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring,springmvc</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/An Intro to the Spring DispatcherServlet/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-如何获取spring管理的所有的bean" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1126,87 +1243,6 @@
 
 
   
-    <article id="post-Intro to AspectJ" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/18/Intro to AspectJ/">Intro to AspectJ</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/18/Intro to AspectJ/" class="archive-article-date">
-  	<time datetime="2017-06-18T14:49:42.156Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a><strong>1. Introduction</strong></h1><p>本文是对AspectJ的一个快速实用的介绍。</p>
-<p>首先，我们将展示如何启用面向方面的编程，然后我们将重点介绍编译时，后期编译和加载时织入之间的区别。</p>
-<p>我们首先简要介绍面向方面的编程（AOP）和AspectJ的基础知识。</p>
-<h1 id="2-Overview"><a href="#2-Overview" class="headerlink" title="2. Overview"></a><strong>2. Overview</strong></h1><p>AOP是一种编程范式，旨在通过允许分离交叉关切来增加模块化。它通过在现有代码中添加附加行为，而不会修改代码本身。相反，我们单独声明要修改哪个代码。</p>
-<p>AspectJ使用Java编程语言的扩展来实现关注和织入横切问题。</p>
-<h1 id="3-Maven-Dependencies"><a href="#3-Maven-Dependencies" class="headerlink" title="3. Maven Dependencies"></a><strong>3. Maven Dependencies</strong></h1><p>AspectJ根据其使用情况提供不同的库。我们可以在Maven Central存储库中的org.aspectj组下找到Maven依赖项。</p>
-<p>在本文中，我们关注使用编译时，后期编译和织入加载时间创建方面所需的依赖关系。</p>
-<h2 id="3-1-AspectJ-Runtime"><a href="#3-1-AspectJ-Runtime" class="headerlink" title="3.1. AspectJ Runtime"></a><strong>3.1. AspectJ Runtime</strong></h2><p>运行AspectJ程序时，类路径应包含与AspectJ运行时库aspectjrt.jar一起的类和方面：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.8.9&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h2 id="3-2-AspectJWeaver"><a href="#3-2-AspectJWeaver" class="headerlink" title="3.2. AspectJWeaver"></a><strong>3.2. AspectJWeaver</strong></h2><p>除了AspectJ运行时依赖之外，我们还需要包含aspectjweaver.jar来在加载时向Java类介绍建议：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.8.9&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
-<h1 id="4-Aspect-Creation"><a href="#4-Aspect-Creation" class="headerlink" title="4. Aspect Creation"></a><strong>4. Aspect Creation</strong></h1><p>AspectJ提供了AOP的实现，并有三个核心概念：</p>
-<ul>
-<li>Join Point</li>
-<li>Pointcut</li>
-<li>Advice</li>
-</ul>
-<p>我们将通过创建一个简单的程序来验证用户帐户余额来演示这些概念。 首先，我们创建一个具有给定余额的帐户类和一种撤销方法：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Account</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span> balance = <span class="number">20</span>;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">withdraw</span><span class="params">(<span class="keyword">int</span> amount)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (balance &lt; amount) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">        &#125; </div><div class="line">        balance = balance - amount;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>我们将创建一个AccountAspect.aj文件来记录帐户信息并验证帐户余额（请注意，AspectJ文件以“.aj”文件扩展名结尾）：</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">spring,aop</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/18/Intro to AspectJ/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1300,11 +1336,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1320,15 +1356,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">programming</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1340,6 +1372,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">springboot mybatis</a>
               </li>
              
@@ -1348,7 +1384,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1356,15 +1392,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java,volatile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1385,6 +1421,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">internet</a>
               </li>
             
             <div class="clearfix"></div>

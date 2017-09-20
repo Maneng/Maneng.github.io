@@ -190,9 +190,9 @@
 <h1 id="3-Maven-Dependencies"><a href="#3-Maven-Dependencies" class="headerlink" title="3. Maven Dependencies"></a><strong>3. Maven Dependencies</strong></h1><p>AspectJ根据其使用情况提供不同的库。我们可以在Maven Central存储库中的org.aspectj组下找到Maven依赖项。</p>
 <p>在本文中，我们关注使用编译时，后期编译和织入加载时间创建方面所需的依赖关系。</p>
 <h2 id="3-1-AspectJ-Runtime"><a href="#3-1-AspectJ-Runtime" class="headerlink" title="3.1. AspectJ Runtime"></a><strong>3.1. AspectJ Runtime</strong></h2><p>运行AspectJ程序时，类路径应包含与AspectJ运行时库aspectjrt.jar一起的类和方面：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;aspectjrt&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.8.9&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjrt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <h2 id="3-2-AspectJWeaver"><a href="#3-2-AspectJWeaver" class="headerlink" title="3.2. AspectJWeaver"></a><strong>3.2. AspectJWeaver</strong></h2><p>除了AspectJ运行时依赖之外，我们还需要包含aspectjweaver.jar来在加载时向Java类介绍建议：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.aspectj&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;aspectjweaver&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;1.8.9&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.aspectj<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>aspectjweaver<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.8.9<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
 <h1 id="4-Aspect-Creation"><a href="#4-Aspect-Creation" class="headerlink" title="4. Aspect Creation"></a><strong>4. Aspect Creation</strong></h1><p>AspectJ提供了AOP的实现，并有三个核心概念：</p>
 <ul>
 <li>Join Point</li>
@@ -449,11 +449,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -469,15 +469,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">programming</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -489,6 +485,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">springboot mybatis</a>
               </li>
              
@@ -497,7 +497,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -505,15 +505,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java,volatile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -534,6 +534,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">internet</a>
               </li>
             
             <div class="clearfix"></div>

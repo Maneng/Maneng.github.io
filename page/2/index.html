@@ -154,6 +154,135 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Dependency Injection with Spring" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/06/23/Dependency Injection with Spring/">Dependency Injection with Spring</a>
+    </h1>
+  
+
+        
+        <a href="/2017/06/23/Dependency Injection with Spring/" class="archive-article-date">
+  	<time datetime="2017-06-23T01:34:23.423Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Intro-to-Inversion-Control-and-Dependency-Injection-with-Spring"><a href="#Intro-to-Inversion-Control-and-Dependency-Injection-with-Spring" class="headerlink" title="Intro to Inversion Control and Dependency Injection with Spring"></a>Intro to Inversion Control and Dependency Injection with Spring</h1><h2 id="1-Overview"><a href="#1-Overview" class="headerlink" title="1. Overview"></a><strong>1. Overview</strong></h2><p>在本文中，我们将介绍IoC（控制反转）和DI（依赖注入）的概念，然后我们将介绍如何在Spring框架中实现这些概念。</p>
+<h2 id="2-What-is-Inversion-of-Control"><a href="#2-What-is-Inversion-of-Control" class="headerlink" title="2. What is Inversion of Control?"></a><strong>2. What is Inversion of Control?</strong></h2><p>控制反转是软件工程中的一个原理，通过该原理将程序的对象或部分的控制转移到容器或框架。它最常用于面向对象编程的上下文中。</p>
+<p>与传统的编程相比，我们的自定义代码调用库，IoC使框架能够控制程序的流程，并调用我们的自定义代码。为了使之成为可能，框架是通过抽象定义的，其中附加了一些行为。</p>
+<p><strong>如果我们想添加自己的行为，我们需要扩展我们自己的类的框架或插件的类。</strong></p>
+<p>这种架构的优点是：</p>
+<ul>
+<li>decoupling the execution of a task from its implementation 将任务的执行与其实现分离</li>
+<li>making it easier to switch between different implementations 使其更容易在不同的实现之间切换</li>
+<li>greater modularity of a program 更大的程序模块化</li>
+<li>greater ease in testing a program by isolating a component or mocking its dependencies and allowing components to communicate through contracts 通过隔离组件或模仿假数据其依赖性并允许组件通过约定进行通信来更容易地测试程序</li>
+</ul>
+<p>可以通过各种机制实现控制反转：策略设计模式，服务定位器模式，工厂模式和依赖注入（DI）。</p>
+<h2 id="3-What-is-Dependency-Injection"><a href="#3-What-is-Dependency-Injection" class="headerlink" title="3. What is Dependency Injection?"></a><strong>3. What is Dependency Injection?</strong></h2><p>依赖注入是实现IoC的一种模式，其中控制被反转是设置对象的依赖关系。<br>将对象与其他对象连接的行为，或将对象“注入”到其他对象中，由汇编程序而不是对象本身完成。<br>以下是传统编程中创建对象依赖关系的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Item item;</div><div class="line">  </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Store</span><span class="params">()</span> </span>&#123;</div><div class="line">        item = <span class="keyword">new</span> ItemImpl1();    </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在上面的示例中，您可以看到，为了实例化Store对象的项依赖关系，您必须指定在Store类本身中将使用的接口Item的实现。</p>
+<p>通过使用DI，我们可以重写示例而不指定我们想要的Item的实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</div><div class="line">    <span class="keyword">private</span> Item item;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Store</span><span class="params">(Item item)</span> </span>&#123;</div><div class="line">        <span class="keyword">this</span>.item = item;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>然后将通过元数据提供要注入的项目的实现，我们将在下面的示例中看到。<br>IoC和DI都是简单的概念，但是对我们系统构建的方式有深刻的影响，所以理解他们是非常有价值的。</p>
+<h2 id="4-The-Spring-IoC-Container"><a href="#4-The-Spring-IoC-Container" class="headerlink" title="4. The Spring IoC Container"></a><strong>4. The Spring IoC Container</strong></h2><p>IoC容器是实现IoC的框架的常见特征。</p>
+<p>在Spring框架中，IoC容器由ApplicationContext接口表示。 Spring容器负责实例化，配置和组装称为bean的对象，以及管理其生命周期。</p>
+<p>Spring框架提供了ApplicationContext接口的几个实现</p>
+<ul>
+<li>用于独立应用程序的ClassPathXmlApplicationContext和FileSystemXmlApplicationContext，Web应用程序的WebApplicationContext。</li>
+</ul>
+<p>为了组装bean，容器使用配置元数据，其可以是XML配置或注释的形式。</p>
+<p>以下是手动实例化容器的一种方式：</p>
+<figure class="highlight vhdl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ApplicationContext <span class="keyword">context</span></div><div class="line">  = <span class="keyword">new</span> ClassPathXmlApplicationContext(<span class="string">"applicationContext.xml"</span>);</div></pre></td></tr></table></figure>
+<h2 id="5-Dependency-Injection-in-Spring"><a href="#5-Dependency-Injection-in-Spring" class="headerlink" title="5. Dependency Injection in Spring"></a><strong>5. Dependency Injection in Spring</strong></h2><p>为了在上面的例子中设置item属性，我们可以使用将在运行时由Spring容器组装对象的元数据</p>
+<p>Spring中的依赖注入可以通过构造函数或设置器（setters）完成。</p>
+<p><strong>5.1. Constructor-Based Dependency Injection</strong></p>
+<p>在基于构造函数的依赖注入的情况下，容器将调用一个构造函数，其中每个变量都表示我们要设置的依赖关系。<br>解析每个参数主要由参数的类型，后跟名称的属性和索引消歧。 bean的配置及其依赖关系可以使用注释来完成：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Item <span class="title">item1</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ItemImpl1();</div><div class="line">    &#125;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Store <span class="title">store</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> Store(item1());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>@Configuration注释表明该类是一个bean定义的源，可以在多个配置类中使用。 @Bean注释用于定义一个bean的方法。如果不指定自定义名称，将使用方法名称。</p>
+<p>如果使用Bean的默认单例范围，则每次调用使用@Bean注释的方法时，Spring首先检查该bean的缓存实例是否已存在，并且仅在不存在的情况下创建一个新的实例。如果指定了原型范围，则为该方法的每次调用返回一个新的bean实例。</p>
+<p>创建bean的另一种方法是通过XML配置：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"item1"</span> class=<span class="string">"org.baeldung.store.ItemImpl1"</span> /&gt; </div><div class="line">&lt;bean id=<span class="string">"store"</span> class=<span class="string">"org.baeldung.store.Store"</span>&gt; </div><div class="line">    &lt;constructor-arg <span class="keyword">type</span>=<span class="string">"ItemImpl1"</span> index=<span class="string">"0"</span> name=<span class="string">"item"</span> <span class="keyword">ref</span>=<span class="string">"item1"</span> /&gt; </div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p><strong>5.2. Setter-Based Dependency Injection</strong></p>
+<p>对于基于setter的DI，容器将在调用无参数构造函数或无参数静态工厂方法来实例化bean之后调用类的setter方法。让我们用注释创建这个配置：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> Store <span class="title">store</span><span class="params">()</span> </span>&#123;</div><div class="line">    Store store = <span class="keyword">new</span> Store();</div><div class="line">    store.setItem(item1());</div><div class="line">    <span class="keyword">return</span> store;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们也可以使用XML来进行相同的Bean配置：</p>
+<figure class="highlight nimrod"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"store"</span> class=<span class="string">"org.baeldung.store.Store"</span>&gt;</div><div class="line">    &lt;property name=<span class="string">"item"</span> <span class="keyword">ref</span>=<span class="string">"item1"</span> /&gt;</div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>基于构造器和基于setter的注射类型可以组合为同一个bean。 Spring文档建议使用基于构造函数的注入用于强制依赖，以及基于setter的注入为可选的注入。</p>
+<p><strong>5.3. Autowiring Dependencies</strong></p>
+<p>装配允许Spring容器通过检查已定义的bean来自动解决协作bean之间的依赖关系。</p>
+<p>使用XML配置自动连接一个bean的四种模式：</p>
+<ul>
+<li><strong>no</strong>：默认值 - 这意味着没有自动连接用于bean，并且必须明确命名依赖关系</li>
+<li><strong>byName</strong>：根据属性的名称完成自动装配，因此Spring将寻找与需要设置的属性具有相同名称的bean</li>
+<li><strong>byType</strong>： 类似于byName的自动装配，只能基于属性的类型，这意味着Spring会寻找一个具有相同属性类型的bean来设置;如果找到多个这种类型的bean，框架会引发异常</li>
+<li><strong>constructor</strong>：自动装配是基于构造函数参数完成的，这意味着Spring将寻找与构造函数参数相同类型的bean</li>
+</ul>
+<p>例如，让我们通过类型将上面定义的item1 bean自动连接到store bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span>(autowire = Autowire.BY_TYPE)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="keyword">private</span> Item item;</div><div class="line"> </div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">setItem</span><span class="params">(Item item)</span></span>&#123;</div><div class="line">        <span class="keyword">this</span>.item = item;    </div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>您还可以使用@Autowired注释来自动注册bean，方法是输入以下类型：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="keyword">private</span> Item item;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果有多个同一类型的bean，您可以添加@Qualifier注释以通过名称引用bean：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Store</span> </span>&#123;</div><div class="line">     </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    <span class="meta">@Qualifier</span>(<span class="string">"item1"</span>)</div><div class="line">    <span class="keyword">private</span> Item item;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>让我们通过XML配置按类型自动连接bean：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean <span class="attr">id="store"</span> <span class="attr">class="org.baeldung.store.Store"</span> <span class="attr">autowire="byType"&gt;</span> &lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>现在让我们通过XML将名为item的bean注入到store bean的item属性中：</p>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">&lt;bean <span class="attr">id="item"</span> <span class="attr">class="org.baeldung.store.ItemImpl1"</span> /&gt;</div><div class="line"> </div><div class="line">&lt;bean <span class="attr">id="store"</span> <span class="attr">class="org.baeldung.store.Store"</span> <span class="attr">autowire="byName"&gt;</span></div><div class="line">&lt;/bean&gt;</div></pre></td></tr></table></figure>
+<p>还可以通过使用构造函数参数或设置器明确定义依赖关系来覆盖自动装配。</p>
+<p><strong>5.4. Lazy Initialized Beans</strong></p>
+<p>默认情况下，容器在初始化期间创建并配置所有单例Bean。为了避免这种情况，您可以在bean配置中指定值为true的lazy-init属性：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;bean id=<span class="string">"item1"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"org.baeldung.store.ItemImpl1"</span> <span class="keyword">lazy</span>-init=<span class="string">"true"</span> /&gt;</div></pre></td></tr></table></figure>
+<p>因此，item1 bean只有在首次被请求时才被初始化，而不是在启动时被初始化。其优点是更快的初始化时间，但是权衡之处在于，只有在请求Bean之后才能发现配置错误，这可能是在应用程序已经运行几个小时甚至几天之后。</p>
+<p><strong>6. Conclusion</strong></p>
+<p>在本文中，我们介绍了控制反转和依赖注入的概念，并在Spring框架中作了例证。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/06/23/Dependency Injection with Spring/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+
+
+
+
+
+
+
+  
     <article id="post-Guide to Spring @Autowired" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -410,7 +539,7 @@
 <p>拦截器可用于交叉切换的问题，并避免重复的处理程序代码，如：日志记录，在Spring模型中更改全局使用的参数。</p>
 <p>在接下来的几节中，正是我们将要看的 - 各种拦截器实现之间的差异。</p>
 <h2 id="3-Maven-Dependencies"><a href="#3-Maven-Dependencies" class="headerlink" title="3. Maven Dependencies"></a><strong>3. Maven Dependencies</strong></h2><p>为了使用Interceptor，您需要在pom.xml文件的依赖项部分中包含以下部分：</p>
-<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span></div><div class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>4.3.2.RELEASE<span class="tag">&lt;/<span class="name">version</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight vbscript-html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;dependency&gt;</div><div class="line">    &lt;groupId&gt;org.springframework&lt;/groupId&gt;</div><div class="line">    &lt;artifactId&gt;spring-web&lt;/artifactId&gt;</div><div class="line">    &lt;version&gt;4.3.2.RELEASE&lt;/version&gt;</div><div class="line">&lt;/dependency&gt;</div></pre></td></tr></table></figure>
 <h2 id="4-Spring-Handler-Interceptor"><a href="#4-Spring-Handler-Interceptor" class="headerlink" title="4. Spring Handler Interceptor"></a><strong>4. Spring Handler Interceptor</strong></h2><p>在框架上使用HandlerMapping的拦截器必须实现HandlerInterceptor接口。</p>
 <p>此接口包含三个主要方法：</p>
 <ul>
@@ -1143,123 +1272,6 @@
 
 
   
-    <article id="post-An Intro to the Spring DispatcherServlet" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/06/23/An Intro to the Spring DispatcherServlet/">An Intro to the Spring DispatcherServlet</a>
-    </h1>
-  
-
-        
-        <a href="/2017/06/23/An Intro to the Spring DispatcherServlet/" class="archive-article-date">
-  	<time datetime="2017-06-23T01:33:23.838Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1. Introduction"></a><strong>1. Introduction</strong></h1><p>简单地说，在前端控制器设计模式中，单个控制器负责将传入的HttpRequest引导到所有应用程序的其他控制器和处理程序。</p>
-<p>Spring的DispatcherServlet实现了这种模式，因此负责正确地协调HttpRequests到他们的右边处理程序。</p>
-<p>在本文中，我们将检查Spring DispatcherServlet的请求处理工作流程以及如何实现参与此工作流程的多个接口。</p>
-<h1 id="2-DispatcherServlet-Request-Processing"><a href="#2-DispatcherServlet-Request-Processing" class="headerlink" title="2. DispatcherServlet Request Processing"></a><strong>2. DispatcherServlet Request Processing</strong></h1><p>DispatcherServlet本质上处理传入的HttpRequest，委托请求，并根据在Spring应用程序中实现的配置的HandlerAdapter接口以及指定处理程序，控制器端点和响应对象的附注进行处理。</p>
-<p>让我们深入了解DispatcherServlet如何处理组件：</p>
-<ul>
-<li>在DispatcherServlet.WEB_APPLICATION_CONTEXT_ATTRIBUTE下关联到DispatcherServlet的WebApplicationContext被搜索并提供给进程的所有元素</li>
-<li>DispatcherServlet发现使用getHandler（）为您的调度程序配置的HandlerAdapter接口的所有实现 - 每个发现和配置的实现都通过handle（）方法通过该进程的其余部分来处理请求</li>
-<li>LocaleResolver可选地绑定到请求，以使进程中的元素能够解析该区域设置</li>
-<li>ThemeResolver可选地绑定到请求，让元素（如视图）确定要使用哪个主题</li>
-<li>如果指定了MultipartResolver，则会为MultipartFiles检查该请求 - 任何找到的都包含在MultipartHttpServletRequest中以进一步处理</li>
-<li>在WebApplicationContext中声明的HandlerExceptionResolver实现在处理请求期间提取异常</li>
-</ul>
-<h1 id="3-HandlerAdapter-Interfaces"><a href="#3-HandlerAdapter-Interfaces" class="headerlink" title="3. HandlerAdapter Interfaces"></a><strong>3. HandlerAdapter Interfaces</strong></h1><p>HandlerAdapter接口有助于通过几个特定接口使用控制器，servlet，HttpRequests和HTTP路径。 HandlerAdapter接口因此通过DispatcherServlet请求处理工作流程的许多阶段起着至关重要的作用</p>
-<p>首先，每个HandlerAdapter实现都从调度器的getHandler（）方法放入HandlerExecutionChain中。然后，随着执行链的进行，这些实现中的每个实现都会处理（）HttpServletRequest对象。</p>
-<p>在以下部分中，我们将更详细地探讨一些最重要和最常用的HandlerAdapter。</p>
-<h2 id="3-1-Mappings"><a href="#3-1-Mappings" class="headerlink" title="3.1. Mappings"></a><strong>3.1. Mappings</strong></h2><p>要了解映射，我们需要先看看如何注释控制器，因为控制器对于HandlerMapping接口是至关重要的。</p>
-<p>SimpleControllerHandlerAdapter允许在没有@Controller注释的情况下显式地实现控制器。</p>
-<p>RequestMappingHandlerAdapter支持使用@RequestMapping注释注释的方法。 我们将在此处关注@Controller注释，但是也可以使用一些有用的资源，并使用SimpleControllerHandlerAdapter的几个示例。</p>
-<p>@RequestMapping注释设置与它相关联的WebApplicationContext中处理程序可用的特定端点。</p>
-<p>我们来看一个公开和处理’/ user / example’端点的控制器的例子：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="meta">@RequestMapping</span>(<span class="string">"/user"</span>)</div><div class="line"><span class="meta">@ResponseBody</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">UserController</span> </span>&#123;</div><div class="line">  </div><div class="line">    <span class="meta">@GetMapping</span>(<span class="string">"/example"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> User <span class="title">fetchUserExample</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>由@RequestMapping注释指定的路径通过HandlerMapping接口在内部进行管理。</p>
-<p>RL结构自然相对于DispatcherServlet本身，并由servlet映射确定。<br>因此，如果DispatcherServlet映射到“/”，则所有映射将被该映射覆盖。 但是，如果servlet映射是’/ dispatcher’，那么任何@RequestMapping注释都将与该根URL相关。</p>
-<p>记住’/‘与servlet映射的’/ *’不一样！ ‘/‘是默认映射，并将所有URL公开给调度员的责任区域。</p>
-<p>‘/ *’让许多较新的Spring开发者感到困惑。它没有指定具有相同URL上下文的所有路径都属于调度员的责任区域。相反，它会覆盖并忽略其他调度器映射。所以’/ example’将会成为404！</p>
-<p>因此，除非非常有限的情况（如配置过滤器），否则不应使用’/ *’。</p>
-<h2 id="3-2-HTTP-Request-Handling"><a href="#3-2-HTTP-Request-Handling" class="headerlink" title="3.2. HTTP Request Handling"></a><strong>3.2. HTTP Request Handling</strong></h2><p>DispatcherServlet的核心职责是将传入的HttpRequests发送到使用@Controller或@RestController注释指定的正确处理程序。</p>
-<p>作为旁注，@Controller和@RestController的主要区别是如何生成响应 - @RestController默认定义了@ResponseBody。</p>
-<p>在这里我们可以找到关于Spring控制器的更深入的写作。</p>
-<h2 id="3-3-The-ViewResolver-Interface"><a href="#3-3-The-ViewResolver-Interface" class="headerlink" title="3.3. The ViewResolver Interface"></a><strong>3.3. The ViewResolver Interface</strong></h2><p>ViewResolver作为ApplicationContext对象上的配置设置附加到DispatcherServlet。 ViewResolver确定调度员提供什么样的视图以及从哪里提供的视图。</p>
-<p>以下是我们将放入WebMvcConfigurerAdapter中以呈现JSP页面的示例配置：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Configuration</span></div><div class="line"><span class="meta">@EnableWebMvc</span></div><div class="line"><span class="meta">@ComponentScan</span>(<span class="string">"com.baeldung.springdispatcherservlet"</span>)</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AppConfig</span> <span class="keyword">extends</span> <span class="title">WebMvcConfigurerAdapter</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Bean</span></div><div class="line">    <span class="function"><span class="keyword">public</span> UrlBasedViewResolver <span class="title">viewResolver</span><span class="params">()</span> </span>&#123;</div><div class="line">        UrlBasedViewResolver resolver</div><div class="line">          = <span class="keyword">new</span> UrlBasedViewResolver();</div><div class="line">        resolver.setPrefix(<span class="string">"/WEB-INF/jsp/"</span>);</div><div class="line">        resolver.setSuffix(<span class="string">".jsp"</span>);</div><div class="line">        resolver.setViewClass(JstlView.class);</div><div class="line">        <span class="keyword">return</span> resolver;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>一个常见的问题是调度员的ViewResolver和整个项目目录结构的关联程度。我们来看看基础知识。</p>
-<p>以下是使用Spring的XML配置的InternalViewResolver的示例路径配置：</p>
-<figure class="highlight nix"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;property <span class="attr">name="prefix"</span> <span class="attr">value="/jsp/"/&gt;</span></div></pre></td></tr></table></figure>
-<p>为了我们的例子，我们假设我们的应用程序正在托管在：</p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">http:</span><span class="comment">//localhost:8080/</span></div></pre></td></tr></table></figure>
-<p>这是本地托管的Apache Tomcat服务器的默认地址和端口。 假设我们的应用程序称为dispatcherexample-1.0.0，我们的JSP视图将可以从以下位置访问：</p>
-<blockquote>
-<p><a href="http://localhost:8080/dispatcherexample-1.0.0/jsp/" target="_blank" rel="external">http://localhost:8080/dispatcherexample-1.0.0/jsp/</a></p>
-</blockquote>
-<p>在Maven的普通Spring项目中，这些视图的路径是：</p>
-<figure class="highlight 1c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">src -<span class="string">|</span></div><div class="line">     main -<span class="string">|</span></div><div class="line">            java</div><div class="line">            resources</div><div class="line">            webapp -<span class="string">|</span></div><div class="line">                    jsp</div><div class="line">                    WEB-INF</div></pre></td></tr></table></figure>
-<p>视图的默认位置在WEB-INF中。在上面的代码段中为我们的InternalViewResolver指定的路径确定了您的视图可用的“src / main / webapp”的子目录。</p>
-<h2 id="3-6-The-MultipartResolver-Interface"><a href="#3-6-The-MultipartResolver-Interface" class="headerlink" title="3.6. The MultipartResolver Interface"></a><strong>3.6. The MultipartResolver Interface</strong></h2><p>MultipartResolver实现检查多部分的请求，并将它们包装在MultipartHttpServletRequest中，以便在发现至少一个multipart的过程中进一步处理其他元素。添加到AppConfig：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Bean</span></div><div class="line"><span class="function"><span class="keyword">public</span> CommonsMultipartResolver <span class="title">multipartResolver</span><span class="params">()</span> </span></div><div class="line">  <span class="keyword">throws</span> IOException &#123;</div><div class="line">    CommonsMultipartResolver resolver</div><div class="line">      = <span class="keyword">new</span> CommonsMultipartResolver();</div><div class="line">    resolver.setMaxUploadSize(<span class="number">10000000</span>);</div><div class="line">    <span class="keyword">return</span> resolver;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在我们已经配置了MultipartResolver bean，我们设置一个控制器来处理MultipartFile请求：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MultipartController</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@Autowired</span></div><div class="line">    ServletContext context;</div><div class="line"> </div><div class="line">    <span class="meta">@PostMapping</span>(<span class="string">"/upload"</span>)</div><div class="line">    <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">FileuploadController</span><span class="params">(</span></span></div><div class="line">      @RequestParam(<span class="string">"file"</span>) MultipartFile file) </div><div class="line">      <span class="keyword">throws</span> IOException &#123;</div><div class="line">        ModelAndView modelAndView = <span class="keyword">new</span> ModelAndView(<span class="string">"index"</span>);</div><div class="line">        InputStream in = file.getInputStream();</div><div class="line">        String path = <span class="keyword">new</span> File(<span class="string">"."</span>).getAbsolutePath();</div><div class="line">        FileOutputStream f = <span class="keyword">new</span> FileOutputStream(</div><div class="line">          path.substring(<span class="number">0</span>, path.length()-<span class="number">1</span>)</div><div class="line">          + <span class="string">"/uploads/"</span> + file.getOriginalFilename());</div><div class="line">        <span class="keyword">int</span> ch;</div><div class="line">        <span class="keyword">while</span> ((ch = in.read()) != -<span class="number">1</span>) &#123;</div><div class="line">            f.write(ch);</div><div class="line">        &#125;</div><div class="line">        f.flush();</div><div class="line">        f.close();</div><div class="line">        modelAndView.getModel()</div><div class="line">          .put(<span class="string">"message"</span>, <span class="string">"File uploaded successfully!"</span>);</div><div class="line">        <span class="keyword">return</span> modelAndView;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-7-The-HandlerExceptionResolver-Interface"><a href="#3-7-The-HandlerExceptionResolver-Interface" class="headerlink" title="3.7. The HandlerExceptionResolver Interface"></a><strong>3.7. The HandlerExceptionResolver Interface</strong></h2><p>Spring的HandlerExceptionResolver为整个Web应用程序，单个控制器或一组控制器提供统一的错误处理。</p>
-<p>要提供应用程序范围的自定义异常处理，请创建一个使用@ControllerAdvice注释的类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@ControllerAdvice</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ExampleGlobalExceptionHandler</span> </span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span></div><div class="line">    <span class="meta">@ResponseBody</span></div><div class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">handleExampleException</span><span class="params">(Exception e)</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>使用@ExceptionHandler注释的类中的任何方法将在调度员的责任区域内的每个控制器上都可用。</p>
-<p>DispatcherServlet的ApplicationContext中的HandlerExceptionResolver接口的实现可用于在使用@ExceptionHandler作为注释时拦截该调度程序的责任区域下的特定控制器，并将正确的类作为参数传入：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Controller</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FooController</span></span>&#123;</div><div class="line"> </div><div class="line">    <span class="meta">@ExceptionHandler</span>(&#123; CustomException1.class, CustomException2.class &#125;)</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">handleException</span><span class="params">()</span> </span>&#123;</div><div class="line">        <span class="comment">// ...</span></div><div class="line">    &#125;</div><div class="line">    <span class="comment">// ...</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>如果发生异常CustomException1或CustomException2，handleException（）方法现在将作为上述示例中的FooController的异常处理程序。 这是一篇关于Spring Web应用程序中的异常处理的文章。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color2">spring,springmvc</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/06/23/An Intro to the Spring DispatcherServlet/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-
-
-
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1353,11 +1365,11 @@
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color2">spring,springmvc</a>
+                <a href="javascript:void(0)" class="js-tag color2">spring</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1373,15 +1385,11 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
-              </li>
-             
-              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color2">programming</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+                <a href="javascript:void(0)" class="js-tag color1">spring,aop</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1393,6 +1401,10 @@
               </li>
              
               <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">java,JPA</a>
+              </li>
+             
+              <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">springboot mybatis</a>
               </li>
              
@@ -1401,7 +1413,7 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
+                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1409,15 +1421,15 @@
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">springSecurity</a>
-              </li>
-             
-              <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
+                <a href="javascript:void(0)" class="js-tag color3">java,注解</a>
               </li>
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">java,volatile</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">undertow</a>
               </li>
              
               <li class="article-tag-list-item">
@@ -1438,6 +1450,10 @@
              
               <li class="article-tag-list-item">
                 <a href="javascript:void(0)" class="js-tag color4">微服务</a>
+              </li>
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color4">internet</a>
               </li>
             
             <div class="clearfix"></div>
