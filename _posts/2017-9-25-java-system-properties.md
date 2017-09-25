@@ -1,7 +1,6 @@
-
 ---
 layout: post
-title:  Java-System-Properties
+title: Java-System-Properties
 categories: Java Basic
 tags:  java 
 author: Marnner
