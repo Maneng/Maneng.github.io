@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2017-9-25-how-to-creat-class-in-java
+title: how-to-creat-class-in-java
 categories: Java Basic
 tags:  java 
 author: Marnner

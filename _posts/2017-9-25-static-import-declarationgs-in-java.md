@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2017-9-25-static-import-declarationgs-in-java
+title: static-import-declarationgs-in-java
 categories: Java Basic
 tags:  java 
 author: Marnner

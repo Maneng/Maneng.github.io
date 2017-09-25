@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 2017-9-25-primitive-data-type-in-java
+title: primitive-data-type-in-java
 categories: Java Basic
 tags:  java 
 author: Marnner
