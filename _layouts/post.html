@@ -90,6 +90,22 @@ layout: default
         </div>
     </div>
 </div>
+
+<div id="container"></div>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+var gitment = new Gitment({
+  id: 'location.href', // 可选。默认为 location.href
+  owner: 'Maneng',
+  repo: 'https://github.com/Maneng/Maneng.github.io.git',
+  oauth: {
+    client_id: 'a73597e9c3fb7722f41b',
+    client_secret: '86c390579770c30c086a69ae676a31046bda1f27',
+  },
+})
+gitment.render('container')
+</script>
 <script>
 /**
  * target _blank
@@ -101,4 +117,5 @@ layout: default
     }
 }());
 </script>
+
 <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
