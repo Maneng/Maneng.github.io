@@ -8,6 +8,9 @@ excerpt: static-import-declarationgs-in-java
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
+
 
 ## 简介
 

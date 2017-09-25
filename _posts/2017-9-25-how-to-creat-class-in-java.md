@@ -8,6 +8,8 @@ excerpt: how-to-creat-class-in-java
 grammar_cjkRuby: true
 ---
 
+* content
+{:toc}
 
 # How to create a class in Java?
 

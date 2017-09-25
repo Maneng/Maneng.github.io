@@ -8,7 +8,8 @@ excerpt: Primitive Data Types in Java
 grammar_cjkRuby: true
 ---
 
-
+* content
+{:toc}
 
 ## 介绍
 
