@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 图解HTTP协议笔记之TCP/IP
-categories: internet
+categories: Internet
 tags:  TCP/IP 
 author: Marnner
 excerpt: 图解HTTP协议笔记之TCP/IP
